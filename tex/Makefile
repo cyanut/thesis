@@ -3,7 +3,7 @@
 all: thesis.pdf
 
 thesis.pdf: ut-thesis.tex
-	latexmk -pdf -pdflatex='pdflatex -interactive=nonstopmode' -use-make $<
+	latexmk -pdf -pdflatex='pdflatex -interactive=nonstopmode' -use-make ut-thesis.tex
 
 clean:
 	latexmk -CA
