@@ -1,3 +1,4 @@
+\nonstopmode
 %% ut-thesis.tex -- document template for graduate theses at UofT
 %%
 %% Copyright (c) 1998-2013 Francois Pitt <fpitt@cs.utoronto.ca>
@@ -61,7 +62,6 @@
 
 %% *** Add any desired options. ***
 \documentclass{ut-thesis}
-
 %% *** Add \usepackage declarations here. ***
 %% The standard packages `geometry' and `setspace' are already loaded by
 %% `ut-thesis' -- see their documentation for details of the features
@@ -71,6 +71,9 @@
 %% \setstretch command to set the line spacing to a value other than
 %% single, one-and-a-half, or double spaced (see the `setspace' package
 %% for details).
+\usepackage{graphicx}
+\usepackage[round,authoryear]{natbib}
+\usepackage[xindy]{glossaries}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,10 +90,10 @@
 
 %% *** Change this example to appropriate values. ***
 \degree{Doctor of Philosophy}
-\department{Computer Science}
-\gradyear{2012}
-\author{Fran\c{c}ois Pitt}
-\title{UT-Thesis Class File Example}
+\department{Institute of Medical Science}
+\gradyear{2016}
+\author{Chen Yan}
+\title{Memory Encoding in Amygdala}
 
 %% *** NOTE ***
 %% Put here all other formatting commands that belong in the preamble.
@@ -98,13 +101,16 @@
 %% \newenvironment's, \newtheorem's, etc. (in other words, all the
 %% global definitions that you will need throughout your thesis) in a
 %% separate file and use "\input{filename}" to input it here.
+\makeglossaries
+\setacronymstyle{long-short}
+\loadglsentries{abbr.tex}
 
 
 %% *** Adjust the following settings as desired. ***
 
 %% List only down to subsections in the table of contents;
 %% 0=chapter, 1=section, 2=subsection, 3=subsubsection, etc.
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 
 %% Make each page fill up the entire page.
 \flushbottom
@@ -156,9 +162,10 @@
 
 %% This generates an "acknowledgements" section, if needed
 %% (uncomment to have it appear in the document).
-%\begin{acknowledgements}
+\begin{acknowledgements}
+    Acknowledgement
 %% *** Put your Acknowledgements here. ***
-%\end{acknowledgements}
+\end{acknowledgements}
 
 %% This generates the Table of Contents (on a separate page).
 \tableofcontents
@@ -169,11 +176,13 @@
 
 %% This generates the List of Figures (on a separate page), if needed
 %% (uncomment to have it appear in the document).
-%\listoffigures
+\listoffigures
 
 %% You can add commands here to generate any other material that belongs
 %% in the head matter (for example, List of Plates, Index of Symbols, or
 %% List of Appendices).
+\printglossaries
+
 
 %% End of the preliminary sections: reset page style and numbering.
 \end{preliminary}
@@ -189,6 +198,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% *** Include chapter files here. ***
+\include{chapters/intro}
+\include{chapters/lit-review}
+\include{chapters/general-methods}
+\include{chapters/memory-trace}
+\include{chapters/miniscope}
+\include{chapters/amyg-recording}
+\include{chapters/conclusion}
+
 
 
 %% This adds a line for the Bibliography in the Table of Contents.

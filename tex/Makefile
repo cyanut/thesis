@@ -7,3 +7,4 @@ thesis.pdf: ut-thesis.tex
 
 clean:
 	latexmk -CA
+	rm *.glo *.xdy
