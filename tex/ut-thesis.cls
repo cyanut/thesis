@@ -149,7 +149,6 @@
 \newcommand*{\utthesisversion}{v2.0} % current version number
 \newcommand*{\utthesisupdated}{2012/06/01} % date of last change(s)
 
-\NeedsTeXFormat{LaTeX2e}[1995/12/01] % robust macros with * form
 \ProvidesClass{ut-thesis}[\utthesisupdated\space\utthesisversion\space
    graduate theses at the University of Toronto]
 
@@ -199,7 +198,8 @@
    \newcommand*{\brDRAFT}%
      {\raisebox{-3ex}[0pt][0pt]{\rlap{\sffamily\scriptsize \ \ DRAFT}}}
    \ExecuteOptions{doublespaced}
-   \PassOptionsToClass{draft,twoside,openany}{report}}
+   \linenumbers
+   \PassOptionsToClass{draft,twoside,openany}{book}}
 
 %% Margin options.
 \DeclareOption{narrowmargins}{\AtEndOfClass % 1 1/4" left, 3/4" others
@@ -246,7 +246,7 @@
   {\AtEndOfClass{\let\cleardoublepage\clearstandarddoublepage}}
 
 %% All other options are passed to the base class directly.
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 
 
 %%%%%%%%%%%%       OPTION EXECUTION       %%%%%%%%%%%%
@@ -262,7 +262,7 @@
 %%%%%%%%%%%%       PACKAGE  LOADING       %%%%%%%%%%%%
 
 %% Load base class using current setting for basic options.
-\LoadClass{report}
+\LoadClass{book}
 
 %% To set/change page layout.
 \RequirePackage{calc}
@@ -270,6 +270,11 @@
 
 %% To set/change line spacing.
 \RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{xcolor}
+\RequirePackage[xindy]{glossaries}
+\RequirePackage{fancyhdr}
+\RequirePackage{lineno}
 
 
 %%%%%%%%%%%%          MAIN  CODE          %%%%%%%%%%%%
@@ -297,13 +302,6 @@
 \title{\emph{(title)}}
 
 %%%%%%    New formatting environments and commands.
-
-%% \begin{preliminary} sets the pagestyle and page numbering for the
-%% preliminary sections; \end{preliminary} resets the page numbering.
-%% The default page style is used outside of the preliminary block.
-\newenvironment*{preliminary}%
-  {\pagestyle{plain}\pagenumbering{roman}}%
-  {\cleardoublepage\pagenumbering{arabic}}
 
 %% Change \maketitle to follow SGS guidelines.
 \renewcommand*{\maketitle}%
@@ -492,6 +490,64 @@
       {\textsc{\ifnum \c@secnumdepth >\m@ne
          \@chapapp\ \thechapter. \ \fi ##1}}}}
 \fi%@twoside
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Chapter formats
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\formatFrontmatterChapter}{
+   \titlespacing*{\chapter}{0pt}{-34pt}{40pt}
+   \titleformat{\chapter}[display]{
+     \centering\normalfont\huge
+   }{
+     \chaptertitlename~\thechapter
+   }{20pt}{\Huge}
+}
+
+\renewcommand{\frontmatter}{
+    \formatFrontmatterChapter
+    \pagenumbering{roman}
+}
+\renewcommand{\backmatter}{\frontmatter}
+
+\newcommand{\MainChapterFormat}{
+   \renewcommand{\chapnumfont}{%     % define font for chapter number
+     \usefont{T1}{pnc}{b}{n}%      % choose New Chancery, bold, normal shape
+     \fontsize{100}{100}%          % font size 100pt, baselineskip 100pt
+     \selectfont%                  % activate font
+   }
+   
+   \colorlet{chapnumcol}{gray!75}  % color for chapter number
+
+   \titleformat{\chapter}[display]
+     {\bfseries}
+     {\chapnumfont\textcolor{chapnumcol}{\thechapter}}
+     {-24pt}
+     {\Huge}
+}
+
+\newcommand{\formatMainmatterChapter}{
+%    \titlespacing*{\chapter}{0pt}{-65pt}{40pt}
+   \MainChapterFormat
+}
+
+\newcommand{\formatAppendixmatterChapter}{
+%    \titlespacing*{\chapter}{0pt}{-63pt}{40pt}
+   \MainChapterFormat
+}
+
+\renewcommand{\mainmatter}{
+  \formatMainmatterChapter
+  \pagestyle{fancy}
+  \glsresetall % Reset all acronyms
+  \pagenumbering{arabic}
+}
+
+\newcommand{\appendixmatter}{
+  \formatAppendixmatterChapter
+  \pagestyle{fancy}
+}
 
 %% Default page style.
 \pagestyle{thesis}
