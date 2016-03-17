@@ -1,10 +1,12 @@
-.PHONY: thesis.pdf all clean
+.PHONY: ut-thesis.pdf all clean
 
-all: thesis.pdf
+all: ut-thesis.pdf
 
-thesis.pdf: ut-thesis.tex
-	latexmk -pdf -pdflatex='pdflatex -interactive=nonstopmode' -use-make ut-thesis.tex
+ut-thesis.pdf: ut-thesis.tex
+	latexmk -pdf -pdflatex='pdflatex' -use-make ut-thesis.tex
 
 clean:
 	latexmk -CA
 	rm *.glo *.xdy
+	rm *.aux
+	rm chapters/*.aux
