@@ -1,0 +1,97 @@
+
+
+%% Margin options.
+\newcommand{\narrowmargins}{ % 1 1/4" left, 3/4" others
+  \geometry{letterpaper, margin=.75in,left=1.25in,headsep=.375in-\headheight,
+             footskip=.375in,marginparwidth=.5in,marginparsep=.125in}}
+\newcommand{\normalmargins}{ % 1 1/4" left, 1" others
+  \geometry{letterpaper, margin=1in,left=1.25in,headsep=.5in-\headheight,
+             footskip=.5in,marginparwidth=.75in,marginparsep=.125in}}
+\newcommand{\widemargins}{ % 1 1/4" all around
+  \geometry{margin=1.25in,headsep=.625in-\headheight,
+             footskip=.625in,marginparwidth=.75in,marginparsep=.25in}}
+\newcommand{\extrawidemargins}{ % 1 1/2" all around
+  \geometry{margin=1.5in,headsep=.75in-\headheight,
+             footskip=.75in,marginparwidth=1in,marginparsep=.25in}}
+
+
+
+%% The following five commands set the respective field values so we can
+%% generate the title page and abstract page automatically.
+\newcommand*{\degree}[1]%
+  {\ifx\empty#1\empty\else\gdef\vdegree{#1}\fi}
+\newcommand*{\department}[1]%
+  {\ifx\empty#1\empty\else\gdef\vdepartment{#1}\fi}
+\newcommand*{\gradyear}[1]%
+  {\ifx\empty#1\empty\else\gdef\vgradyear{#1}\fi}
+\renewcommand*{\author}[1]%
+  {\ifx\empty#1\empty\else\gdef\vauthor{#1}\fi}
+\renewcommand*{\title}[1]%
+  {\ifx\empty#1\empty\else\gdef\vtitle{#1}\fi}
+
+%\newcommand*{\singlespacingnoskip}{\setstretch{\setspace@singespace}}
+
+%% Change \maketitle to follow SGS guidelines.
+\renewcommand{\maketitle}%
+  {\begin{titlepage}
+   \large\singlespacing
+   \begin{center}
+      \mbox{}
+      \vfill
+      \textsc{\vtitle}\\
+      \vfill
+      by \\
+      \vfill
+      {\vauthor}\\
+      \vfill
+      \vfill
+      A thesis submitted in conformity with the requirements\\
+      for the degree of {\vdegree}\\
+      Graduate Department of {\vdepartment}\\
+      University of Toronto\\
+      \vfill
+      {\copyright} Copyright {\vgradyear} by {\vauthor}\\
+      \vspace{.01\textheight}
+      \mbox{}
+   \end{center}
+   \setcounter{page}{1}
+   \end{titlepage}
+   \setcounter{page}{2}}
+
+
+%% Change \begin{abstract}...\end{abstract} to follow SGS guidelines.
+\newenvironment{abstract}%
+  {\begin{center}
+      \section*{Abstract}
+   \end{center}
+   \begin{center}
+      {\vtitle}\\[2ex]
+      {\vauthor}\\
+      {\vdegree}\\
+      Graduate Department of {\vdepartment}\\
+      University of Toronto\\
+      {\vgradyear}\\
+   \end{center}
+   \begingroup
+   %% Adjust line spacing: if it was less than 2, increase it to 2;
+   %% otherwise, leave it as is.
+   \ifdim \baselinestretch pt < 1.6pt \doublespacing\fi}%
+  {\par\endgroup\newpage}
+
+
+%% \begin{acknowledgements}...\end{acknowledgements} formats an
+%% acknowledgements section (*not* on a separate page).
+\newenvironment{acknowledgements}%
+  {\begin{center}
+      \section*{Acknowledgements}
+   \end{center}
+   \begingroup\noindent}%
+  {\par\endgroup}
+
+
+
+%% Single-spaced quotes and quotations.
+\newenvironment{longquote}%
+  {\begin{quote}\singlespacingnoskip}{\end{quote}}
+\newenvironment{longquotation}%
+  {\begin{quotation}\singlespacingnoskip}{\end{quotation}}
