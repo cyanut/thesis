@@ -47,7 +47,7 @@
       \vfill
       A thesis submitted in conformity with the requirements\\
       for the degree of {\vdegree}\\
-      Graduate Department of {\vdepartment}\\
+      {\vdepartment}\\
       University of Toronto\\
       \vfill
       {\copyright} Copyright {\vgradyear} by {\vauthor}\\
@@ -58,17 +58,17 @@
    \end{titlepage}
    \setcounter{page}{2}}
 
-
+\newcommand{\floatingtitle}[1]{\begin{center}\large\textbf{#1}\end{center}}
 %% Change \begin{abstract}...\end{abstract} to follow SGS guidelines.
 \newenvironment{abstract}%
-  {\begin{center}
-      \section*{Abstract}
-   \end{center}
+  {
+  \pagestyle{floating}
+  \floatingtitle{Abstract}
    \begin{center}
       {\vtitle}\\[2ex]
       {\vauthor}\\
       {\vdegree}\\
-      Graduate Department of {\vdepartment}\\
+      {\vdepartment}\\
       University of Toronto\\
       {\vgradyear}\\
    \end{center}
@@ -82,11 +82,11 @@
 %% \begin{acknowledgements}...\end{acknowledgements} formats an
 %% acknowledgements section (*not* on a separate page).
 \newenvironment{acknowledgements}%
-  {\begin{center}
-      \section*{Acknowledgements}
-   \end{center}
+  {
+  \pagestyle{floating}
+  \floatingtitle{Acknowledgements}
    \begingroup\noindent}%
-  {\par\endgroup}
+  {\par\endgroup\newpage}
 
 
 
