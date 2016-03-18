@@ -1,9 +1,9 @@
-.PHONY: all clean 
+.PHONY: all clean ut-thesis.pdf
 
 all: ut-thesis.pdf
 
-ut-thesis.pdf: tex/*.tex tex/chapters/*.tex
-	latexmk -pdf -use-make -cd tex/ut-thesis.tex
+ut-thesis.pdf: tex/*.tex tex/chapters/*.tex tex/*.bib
+	latexmk -pdf -r ./latexmkrc -use-make -cd tex/ut-thesis.tex
 	cp tex/ut-thesis.pdf .
 
 
