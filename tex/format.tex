@@ -9,6 +9,7 @@
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{fancyhdr}                    
+\usepackage{colortbl}
 
 
 \titlespacing*{\chapter}{0cm}{-1.cm}{-40pt}%pbk
@@ -19,19 +20,19 @@
 
 
  \newcommand\boxedSection[3]{{%
-%
+     %
      \begin{tikzpicture}[inner sep=#3,line width=1.0pt]
          \node[anchor=east,rectangle,draw] at (0,0) (counter) {\textbf{#2}};
              \draw (counter.south west)  ++(.0pt,.5pt)-- ++($(\linewidth,0) - (2.5pt,0)$);
-\node [right of=counter,anchor=west]{#1};
+         \node [right of=counter,anchor=west]{#1};
      \end{tikzpicture}
  }}
  \newcommand\boxedSectionB[3]{{%
-%
+     %
      \begin{tikzpicture}[inner sep=#3,line width=1pt]
          \node[anchor=east,rectangle,draw,fill=black] at (0,0) (counter) {\color{white}\textbf{#2}};
              \draw (counter.south west) ++(.0pt,.5pt)-- ++($(\linewidth,0) - (2.5pt,0)$);
-\node [right of=counter,anchor=west]{#1};
+         \node [right of=counter,anchor=west]{#1};
      \end{tikzpicture}
  }}
 \newcommand\boxedsection[1]{\boxedSectionB{#1}{\thesection}{2mm}}
@@ -60,52 +61,43 @@
 
 
 
-%%% Fancy Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Fancy Header Style Options
+     %%% Fancy Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     % Fancy Header Style Options
 
-\pagestyle{fancy}                       % Sets fancy header and footer
-\fancyfoot{}                            % Delete current footer settings
+\fancypagestyle{body}{                       % Sets fancy header and footer
+    \fancyfoot{}                            % Delete current footer settings
 
-%\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
-%  \markboth{\chaptername\ \thechapter.\ #1}}{}} %
+    %\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+    %  \markboth{\chaptername\ \thechapter.\ #1}}{}} %
 
-%\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
-%  \markright{\thesection.\ #1}}         %
+    %\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+    %  \markright{\thesection.\ #1}}         %
 
-\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even
+    \fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even
 % pages and right on odd pages
-\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter.\ #1}}{}}
-\fancyhead[RE]{\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
-\fancyhead[LO]{\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
+    \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter.\ ##1}}{}}
+    \fancyhead[RE]{\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
+    \fancyhead[LO]{\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
 
-\let\headruleORIG\headrule
-\renewcommand{\headrule}{\color{black} \headruleORIG}
-\renewcommand{\headrulewidth}{1.0pt}
-\usepackage{colortbl}
-\arrayrulecolor{black}
-
-\fancypagestyle{plain}{
-  \fancyhead{}
-  \fancyfoot[CE,CO]{\thepage}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{1.0pt}
+    \let\headruleORIG\headrule
+    \renewcommand{\headrule}{\color{black} \headruleORIG}
+    \renewcommand{\headrulewidth}{1.0pt}
+    \arrayrulecolor{black}
 }
 
-\fancypagestyle{floating}{
+\fancypagestyle{plain}{
+    \fancyhead{}
+  \fancyfoot[CE,CO]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+
+\fancypagestyle{preliminary}{
     \fancyhead{}
     \fancyfoot[CE,CO]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-    \doublespacing
 }
-
-% centered page environment
-
-
-\newenvironment{floating}
-{\newpage\thispagestyle{floating}}
-{}
-
 
 
 \renewcommand{\figurename}{Figure~}

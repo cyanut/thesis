@@ -25,16 +25,18 @@
 
 \begin{document}
 \pagenumbering{roman}
+\pagestyle{preliminary}
+\renewcommand*\chapterpagestyle{preliminary}
 \frontmatter
 
 \maketitle
 
 \begin{abstract}
-\input{abstract}
+    \input{abstract}
 \end{abstract}
 
 \begin{acknowledgements}
-\input{acknowledgements}
+    \input{acknowledgements}
 \end{acknowledgements}
 
 \tableofcontents
@@ -47,6 +49,8 @@
 
 \clearpage
 
+\pagestyle{body}
+\renewcommand*\chapterpagestyle{plain}
 \pagenumbering{arabic}
 
 \mainmatter
