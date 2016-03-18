@@ -1,23 +1,6 @@
 
-
-%% Margin options.
-\newcommand{\narrowmargins}{ % 1 1/4" left, 3/4" others
-    \geometry{letterpaper, margin=.75in,left=1.25in,headsep=.375in-\headheight,
-             footskip=.375in,marginparwidth=.5in,marginparsep=.125in}}
-\newcommand{\normalmargins}{ % 1 1/4" left, 1" others
-    \geometry{letterpaper, margin=1in,left=1.25in,headsep=.5in-\headheight,
-             footskip=.5in,marginparwidth=.75in,marginparsep=.125in}}
-\newcommand{\widemargins}{ % 1 1/4" all around
-    \geometry{margin=1.25in,headsep=.625in-\headheight,
-             footskip=.625in,marginparwidth=.75in,marginparsep=.25in}}
-\newcommand{\extrawidemargins}{ % 1 1/2" all around
-    \geometry{margin=1.5in,headsep=.75in-\headheight,
-             footskip=.75in,marginparwidth=1in,marginparsep=.25in}}
-
-
-
-             %% The following five commands set the respective field values so we can
-             %% generate the title page and abstract page automatically.
+ %% The following five commands set the respective field values so we can
+ %% generate the title page and abstract page automatically.
 \newcommand*{\degree}[1]%
   {\ifx\empty#1\empty\else\gdef\vdegree{#1}\fi}
 \newcommand*{\department}[1]%
@@ -62,7 +45,7 @@
   {
       \chapter*{Abstract}
    \begin{center}
-       {\textsc\vtitle}\\[2ex]
+       {\Large\textbf\vtitle}\\[2ex]
        {\vauthor}\\
        {\vdegree}\\
        {\vdepartment}\\

@@ -7,16 +7,27 @@
 \usepackage{tikz,titlesec}
 \usetikzlibrary{calc}
 \usepackage{setspace}
-\usepackage{geometry}
+\usepackage[left=32mm,right=32mm,top=32mm,bottom=32mm]{geometry}
 \usepackage{fancyhdr}                    
 \usepackage{colortbl}
+\usepackage{lmodern}
 
 
-\titlespacing*{\chapter}{0cm}{-1.cm}{-40pt}%pbk
-\titleformat{\chapter}[display]{\Huge\filleft\scshape}{ \normalfont\bf\fontfamily{put}\fontseries{b}\fontsize{95pt}{0pt}\selectfont\thechapter}{20pt}{}[\titlerule\vspace{2ex}\filright\vspace{2ex}]
+\titlespacing*{\chapter}{0cm}{-1.cm}{-20pt}%pbk
+
+\titleformat{\chapter}[display]
+            {\Huge\filleft\scshape}
+            {\normalfont\bf\fontfamily{put}\fontseries{b}\fontsize{95pt}{0pt}\selectfont\thechapter}
+            {0pt}
+            {}[\titlerule\vspace{2ex}\filright\vspace{2ex}]
 %
 \titlespacing*{\part}{-10pt}{120pt}{-80pt}%pbk
-\titleformat{\part}[frame]{\Huge\filcenter\scshape}{ \normalfont\bf\fontsize{85pt}{0pt}\selectfont \raisebox{1.7cm}{ Part\fontfamily{put}\fontseries{b}\fontsize{105pt}{0pt}\selectfont \hspace{.2em}\thepart} }{30pt}{}[\filright]
+
+\titleformat{\part}[frame]
+            {\Huge\filcenter\scshape}
+            {\normalfont\bf\fontsize{85pt}{0pt}\selectfont \raisebox{1.7cm}{ Part\fontfamily{put}\fontseries{b}\fontsize{105pt}{0pt}\selectfont \hspace{.2em}\thepart} }
+            {30pt}
+            {}[\filright]
 
 
  \newcommand\boxedSection[3]{{%
@@ -38,7 +49,9 @@
 \newcommand\boxedsection[1]{\boxedSectionB{#1}{\thesection}{2mm}}
 \newcommand\boxedsubsection[1]{\boxedSection{#1}{\thesubsection}{1.7mm}}
 \newcommand\boxedsubsubsection[1]{\boxedSection{#1}{\thesubsubsection}{1.5mm}}
-
+\titlespacing*{\section}{0ex}{3ex}{-1.5ex}
+\titlespacing*{\subsection}{0ex}{2.5ex}{-2ex}
+\titlespacing*{\subsubsection}{0ex}{2ex}{-2.5ex}
  \titleformat{\section}[hang]%
      {\usekomafont{section}}%
      {}%
