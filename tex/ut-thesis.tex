@@ -12,6 +12,7 @@
 \loadglsentries{abbr}
 \setacronymstyle{long-short}
 \makeglossaries
+\makeindex
 
 
 \setcounter{tocdepth}{3}
@@ -19,6 +20,8 @@
 %% Make each page fill up the entire page.
 \flushbottom
 \onehalfspacing
+
+\usepackage{todonotes}
 
 
 %%%%%%%%%%%%      MAIN  DOCUMENT      %%%%%%%%%%%%
@@ -47,6 +50,8 @@
 
 \glsaddall
 \printglossaries
+
+\listoftodos
 
 \clearpage
 
