@@ -1,6 +1,6 @@
 \chapter{Construction of a miniature epi-fluorescence microscope}
 
-\section{Introduction}\toto{edit microscope intro}
+\section{Introduction}\todo{edit microscope intro}
 
 
     One of the major technological limitation in neuroscience research is recording neural activity in model animals. Traditional techniques such multi-unit recordings give excellent temporal resolution, however the spatial resolution --- as measured by the number of cells simutaneously recorded --- is limited. Moreover, it is very hard to distinguish cell subpopulations within the same region from the recording. Neural activity can also be inferred by post-hoc staining of neural activity markers, such as cfos or arc. This method give excellent spatial resolution, however the temporal resolution is very poor, where the time window of neural activity lasts from minutes to hours.
@@ -17,10 +17,13 @@
 \subsection{Construction of the mini-microscope}
 
 \subsubsection{Microscope design}
-Optical design of the microscope is aided using Zemax software (Zemax Development Corporation) to optimize the lens and filter configuration. The casing of the microscope is modelled using Rhinoceros 3D software (Robert McNeel \& Associates) and OpenSCAD software. 
+Optical design of the microscope is aided with Zemax software (Zemax Development Corporation) to optimize the lens and filter configuration. The casing of the microscope is modelled using OpenSCAD software. 
 
 \subsubsection{Lens configuration}
-Potential lenses for emission light path are selected from modelling and calculation to give a working distance of less than \SI{50}{\um}, a magnification of about 2--5x and a focal length of less than \SI{3}{\cm}. The lenses are purchased and installed into custom-made mounts on a two-arm stereotaxic frame. The distance of the lenses are then optimized against a fibre bundle light source close to the \gls{grin} lens. A drum lens is used to collect light from the \gls{led}. The drum lens is tested in a similar manner and selected to give diverging light after \gls{grin} lens.
+
+
+
+Potential lenses for emission light path are selected from modelling and calculation to give a working distance of less than \SI{100}{\um} in water, a magnification of about 2--6x and a focal length of less than \SI{6}{\cm}. The lenses are purchased and installed into custom-made mounts on a two-arm stereotaxic frame. The distance of the lenses are then optimized against a fibre bundle light source close to the \gls{grin} lens. A drum lens is used to collect light from the \gls{led}. The drum lens is tested in a similar manner and selected to give diverging light after \gls{grin} lens.
 
 \subsubsection{Filter selection}
 The filters are selected to cover the excitation and emission spectrum of the genetic encoded calcium sensor GCaMP6s \citep{chen13}, and further screen for high bandwidth and low overlap. The size of the filters are custom-made to fit the size constraints.
