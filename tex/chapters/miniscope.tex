@@ -14,32 +14,44 @@
 
 \section{Material and Methods}
 
-\subsection{Construction of the mini-microscope}
+\subsection{Design of the mini-microscope}
 
-\subsubsection{Microscope design}
-Optical design of the microscope is aided with Zemax software (Zemax Development Corporation) to optimize the lens and filter configuration. The casing of the microscope is modelled using OpenSCAD software. 
+The mini-microscope has the same design as an general single-photon epiflourescence microscope except for the size constraints. Excitation light is emitted from a \gls{led} light source, filtered, reflected by a dichroic mirror and evenly illuminate the sample. The flourescent light from the sample is collected by the objective, passes through the dichroic mirror, filtered and focused on the camera. The fit the size constraints, we chose the use a high-intensity \gls{led} as the light source, a \gls{grin} lens as an objective, and a miniatured \gls{cmos} camera to capture the image.\todo{maybe a illustration}
+
+The optical design of the microscope is aided with Zemax software (Zemax Development Corporation) to optimize the lens and filter configuration. The casing of the microscope is modelled using OpenSCAD software. 
 
 \subsubsection{Lens configuration}
 
-Potential lenses for emission light path are selected from modelling and calculation to give a working distance of less than \SI{100}{\um} in water, a magnification of about 2--6x and a focal length of less than \SI{6}{\cm}. The lenses are purchased and installed into custom-made mounts on a two-arm stereotaxic frame. The distance of the lenses are then optimized against a fibre bundle light source close to the \gls{grin} lens. A drum lens is used to collect light from the \gls{led}. The drum lens is tested in a similar manner and selected to give diverging light after \gls{grin} lens. 
+The lenses configuration consists a \gls{grin} objective lens and a ocular cube lens forming a 4F system, where the distance between the thin-lens equivelant of the two lenses equals to the sum of the focal length. Potential lenses for emission light path are selected from modelling and calculation to give a working distance of \SI{100}{\um} in water, a magnification of 6x and a back focal length of \SI{6}{\cm}. During prototyping, the lenses are purchased and installed into custom-made mounts on a two-arm stereotaxic frame. The distance of the lenses are then optimized against a fibre bundle light source close to the \gls{grin} lens. A drum lens is used to collect light from the \gls{led}. The drum lens is tested in a similar manner and selected to give diverging light after \gls{grin} lens. We has chose to use an achromatic doublet (F=\SI{15}{\mm}, Edmund Optics). We used a \SI{1.8}{\mm} diameter 0.25-pitch \gls{grin} lens (64--537, Edmund Optics) as objective for hippocampus imaging. To minimize brain damage for deep brain imaging, the objective lens was a home-assembled doublet of a \SI{0.5}{\mm} diameter, 1-pitch \gls{grin} relay lens (\todo{GoFoton lens info}) and a \SI{2}{\mm} diameter 0.25-pitch \gls{grin} lens (\todo{GoFoton lens info}). The details of doublet assembly is described in \label{objective assmebly}.
 
 \subsubsection{Filter selection}
-The filters are selected to cover the excitation and emission spectrum of the genetic encoded calcium sensor GCaMP6s \citep{chen13}, and further screen for high bandwidth and low overlap. The size of the filters are custom-made to fit the size constraints.
+The filters are selected to cover the excitation and emission spectrum of the genetic encoded calcium sensor GCaMP6s \citep{chen13}, and further screen for high bandwidth and low overlap. The fit the size constraints, the excitation and emission filters had dimensions of \SI{5x5x1}{\mm}, and the dichroic mirror \SI{7.1x5x1}{\mm}. We have chose to use a \gls{fitc} filter set for gCaMP6 imaging (\todo{chroma filter info}). For dual colour imaging, we took advantage of significant long tail of the red retrobeads spectrum, and use the same blue light to excite the red flourephore. In these experiments, a \acrshort{tritc}\slash\acrshort{fitc} filter set was used (\todo{chroma filter info}).
 
-\subsubsection{Image sensor}
-The image sensor are selected to have an packaged size of less than \SI{1.5 x 1.5}{\cm}. The sensor with highest sensitivity is then used.
+\subsubsection{Electronics}
+The image sensor are selected to have an packaged size of less than \SI{1.5 x 1.5}{\cm}. We used a commercially available analogue camera module (HD1313BW, Ruishibao) that gives satisfactory sensitivity and dynamic range. The camera board is connected to a \SI{5}{\V} power regulator. After the power regulator, the wires were connected through a slip ring (\todo{slipring info}) was the used to avoid tanglement of the wires during animal behaviour. After the slip ring, the wires are connected to a \SI{12}{\V} \gls{dc} power source and a \gls{usb} analogue video capture card (\todo{Video capture info}). The video capture card is controlled by custom software for synchronized video capture (See code in \todo{reference code}).
 
-\subsubsection{Casing}
-The casing model is produced by 3D printing using PolyJet technology with VeroBlackPlus material (Stratasys). This gives a rigid, opaque and black casing with highest resolution for details.
+A monochrome, high-intensity blue \gls{led} (\todo{led info}, Lumiled) was used as the light source. The \gls{led} wires joins the video camera wires through the slip ring, and then connected to a variable \gls{dc} power source (\todo{DC power source info}). During recording, the \gls{led} was driven at a current between \SI{20}{\mA} and \SI{100}{\mA}.
 
+\subsubsection{Casing and assembly}
+The casing model is produced by 3D printing using PolyJet technology with VeroBlackPlus material (Stratasys). This gives a rigid, opaque and black casing with highest resolution for details. The microscope body is screwed onto the camera holder via M8 thread to allow easy change of the focus plane. A side M2$\times$\SI{2}{\mm} nylon screw (\todo{info side screw}) is used to lock the camera holder on the microscope body.
 
+A metal nut \todo{microscope body nut spec} was glued to the bottom of the microscopy body concentric to the light path opening using a fast-curing epoxy glue (\todo{epoxy info?}). The nut allows to easily and firmly lock the microscope onto the baseplate.
+
+Unlike the microscope body, the base plate was 3d printed using \gls{fdm} with \gls{pla} material. A threaded tube (\todo{baseplate thread tube info}) was heated with a soldering iron and inserted into the center of the base plate, and further fixed with epoxy glue. The objective lens was inserted into the center of the threaded tube, and fixed with crazy glue on the bottom. For objective that are thinner than the inner diameter of the threaded tube, an additional stainless steel tube was inserted inbetween to aid alignment of the lens.
+
+\subsubsection{Objecive for deep brain imaging} \label{objective assembly}
+\todo{ref lens paper}
 
 \subsection{Implantation of the mini-microscope}
 
-Two weeks after viral infusion, animals are anesthesized and head-fixed on a stereotaxic frame. Three screws were placed around the viral injection site for anchoring the microscope. A circular craniology of \SI{2}{\mm} was performed above the viral injection site. The dura was pierced and lifted with a fine tweezer to expose the brain. The brain is then constantly irrigated with artificial cerebral-spinal cord fluid to remove the blood. For \gls{ca1} experiments, a 27 gauge aspiration needle was used to remove cortex, to expose \gls{ca1}. The mini-microscope is then fixed on the stereotaxic frame and gradually lowered to the target coordinates. Opaque black dental acrylic was used to secure the microscope baseplate to the skull. Once the dental acrylic cured, the microscope body was detached from the baseplate and replaced with a cap. Animals were given \SI{5}{\mg\per\kg} ketoprofen for analgesia.
+Two weeks after gCaMP6 infusion to the target area, animals are anesthesized and head-fixed on a stereotaxic frame as described in \todo{ref general methods}. Three screws were placed around the viral injection site for anchoring the microscope. 
+
+For implantation targetting \gls{ca1}, a circular craniology of \SI{2}{\mm} was performed above the viral injection site. The dura was pierced and lifted with a fine tweezer to expose the brain. The brain is then constantly irrigated with artificial cerebral-spinal cord fluid to remove the blood., a 27 gauge aspiration needle was used to remove cortex, to expose \gls{ca1}. For implantation targetting amygdala after anchoring the screws, a 27-gauge needle was lowered to the target coordinate, left for \SI{5}{\min}, and slowly retracted.
+
+The mini-microscope is then fixed on the stereotaxic frame and gradually lowered to the target coordinates (\gls{ca1}: \gls{la}: \todo{coordinate for ca1 and amygdala}). Opaque black dental acrylic was used to secure the microscope baseplate to the skull. Once the dental acrylic cured, the microscope body was detached from the baseplate and replaced with a cap. Animals were given \SI{5}{\mg\per\kg} ketoprofen for analgesia.
 
 \subsection{In vivo mini-microscope testing}
-The animals were kept in the home cage for two weeks before the first image session. This time allows the optical window to clear up. The animals were scruffed, the cap was removed and replaced with the microscope body. A typical imaging session lasts for \SI{5}{\minute}. After the imaging session the microscope body was removed, and the animal was recapped.
+After lens implantation, the animals were kept in the home cage for at least two weeks before the first image session. This time allows the optical window to clear up. The animals were scruffed, the cap was removed and replaced with the microscope body. A typical imaging session lasts for \SI{5}{\minute}. After the imaging session the microscope body was removed, and the animal was recapped.
 
 \subsection{Image analysis}
 Individual cell calcium signals were extracted from the movie as previously described \citep{mukamel09}. Briefly, we first estimate the number of cells in the movie, and reduced the number of temporal dimension to roughly number of cells using principle component analysis. The resulting principle components were then subjected to independent component analysis, where the spatial filter for individual cells were extracted from the components, and the calcium signal of the corresponding cell was extracted from the mixing matrix. The time-course calcium signal was then aligned with behaviour recordings to identify neural activity patterns.
