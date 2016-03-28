@@ -39,14 +39,18 @@ A metal nut \todo{microscope body nut spec} was glued to the bottom of the micro
 
 Unlike the microscope body, the base plate was 3d printed using \gls{fdm} with \gls{pla} material. A threaded tube (\todo{baseplate thread tube info}) was heated with a soldering iron and inserted into the center of the base plate, and further fixed with epoxy glue. The objective lens was inserted into the center of the threaded tube, and fixed with crazy glue on the bottom. For objective that are thinner than the inner diameter of the threaded tube, an additional stainless steel tube was inserted inbetween to aid alignment of the lens.
 
-\subsubsection{Objecive for deep brain imaging} \label{objective assembly}
-\todo{ref lens paper}
+\subsubsection{Objective for deep brain imaging} \label{objective assembly}
+
+For deep brain imaging, a \SI{0.5}{\mm} diameter, 1.0-pitch relay lens was glued to a \SI{2}{\mm} diameter, 0.25-pitch \gls{grin} lens. The setup is modified from \citep{kim12} to ensure concentricity and alignment. In the setup, a V-groove clamp (\todo{clamp details}, ThorLab) is used to hold the large \gls{grin} lens in place virtically, and the thin relay lens was mounted on another V-groove clamp attached to a 3-axis manipulator (\todo{manipulator details}, ThorLabs). The two V-groove clamps were leveled using a bull's eye spirit level. An analogue lens and camera chip was mounted under the large \gls{grin} lens, and displayed the image of the large \gls{grin} lens on a monitor. A disecting microscope was mounted horizontally for monitoring the vertical position of the two lenses. \todo{insert figure for the setup}
+
+During assembly, both lenses were mounted in the V-groove clamps respectively. A small drop of \gls{uv} curing optical adhesive (NOA61, Norland) was added to the bottom surface of the relay lens using a 27-gauge needle. The relay lens was then lower to just above the large \gls{grin} lens when an image of the relay lens is visible on the monitor. The relay lens was then moved to the center of the large \gls{grin} lens according to the monitor display. Observed through the dissecting microscope, the relay lens was then lowered to touch the upper surface of the large \gls{grin} lens. A \SI{375}{\nm} spot \gls{uv} light source (\todo{uv light source info}) was used to cure the optical glue. The curing time is calculated to give at least \SI{3}{\J\per\mm\squared} of \gls{uv} light on the optical adhesive. 
+
 
 \subsection{Implantation of the mini-microscope}
 
 Two weeks after gCaMP6 infusion to the target area, animals are anesthesized and head-fixed on a stereotaxic frame as described in \todo{ref general methods}. Three screws were placed around the viral injection site for anchoring the microscope. 
 
-For implantation targetting \gls{ca1}, a circular craniology of \SI{2}{\mm} was performed above the viral injection site. The dura was pierced and lifted with a fine tweezer to expose the brain. The brain is then constantly irrigated with artificial cerebral-spinal cord fluid to remove the blood., a 27 gauge aspiration needle was used to remove cortex, to expose \gls{ca1}. For implantation targetting amygdala after anchoring the screws, a 27-gauge needle was lowered to the target coordinate, left for \SI{5}{\min}, and slowly retracted.
+For implantation targetting \gls{ca1}, a circular craniology of \SI{2}{\mm} was performed above the viral injection site. The dura was pierced and lifted with a fine tweezer to expose the brain. The brain is then constantly irrigated with artificial cerebral-spinal cord fluid to remove the blood. A 27-gauge aspiration needle was used to remove cortex and expose \gls{ca1}. For implantation targetting amygdala after anchoring the screws, a 27-gauge needle was lowered to the target coordinate, left for \SI{5}{\min}, and slowly retracted.
 
 The mini-microscope is then fixed on the stereotaxic frame and gradually lowered to the target coordinates (\gls{ca1}: \gls{la}: \todo{coordinate for ca1 and amygdala}). Opaque black dental acrylic was used to secure the microscope baseplate to the skull. Once the dental acrylic cured, the microscope body was detached from the baseplate and replaced with a cap. Animals were given \SI{5}{\mg\per\kg} ketoprofen for analgesia.
 
