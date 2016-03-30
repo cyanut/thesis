@@ -8,7 +8,7 @@
     Live calcium imaging gives the best of both method. By labelling the cell of interest with a calcium indicator, neural activity can be inferred in milli-second resolution. Hundreds of cells can be simultaneously recorded, and specific subpopulations can be distinguished by fluorescence in different colour channels. However, traditional live calcium imaging requires the animals' head firmly fixed under a microscope stage. This requirement is incompatible with most well established behaviour assays, and at the same time introduce significant stress to the animal, potentially confounding the behavioural result. Moreover, due to light scattering in the opaque brain tissue, most of the studies have focused only on cortical areas, while techniques to image deep brain tissue on a standard two-photon microscope is still under development and not widely adopted \citep{barretto12}.
 
     \textit{In vivo} calcium imaging in behaving animals is first demonstrated by Mark Schnitzer's group in Stanford \citep{ghosh11}. The authors constructed a miniature epifluorescence microscope which is chronically implanted in the brain to image the fluorescence from region of interest. In a follow-up paper \citep{ziv13}, the authors demonstrated that the miniature microscope can image GCaMP3 calcium signals from hippocampal \gls{ca1} place cells for more than a month. However, there has been several limitations of their design: first their design incorporates an objective lens of \SI{1}{\mm}  in diameter, which is impractical to reach deep brain tissue; second, their mini-microscope was only able to identify GCaMP signals, and therefore unable to distinguish different cells types within the population \citep{ghosh11,ziv13}. 
-    
+
     In the current project, we aim to tackle the above mentioned limitations by building a head-mount miniature microscope which is able to image calcium signals in deep brain structures, while also able to image a separate fluorescence colour channel, allowing to distinguish difference cell type. The mini-microscope, once developed, will be used for imaging \gls{la} neurons to investigate mechanisms of fear memory encoding.
 
 
@@ -70,7 +70,7 @@ An image of the mini-microscope is shown in Figure~\ref{f.scope}. The resolution
 To test \textit{in vivo} imaging capability of the microscope, we first implanted the microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{120}{\kilo\dalton}). The fluorescein-dextran will fill the blood vessels and have similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
 
 We have first tested GCaMP6s fluorescence \textit{in vitro}. HEK--293 cells were transfected with pGP--CMV--gCAMP6s (Addgene), and imaged the next day. During imaging session, we challenged the cell with \SI{10}{\nmol} ATP, which is known to up-regulate intra-cellular \ce{Ca^2+} level \citep[\textit{e.g.}][]{lee04}. The result is shown in Figure~\ref{f.gcampinvitro}. The GCaMP6s gives minimal background but bright fluorescence when the intracellular \ce{Ca^2+} is induced.
-    
+
 To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into CA1 hippocampus of animals. After AAV expression plateaued, we aspirated cortical tissue above the viral infusion site and implanted the microscope baseplate. After two weeks when the animals recovered and the cranial window was cleared, the microscope was re-attached to the implanted baseplate. The animal were placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. More than 200 cells are clearly identifiable.
 
 We used a previously established method to extract \ce{Ca^2+} signals from the movie \citep{mukamel09}. Briefly, we used principle component analysis to reduce the temporal dimension, and then independent component analysis to extract the spatial location of cells and their corresponding \ce{Ca^2+} signals. Figure~\ref{f.analysis} shows a sample independent component that represents a cell and it's activity. The extracted cells are random coloured in Figure~\ref{f.ca1rainbow}.   
@@ -81,5 +81,116 @@ This design of the miniature microscope incorporates an objective lens of \SI{1.
 
 
 To enable us to identify different cell types in a population, we decided to add a second colour channel in the microscope. We have switched the filter set to a FITC/TRITC dual band set (Chroma 59004), and also from grayscale camera to an RGB camera chip. Figure~\ref{f.twocolour} shows the two-colour microscope against perfused brain expressing \gls{gfp} and TdTomato. Both fluorophore can be clearly seen. We have also tested the red channel \textit{in vivo}, where we infused red retrobeads (LumaFlour) in \gls{nac} and implanted the mini-microscope in \gls{la}. The retrobeads travels retrogradely, and will label amygdala neurons that have connection to \gls{nac}. These cells can be clearly identified under the mini-microscope in the red channel, with no interference to the green channel (Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}). 
+
+
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.55\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{microscope-schematic.png}
+        \caption{\label{f.scope-schema}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scope-cropped.jpg}
+        \caption{\label{f.scope}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{usaf-target.png}
+        \caption{\label{f.usaf}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scope-gfp.png}
+        \caption{\label{f.scope-gfp}}
+    \end{subfigure}
+    \caption{\subref{f.scope-schema} Schematic of the miniature microscope. Excitation light is emitted from a high-intensity blue LED, filtered and reflected to the sample by a dichroic mirror. GCaMP6 emission is collected by the gradient-index (GRIN) lens, filtered and focused onto a CMOS camera chip, where the images are sent to a computer and recorded. 
+             \subref{f.scope} Prototype of the mini-microscope.
+             \subref{f.usaf} USAF resolution test target under the mini-microscope.}
+             \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{blood-vessel.png}
+    \caption{\textit{In vivo} image of blood vessel. The animal received 10mg/kg fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. \label{f.bloodvessel}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{gcamp-in-vitro.jpg}
+    \caption{Expression of GCaMP6s \textit{in vitro}. HEK--293 cells were transfected with pGP--syn--GCaMP6s--WPRE. During imaging session, the cells are challenged with 10nM ATP to induce intracellular \ce{Ca^2+}. Images are taken from an inverted light microscope. GCaMP6s gives minimum background, and shows significant fluorescence when intracellular \ce{Ca^2+} is induced. \label{f.gcampinvitro}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{cells-bw.png}
+    \caption{Cells in CA1 captured by the mini-microscope in behaving animal. Two weeks after AAV infusion and microscope implantation, the animal is allowed to freely explore a novel environment. The picture is a maximum projection of all frames captured in a 5-minute session. \label{f.ca1bw}}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{analysis1.png}
+    \caption{Example of an independent component of the movie after analysis, showing both the extracted spatial location of the cell (left) and the un-normalized actvity (top right). \label{f.analysis}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{cells-bw-rainbow-all-final.png}
+    \caption{More than 100 cells are identified in a single imaging session. The identified cells are randomly coloured. \label{f.ca1rainbow}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{trace1.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{trace2.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{trace3.png}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{trace4.png}
+    \end{subfigure}
+    \caption{Activity of 4 sample cells plotted against location of the animal. The colour represents the \ce{Ca^2+} activity. The cellular activity is specific to the animal's location in the environment. \label{f.traceplot}}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{amygdala.png}
+    \caption{Raw calcium signals during fear conditioning. Left: extracted map of neurons, randomly coloured. Right: Sample calcium signals over time.\label{f.amygdala}}
+
+\end{figure}
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{two-colour-g.png}
+        \caption{\label{f.twocolour.g}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{two-colour-r.png}
+        \caption{\label{f.twocolour.r}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{two-colour-green-in-vivo.png}
+        \caption{\label{f.twocolour.g.invivo}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\linewidth}
+        \includegraphics[width=\textwidth]{two-colour-red-in-vivo.png}
+        \caption{\label{f.twocolour.r.invivo}}
+    \end{subfigure}
+
+    \caption{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
+\end{figure}
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{behaviour-schematic.png}
+    \caption{Proposed experiment. A mixture of GCaMP6s-expressing AAV and tdTomato-expressing long-term HSV are infused into LA of the animals. A two-colour microscope is implanted to visualize infected LA neurons. The animal then subject to auditory fear conditioning paradigm, and GCaMP6s signals in either tdTomato\textsuperscript{+} or tdTomato\textsuperscript{-} cells are recorded. We hypothesize that the tdTomato\textsuperscript{+} cells will be more excitable than tdTomato\textsuperscript{-} cells during training and testing. \label{f.behaviour-schema}}
+\end{figure}
+
+
+
 
 \section{Discussion}

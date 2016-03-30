@@ -1,7 +1,6 @@
+%\nonstopmode
 \documentclass[letterpaper,oneside, openright]{scrbook}
 \usepackage[left=32mm,right=32mm,top=32mm,bottom=32mm, headsep=10mm]{geometry}
-\usepackage{lipsum}
-\usepackage{graphicx}
 \usepackage{color}
 \usepackage{transparent}
 \usepackage[round,authoryear]{natbib}
@@ -20,6 +19,16 @@
 
 \usepackage{siunitx}
 \usepackage{mhchem}
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+\graphicspath{{../figs/}{../figs/lit-review/}{../figs/memory-trace/}{../figs/miniscope/}}
+\DeclareGraphicsExtensions{.jpg,.png,.pdf,.svg}
+
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+\usepackage{subcaption}
+\captionsetup{subrefformat=parens}
 
 
 
