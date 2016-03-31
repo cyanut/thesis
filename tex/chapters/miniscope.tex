@@ -58,10 +58,39 @@ The mini-microscope is then fixed on the stereotaxic frame and gradually lowered
 After lens implantation, the animals were kept in the home cage for at least two weeks before the first image session. This time allows the optical window to clear up. The animals were scruffed, the cap was removed and replaced with the microscope body. A typical imaging session lasts for \SI{5}{\minute}. After the imaging session the microscope body was removed, and the animal was recapped.
 
 \subsection{Image analysis}
+\subsubsection{Illumination correction}
+\subsubsection{Motion correction}
+\subsubsection{Extract cell}
 Individual cell calcium signals were extracted from the movie as previously described \citep{mukamel09}. Briefly, we first estimate the number of cells in the movie, and reduced the number of temporal dimension to roughly number of cells using principle component analysis. The resulting principle components were then subjected to independent component analysis, where the spatial filter for individual cells were extracted from the components, and the calcium signal of the corresponding cell was extracted from the mixing matrix. The time-course calcium signal was then aligned with behaviour recordings to identify neural activity patterns.
+\subsubsection{Mapping cells across session}
 
 
 \section{Results}\todo{edit microscope result}
+
+
+\subsection{minimicroscope}
+Photo, dimensions, resolution, perfused brain
+
+\subsection{Video preprocessing}
+\subsubsection{illumination correction}
+before, after
+\subsubsection{motion correction}
+max projection, x/y motion plot, heart beat / breath
+
+\subsection{Blood flow}
+image, blood vessel detection, velocity heatmap
+
+\subsection{CA1 analysis}
+max projection, sample cell, animal tracing, place cell heat map
+
+\subsection{long term stability}
+matching cells across sessions
+
+\subsection{Two colour}
+
+\subsection{Deep brain imaging}
+same as CA1 analysis
+
 
 With the design from \citet{ghosh11} as a guide, we started to make our own epifluorescence mini-microscope. Currently we have constructed working prototypes weighing less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box. The light source is a high intensity blue \gls{led} (LXML--PB01--0023, Lumileds). The illumination light is collected by a drum lens (45--549, Edmund Optics) and then filtered by a blue bandpass filter (ET470/40x, Chroma). The filtered illumination is then reflected by a dichroic mirror (T495lpxr, Chroma) on to the sample. Fluorescence is collected by a \SI{1.8}{\mm} \gls{grin} lens (64--537, Edmund Optics), filtered with a green bandpass filter (ET525/50m, Chroma), then focused by an achromatic lens (49--277, Edmund Optics) onto a 600 tv-line analogue CMOS camera sensor (ASX340, Aptina). The analogue signal is then converted by a consumer video capture device (MyGica) at resolution of \num{720 x 576} and a frame rate of 25 frames per second.
 
@@ -92,7 +121,7 @@ To enable us to identify different cell types in a population, we decided to add
     \end{subfigure}
     \begin{subfigure}[t]{.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{scope-cropped.jpg}
+        \includegraphics[width=\textwidth]{scope-cropped}
         \caption{\label{f.scope}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
@@ -184,11 +213,12 @@ To enable us to identify different cell types in a population, we decided to add
     \caption{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
 \end{figure}
 
-
+\begin{comment}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{behaviour-schematic.png}
     \caption{Proposed experiment. A mixture of GCaMP6s-expressing AAV and tdTomato-expressing long-term HSV are infused into LA of the animals. A two-colour microscope is implanted to visualize infected LA neurons. The animal then subject to auditory fear conditioning paradigm, and GCaMP6s signals in either tdTomato\textsuperscript{+} or tdTomato\textsuperscript{-} cells are recorded. We hypothesize that the tdTomato\textsuperscript{+} cells will be more excitable than tdTomato\textsuperscript{-} cells during training and testing. \label{f.behaviour-schema}}
 \end{figure}
+\end{comment}
 
 
 
