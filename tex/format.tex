@@ -31,6 +31,7 @@
 \captionsetup{subrefformat=parens}
 
 \usepackage{verbatim} %for multiline comments
+\usepackage{placeins} %for confining figures to sections
 
 \titlespacing*{\chapter}{0pt}{4ex}{1ex}%pbk
 
@@ -114,3 +115,13 @@
 \renewcommand{\figurename}{Figure~}
 
 \DeclareSIUnit{\Molar}{\textsc{m}}
+
+%confine figures to sections
+\let\Oldsection\section
+\renewcommand{\section}{\FloatBarrier\Oldsection}
+
+\let\Oldsubsection\subsection
+\renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
+
+\let\Oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}

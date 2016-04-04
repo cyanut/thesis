@@ -39,7 +39,7 @@ A metal nut \todo{microscope body nut spec} was glued to the bottom of the micro
 
 Unlike the microscope body, the base plate was 3d printed using \gls{fdm} with \gls{pla} material. A threaded tube (\todo{baseplate thread tube info}) was heated with a soldering iron and inserted into the center of the base plate, and further fixed with epoxy glue. The objective lens was inserted into the center of the threaded tube, and fixed with crazy glue on the bottom. For objective that are thinner than the inner diameter of the threaded tube, an additional stainless steel tube was inserted inbetween to aid alignment of the lens.
 
-\subsubsection{Objective for deep brain imaging} \label{objective assembly}
+\subsubsection{Objective lens assembly for deep brain imaging} \label{objective assembly}
 
 For deep brain imaging, a \SI{0.5}{\mm} diameter, 1.0-pitch relay lens was glued to a \SI{2}{\mm} diameter, 0.25-pitch \gls{grin} lens. The setup is modified from \citep{kim12} to ensure concentricity and alignment. In the setup, a V-groove clamp (\todo{clamp details}, ThorLab) is used to hold the large \gls{grin} lens in place virtically, and the thin relay lens was mounted on another V-groove clamp attached to a 3-axis manipulator (\todo{manipulator details}, ThorLabs). The two V-groove clamps were leveled using a bull's eye spirit level. An analogue lens and camera chip was mounted under the large \gls{grin} lens, and displayed the image of the large \gls{grin} lens on a monitor. A disecting microscope was mounted horizontally for monitoring the vertical position of the two lenses. \todo{insert figure for the setup}
 
@@ -59,60 +59,40 @@ After lens implantation, the animals were kept in the home cage for at least two
 
 \subsection{Image analysis}
 \subsubsection{Illumination correction}
+\todo{illumination correction meth}
 \subsubsection{Motion correction}
-\subsubsection{Extract cell}
+\todo{motion correction meth}
+
+\subsubsection{Extracting cell from calcium imaging video}
 Individual cell calcium signals were extracted from the movie as previously described \citep{mukamel09}. Briefly, we first estimate the number of cells in the movie, and reduced the number of temporal dimension to roughly number of cells using principle component analysis. The resulting principle components were then subjected to independent component analysis, where the spatial filter for individual cells were extracted from the components, and the calcium signal of the corresponding cell was extracted from the mixing matrix. The time-course calcium signal was then aligned with behaviour recordings to identify neural activity patterns.
+
 \subsubsection{Mapping cells across session}
+Cells are extracted from the recordings for both session respectively. The position of the each cells were calculated as the center of mass of the 90 percent pixels in the extracted \gls{ica} component. The position of cells for each recording were approximately aligned to have overlapping center of mass, then rotated to have overlapping principle component vectors. The two point clouds are then precisely aligned using TrimICP(\todo{ref TrimICP}). TrimICP is robust against outliers, which can be observed even when cells fire in one session but were silent in another. TrimICP was performed using a 40\% outlier ratio, optimizing both translation and rotation. After alignment, cells that are less than \SI{5}{\um} from one session to another are mark as  same cells.
 
 
-\section{Results}\todo{edit microscope result}
+\section{Results}
 
+\subsection{mini-microscope}
+The mini-microscope provides a cheap and easy way for neuroscience laboratories to measure calcium activity in freely behaving small animals. The completely assembled mini-microscope weighs less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box (Figure~\ref{f.scope}). Adult mice with the mini-microscope attached are able to rear, groom, and freely explore environment with no noticable change from their natural behaviour (\todo{mouse image?}).
 
-\subsection{minimicroscope}
-Photo, dimensions, resolution, perfused brain
+\todo{insert microscope photo and mouse figure here}
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{scope-cropped}
+        \caption{\label{f.scope}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \missingfigure{animal with scope}
+    \end{subfigure}
+\end{figure}
 
-\subsection{Video preprocessing}
-\subsubsection{illumination correction}
-before, after
-\subsubsection{motion correction}
-max projection, x/y motion plot, heart beat / breath
+The theoretical optical resolution of the mini-microscope is \SI{1}{\um}. To measure the resolution empirically, we tested the mini-microscope against \gls{usaf} resolution target (\todo{USAF target detail}, Edmund Optics). As shown in Figure~\ref{f.usaf}, the thinest lines (group 7 element 6, \SI{2.07}{\um} width) are clearly visible. This suggest that the empirical resolution of the microscope is smaller than \SI{2}{\um}. With this resolution, the mini-microscope is able to resolve cell bodies and capillary blood vessels.
 
-\subsection{Blood flow}
-image, blood vessel detection, velocity heatmap
+In order to test the illumination, we expressed \gls{gfp} in \gls{la} of an animal, perfused and harvested the brain 3 days later when the \gls{hsv} expression peaks. The brain was sliced coronally on a vibratome until the area of infection. The trunk of the brain was imaged under the mini-microscope. As seen is Figure~\ref{f.scope-gfp}, the \gls{gfp} cells are clearly visible. Moreover, many of the apical dendrites can also be resolved. The imaging quality is comparable to that taken under a standard epi-flourescence microscope (Nikon \todo{Nikon details}\todo{insert Nikon image}. The imaging quality is lower than normal due to the thickness of the brain trunk). This result confirms that the flourescence under the \gls{led} illumination can be reliably detected by the \gls{cmos} camera.
 
-\subsection{CA1 analysis}
-max projection, sample cell, animal tracing, place cell heat map
-
-\subsection{long term stability}
-matching cells across sessions
-
-\subsection{Two colour}
-
-\subsection{Deep brain imaging}
-same as CA1 analysis
-
-
-With the design from \citet{ghosh11} as a guide, we started to make our own epifluorescence mini-microscope. Currently we have constructed working prototypes weighing less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box. The light source is a high intensity blue \gls{led} (LXML--PB01--0023, Lumileds). The illumination light is collected by a drum lens (45--549, Edmund Optics) and then filtered by a blue bandpass filter (ET470/40x, Chroma). The filtered illumination is then reflected by a dichroic mirror (T495lpxr, Chroma) on to the sample. Fluorescence is collected by a \SI{1.8}{\mm} \gls{grin} lens (64--537, Edmund Optics), filtered with a green bandpass filter (ET525/50m, Chroma), then focused by an achromatic lens (49--277, Edmund Optics) onto a 600 tv-line analogue CMOS camera sensor (ASX340, Aptina). The analogue signal is then converted by a consumer video capture device (MyGica) at resolution of \num{720 x 576} and a frame rate of 25 frames per second.
-
-An image of the mini-microscope is shown in Figure~\ref{f.scope}. The resolution of the microscope is better than \SI{2}{\um}, as shown in Figure~\ref{f.usaf} when it is tested against USAF resolution target (Lines in group 7 element 6 have width of \SI{2.07}{\um} and are clearly visible). We have tested the prototype on a perfused brain with \gls{gfp} signals. And as shown in \ref{f.scope-gfp}, the \gls{gfp} cells are clearly identified, with some of the neural processes visible.
-
-To test \textit{in vivo} imaging capability of the microscope, we first implanted the microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{120}{\kilo\dalton}). The fluorescein-dextran will fill the blood vessels and have similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
-
-We have first tested GCaMP6s fluorescence \textit{in vitro}. HEK--293 cells were transfected with pGP--CMV--gCAMP6s (Addgene), and imaged the next day. During imaging session, we challenged the cell with \SI{10}{\nmol} ATP, which is known to up-regulate intra-cellular \ce{Ca^2+} level \citep[\textit{e.g.}][]{lee04}. The result is shown in Figure~\ref{f.gcampinvitro}. The GCaMP6s gives minimal background but bright fluorescence when the intracellular \ce{Ca^2+} is induced.
-
-To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into CA1 hippocampus of animals. After AAV expression plateaued, we aspirated cortical tissue above the viral infusion site and implanted the microscope baseplate. After two weeks when the animals recovered and the cranial window was cleared, the microscope was re-attached to the implanted baseplate. The animal were placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. More than 200 cells are clearly identifiable.
-
-We used a previously established method to extract \ce{Ca^2+} signals from the movie \citep{mukamel09}. Briefly, we used principle component analysis to reduce the temporal dimension, and then independent component analysis to extract the spatial location of cells and their corresponding \ce{Ca^2+} signals. Figure~\ref{f.analysis} shows a sample independent component that represents a cell and it's activity. The extracted cells are random coloured in Figure~\ref{f.ca1rainbow}.   
-
-The timecourse of the identified cells were mapped back to the behaviour of the animal. Figure~\ref{f.traceplot} shows \ce{Ca^2+} activity of potential place cells as they respond to specific location in the environment the animal is in.
-
-This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to visualize activity form more than 40 cells in lateral amygdala and track them over time (Figure~\ref{f.amygdala}).
-
-
-To enable us to identify different cell types in a population, we decided to add a second colour channel in the microscope. We have switched the filter set to a FITC/TRITC dual band set (Chroma 59004), and also from grayscale camera to an RGB camera chip. Figure~\ref{f.twocolour} shows the two-colour microscope against perfused brain expressing \gls{gfp} and TdTomato. Both fluorophore can be clearly seen. We have also tested the red channel \textit{in vivo}, where we infused red retrobeads (LumaFlour) in \gls{nac} and implanted the mini-microscope in \gls{la}. The retrobeads travels retrogradely, and will label amygdala neurons that have connection to \gls{nac}. These cells can be clearly identified under the mini-microscope in the red channel, with no interference to the green channel (Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}). 
-
-
-
+\todo{reorganize figures}
 \begin{figure}[h]
     \begin{subfigure}[t]{.55\textwidth}
         \centering
@@ -140,18 +120,45 @@ To enable us to identify different cell types in a population, we decided to add
              \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.
 \end{figure}
 
+\subsection{Video preprocessing}
+\subsubsection{illumination correction}
+\todo{move to methods?}
+Due to the size limitation of the mini-microscope, the illumination has to be compromized and is uneven. The uneven illumination not only affects the calcium signal and cell detection, but also adds difficulty to the motion correction step, since the uneven illumination pattern appears stable even when there is relative movement between the mini-microscope and the target. To correct this, a 2D gaussian filter with large window (15 $\times$ 15) is convolved with each frame to extract the illumination pattern. The illumination pattern is then subtracted from the frame\todo{... and nomalized by multiplying the inverse of the difference of illumination pattern to roof}. Figure~\ref{f.illumination}\todo{image} shows the maximum projection of the recording before and after illumination correction. Cells under intense illumination in the center can be clearly visualized after illumination correction.
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \missingfigure{before correction}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \missingfigure{after correction}
+    \end{subfigure}
+    \caption{\label{f.illumination}, before, after}
+\end{figure}
+
+\subsubsection{motion correction}
+After illumination correction, the movie was then removed from dust, and corrected for motion. Occasional dust speckles on the camera appears as stational small dark objects in the movie, and would interfere with motion detection. To remove the dust speckles, for each frame, pixels two standard deviation darker than mean intensity are labeled. The labeled pixels are morphologically eroded and dilated to remove noise, and then inpainted using Navier-Stokes based methods (\todo{reference opencv?}).
+
+As the motion is almost entirely translational, after dust removal we used phase correlation algorithm to achieved sub-pixel level motion correction. The reference frame is initialized to be the first frame. A moving average of 25 registered frames were generated, and the reference frame is updated by maximum projection of the moving average frame to the reference frame. To test the efficacy of the motion correction algorithm, we have generated a perticularly shaky recording by loosing the connection of the mini-microscope to the baseplate. As can be seen from the maximum projection of the original recording and stabilized recording (Figure~\todo{ref max projection image}), the motion correction works well even for extremely erratic motion. 
+
+\missingfigure{max projection, x/y motion plot}
+
+\subsection{Measuring blood flow with mini-microscope}
+To test \textit{in vivo} imaging capability of the microscope, we first implanted the microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{120}{\kilo\dalton}). The fluorescein-dextran will fill the blood vessels and have similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
+\todo{calculating blood flow}
+\todo{image, blood vessel detection, velocity heatmap}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{blood-vessel.png}
     \caption{\textit{In vivo} image of blood vessel. The animal received 10mg/kg fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. \label{f.bloodvessel}}
 \end{figure}
 
 
-\begin{figure}[h]
-    \includegraphics[width=\textwidth]{gcamp-in-vitro.jpg}
-    \caption{Expression of GCaMP6s \textit{in vitro}. HEK--293 cells were transfected with pGP--syn--GCaMP6s--WPRE. During imaging session, the cells are challenged with 10nM ATP to induce intracellular \ce{Ca^2+}. Images are taken from an inverted light microscope. GCaMP6s gives minimum background, and shows significant fluorescence when intracellular \ce{Ca^2+} is induced. \label{f.gcampinvitro}}
-\end{figure}
+\subsection{Recording calcium transients in CA1}
+To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into \gls{ca1} hippocampus and implanted the mini-microscope above the injection site. During behavioural session, the animal was placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. We were able to extract 200 cells from the recording and their corresponding \ce{Ca^2+} transients (Figure~\ref{f.ca1rainbow}\ref{f.analysis}).
 
-
+The positions of the animal was traced out in the behaviour video. The timecourse of the identified cells were mapped back to the behaviour of the animal. Figure~\ref{f.traceplot} shows \ce{Ca^2+} activity of potential place cells as they respond to specific location in the environment the animal is in.
+\todo{max projection, sample cell, animal tracing, place cell heat map}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{cells-bw.png}
     \caption{Cells in CA1 captured by the mini-microscope in behaving animal. Two weeks after AAV infusion and microscope implantation, the animal is allowed to freely explore a novel environment. The picture is a maximum projection of all frames captured in a 5-minute session. \label{f.ca1bw}}
@@ -185,12 +192,23 @@ To enable us to identify different cell types in a population, we decided to add
     \caption{Activity of 4 sample cells plotted against location of the animal. The colour represents the \ce{Ca^2+} activity. The cellular activity is specific to the animal's location in the environment. \label{f.traceplot}}
 \end{figure}
 
+\subsection{between session stability}
+Two measure the stability of the imaging field between sessions, animals with gCaMP6 infused in \gls{ca1} underwent contextual fear conditioning, and \SI{24}{\hour} later, were put back to the same context for testing. Mini-microscope was attached during both imaging sessions, and the recordings are aligned as shown in \todo{alignment figure}. \todo{alignment result, how many percentage overlap??}
+\todo{figure matching cells across sessions}
+
+\subsection{Deep brain imaging}
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{amygdala.png}
     \caption{Raw calcium signals during fear conditioning. Left: extracted map of neurons, randomly coloured. Right: Sample calcium signals over time.\label{f.amygdala}}
 
 \end{figure}
+\todo{same as CA1 analysis}
+This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to visualize activity form more than 40 cells in lateral amygdala and track them over time (Figure~\ref{f.amygdala}).
+
+
+\subsection{Two colour}
+To test the two-colour version of the mini-microscope, we infused red retrobeads (\todo{retrobeads info}) in \gls{nac} bilaterally and gCaMP6 \gls{aav} in \gls{la}. The retrobeads will be trafficked retrogradely along axons, and will label \gls{la} neurons that preject to \gls{nac}. The images acquired from both the green and red channel are shown in Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}. There is no interference between the two channels\todo{wording}.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\linewidth}
@@ -213,6 +231,22 @@ To enable us to identify different cell types in a population, we decided to add
     \caption{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
 \end{figure}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{comment}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{behaviour-schematic.png}
@@ -224,3 +258,4 @@ To enable us to identify different cell types in a population, we decided to add
 
 
 \section{Discussion}
+1-2 pages
