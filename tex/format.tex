@@ -22,7 +22,7 @@
 
 \usepackage{lipsum}
 \usepackage{graphicx}
-\graphicspath{{../figs/}{../figs/lit-review/}{../figs/memory-trace/}{../figs/miniscope/}}
+\graphicspath{{../figs/}{../figs/lit-review/}{../figs/ad/}{../figs/miniscope/}}
 \DeclareGraphicsExtensions{.jpg,.png,.pdf,.svg}
 
 \usepackage{caption}
@@ -32,12 +32,13 @@
 
 \usepackage{verbatim} %for multiline comments
 \usepackage{placeins} %for confining figures to sections
+\usepackage[pagewise]{lineno}
 
 \titlespacing*{\chapter}{0pt}{4ex}{1ex}%pbk
 
 \titleformat{\chapter}[display]
             {\Huge\filleft\scshape}
-            {\normalfont\bf\fontfamily{put}\fontseries{b}\fontsize{95pt}{0pt}\selectfont\thechapter}
+            {\normalfont\fontfamily{put}\fontseries{b}\fontsize{95pt}{0pt}\selectfont\thechapter}
             {0pt}
             {}[\titlerule\vspace{2ex}\filright\vspace{2ex}]
 %
@@ -45,7 +46,7 @@
 
 \titleformat{\part}[frame]
             {\Huge\filcenter\scshape}
-            {\normalfont\bf\fontsize{85pt}{0pt}\selectfont \raisebox{1.7cm}{ Part\fontfamily{put}\fontseries{b}\fontsize{105pt}{0pt}\selectfont \hspace{.2em}\thepart} }
+            {\normalfont\fontsize{85pt}{0pt}\selectfont \raisebox{1.7cm}{ Part\fontfamily{put}\fontseries{b}\fontsize{105pt}{0pt}\selectfont \hspace{.2em}\thepart} }
             {30pt}
             {}[\filright]
 \addtokomafont{section}{\bfseries}
@@ -125,3 +126,17 @@
 
 \let\Oldsubsubsection\subsubsection
 \renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
+
+
+\newcommand{\draftfoot}{
+    \fancyfoot[CE,CO]{\textcolor{red}{\textbf{DRAFT as of \today}}}
+}
+\newcommand{\draft}{
+    \fancypagestyle{body}{
+        \draftfoot
+    }
+    \fancypagestyle{plain}{
+        \draftfoot
+    }
+    \linenumbers
+}
