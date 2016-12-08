@@ -34,6 +34,8 @@
 \usepackage{placeins} %for confining figures to sections
 \usepackage[pagewise]{lineno}
 
+\usepackage{background} %showing draft watermark
+
 \titlespacing*{\chapter}{0pt}{4ex}{1ex}%pbk
 
 \titleformat{\chapter}[display]
@@ -128,15 +130,10 @@
 \renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
 
 
-\newcommand{\draftfoot}{
-    \fancyfoot[CE,CO]{\textcolor{red}{\textbf{DRAFT as of \today}}}
-}
+
 \newcommand{\draft}{
-    \fancypagestyle{body}{
-        \draftfoot
-    }
-    \fancypagestyle{plain}{
-        \draftfoot
-    }
+    \backgroundsetup{placement=bottom,
+                     contents=\textbf{DRAFT as of \today},
+                     color=red, scale=1.2, vshift=0.8cm}     
     \linenumbers
 }
