@@ -3,13 +3,43 @@
 
 \section{Material and Methods}\todo{edit methods}
 
-\subsection{Animals and viral vectors}
+\subsection{Animals and vectors}
+All animals were housed in groups of 4 or 5, with a 12-hour light/dark cycle. Food and water are provided \textit{ad libitum} to all animals. Experiments were performed during the light phase of the circadian cycle. Mice were at least 8 weeks old at the beginning of all experiments. All experiments were in accordance to the Hospital for Sick Children Animal Care and Use Committee.
 
-Heterozygous and wild-type from the Tg-CRND8 Alzheimer model mouse strain were used in the experiment. All animals were caged in groups of 4 or 5, with a 12-hour light/dark cycle. Food and water are provided \textit{ad libitum} to all animals. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core. Additionally, GCaMP6f was introduced by crossing Tg-CRND8 with GP5.17 GCaMP6f strain. Results from F1 of Tg-CRND8 and GP5.17 were pooled with the AAV experiments.
+\subsubsection{TgCRND8 mice}
+TgCRND8 mice were developed at the Center of Research for Neurodegenerative Diseases (CRND) and carry a human APP695 transgene with the Swedish (K670N-M671L) and Indiana (V717F) FAD mutations under the regulation of the Syrian hamster prion promoter \citep{chishti01}. TgCRND8 was back-crossed with C57BL/6, \gls{tg} and \gls{wt} littermates of F1 generation were used in the experiments.
+
+
+\subsubsection{GP5.17 mice}
+GP5.17 mice transgenically express the flourescence calcium indicator GCaMP6f under the Thy1 promoter \citep{dana14}. TgCRND8 was crossed with GP5.17. Animals that that are GCaMP6f\textsuperscript{+} and \gls{app}\textsuperscript{-}, or GCaMP6f\textsuperscript{+} and \gls{app}\textsuperscript{+} are used in the experiments. 
+
+\subsubsection{Viral vectors}
+In the TgCRND8 mice, GCaMP6f expression is delivered through \gls{aav}. GCaMP6f expression is controlled by \gls{hsyn} promoter. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core. The virus is used undiluted. 
+
+\subsubsection{\tglu~peptide}
+To deliever \glu~construct (YKEGYNVYG) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb} through an unknown mechanism \todo{cite TAT}. The \tglu was synthesized from the sequence YGRKKRRQRRRYKEGYNVYG and desolved in saline. 
+
+
+\subsection{Viral Infusion}
+
+Each animal received \gls{ip} injection of atropine (\SI{0.1}{\mg\per\kg}) and chlorohydrate (\SI{400}{\mg\per\kg}) before being secured on a stereotaxic frame. An incision was made on the scalp and the skin was pulled to the side to reveal the skull. Holes were drilled above \gls{la} on the skull for micropipette injection. Virus was loaded into a glass micropipette and gradually lowered to target coordinate. \SI{1.5}{\ul} of virus were injected on each side at a rate of \SI{0.12}{\ul\per\min}, aiming at \gls{la} (\gls{a/p} \SI{-1.4}{\mm}, \gls{m/l} $\pm$\SI{3.5}{\mm}, \gls{d/v} \SI{5.0}{\mm} from Bregma). The micropipette was left in the brain for an extra \SI{10}{\min} before slowly retracted. The incision was sutured and treated with antibiotics. Each animal then received subcutaneous injection of analgesic (ketoprofen, \SI{5}{\mg\per\kg}) before returned to a partially heated clean cage for recovery.
+
+\subsection{Histology}
+Placement of implants and extent of viral infections was determined by \gls{gfp} expression. After all experiments, animals were transcardially perfused with first \gls{pbs} then 4\% \gls{pfa}. The brains were disected and kept in 4\% \gls{pfa} overnight, and washed with \gls{pbs}. The brains were then sliced coronally on a vibrotome (\todo{vibrotome info}) to \SI{50}{\um} thickness. Slices containing \gls{la} were then mounted on gelatin-coated glass slices with a hardening mounting media (Permaflour\todo{permaflour info}) and assessed under an epi-flourescence microscope(Nikon\todo{Nikon info}).
 
 \subsection{Contextual fear conditioning}
+Fear conditioning chambers (\SI{31 x 24 x 21}{\cm}; MED Associates, St. Albans, VT), consisted of 2 stainless steel and 2 clear acrylic walls, with a stainless steel shock-grid floor (bars \SI{3.2}{\mm} diameter, spaced \SI{7.9}{\mm} apart). A plastic drop-pan containing a 70\% ethanol solution was placed below the grid floor. A fan provided low-level white- noise during training and testing in the context. Behavior was monitored by overhead cameras, which digitized video images at \SI{15}{\Hz}. 
 
 Animals underwent contextual fear conditioning three weeks after mini-microscope baseplate implantation. One hour before training, animals received either TAT-GluA2 peptide (i.p., \SI{15}{\mmol\per\kg}) or vehicle injection. A mini-microscope is attached to the animal to record calcium activities during both training and testing of contextual fear conditioning. During training, animals were confined in the chamber for \SI{5}{\minute}. A footshock of \SI{0.5}{\mA} was delivered at \SI{4}{\minute} time point. During testing session \SI{24}{\hour} later, animals were placed back in the training environment for \SI{10}{\minute}. 
+
+\subsection{Animal tracing}
+\todo{Animal tracing method}
+Videos of animal behaviours were encoded as grey-scale images, and 
+\subsubsection{Background subtraction}
+A background image of the environment was generated by taking the median 
+\subsubsection{Features}
+\subsubsection{Viterbi's algorithm}
+\subsubsection{Particle filters}
 
 \subsection{Analysis}
 
@@ -27,8 +57,9 @@ First, we compared the average activity between groups, and have found the Tg an
 We then investigated that how cell Tg cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing (Skaggs et al., 1993). Then using machine learning methods, we investigated how freezing is encoded at a network level by training general classifiers to predict animals' behaviour from recorded cell activity. Both approach suggest that Tg animals have consistent worse freezing encoding both at a cellular level but also at a network level. 
 
 We have also investigated how the animals freeze, by A detailed analysis of the animals' freezing behaviour suggests that the Tg animals often start to freeze, however each freezing period is significantly 
+
 \subsection{Overall cell activity}
 \subsection{Freezing Behaviour}
 \subsection{Freezing information encoding}
-\subsection{Decoding freezing using machine learning}
+\subsection{Decoding freezing using machine learning methods}
 \section{Discussion}
