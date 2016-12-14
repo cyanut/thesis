@@ -106,11 +106,116 @@ While all the measurements we have performed considers each cell individually, a
 
 \subsection{Freezing Behaviour}
 \todo{paradigm}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{paradigm.png}
+    \caption{Experimental paradigm. Adult \gls{wt} and \gls{tg} animals (with gCaMP6f expression) were implanted with a mini-microscope baseplate targeting CA1 hippocampus on day 0. The cells were visible three weeks later. Animals received \tglu peptide (i.p.) \SI{1}{\hour} before contextual fear conditioning. Animals were tested \SI{24}{\hour} later for freezing behaviour. Calcium activity were recorded for both training and testing session. \label{f.ad.paradigm}}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{trace.png}
+    \caption{Sample cell image and traces. Traces are random coloured and correspond to cells of the same colour. \label{f.ad.trace}}
+\end{figure}
+
+
 \todo{freezing}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{freezing.png}
+    \caption{Percent of freezing during testing. \Gls{tg} animals showed significant lower freezing, and \tglu treatment returns the freezing to wildtype level. \label{f.ad.freezing}}
+\end{figure}
+
 \subsection{\tglu rescues hyperactivity in \gls{tg} cells}
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{activity_train.png}
+        \caption{\label{f.ad.acttrain}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{activity_test.png}
+        \caption{\label{f.ad.acttest}}
+    \end{subfigure}
+    \caption{Distribution and mean of average cell activity during \subref{f.ad.acttrain} training and \subref{f.ad.acttest} testing. Cells in the Tg animals are significantly more active, and this is rescued by \tglu treatment. \label{f.ad.activity}}
+\end{figure}
+
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{freeze_info.png}
+    \caption{Freezing information during testing. This measurement represent how much information a cell have in a period of time about whether the animal is freezing. Cells in \gls{tg} animals encode significantly less freezing than the \gls{wt} groups, and \tglu treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
+\end{figure}
+    
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{freeze_position.png}
+    \caption{Freezing information conditioned on animal's position. This measurement removes the effect of position from freezing information measurement, and the result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the animal is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{nb.png}
+        \caption{\label{f.ad.nb}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{svm.png}
+        \caption{\label{f.ad.svm}}
+    \end{subfigure}
+    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured as F1 score. Both classifiers showed inferior performance in \gls{tg} group, further supports the hypothesis that \gls{tg} animals have sub-optimal freezing encoding. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the coordination between the activity of the cells. \label{f.ad.classifier}}
+\end{figure}
+
+
 \subsection{\Gls{tg} animals can initiate freezing}
 \subsection{\Gls{tg} animals have deficits recall freezing memory}
 \subsection{\tglu rescues recall by decreasing activity}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{sample_trace.png}
+    \caption{Sample traces from cells with highest freezing information in an animal. It appears that cells encode freezing by decreasing their activity. \label{f.ad.sample_trace}}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{ch_activity.png}
+    \caption{Distribution and mean of activity difference between freezing and none-freezing, in cell with freezing information more than 0.01. This confirms the intuition from Figure~\ref{f.ad.sample_trace} that most of the cells encode freezing by decreasing activity. \label{f.ad.ch_activity}}
+\end{figure}
+
+
+
+
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \includegraphics[width=\textwidth]{corr1.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \includegraphics[width=\textwidth]{corr2.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \includegraphics[width=\textwidth]{corr3.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \includegraphics[width=\textwidth]{corr4.png}
+        \caption{}
+    \end{subfigure}
+    \caption{Scatter plots of varies behaviour measurement against freezing information, in pooled \gls{wt}, \gls{wt}-\glu and \gls{tg}-\glu. Given there is no group difference between the three groups, if any of the behaviour factor is confounding, the it will contribute to within-group difference and correlate with freezing information. We have found no significant correlations. However the near significance of percent freezing and spatial entropy correlations will need further investigation. \label{f.ad.corrs}}
+\end{figure}
+
+\pagebreak 
+
+
+
+
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{activity_freezing.png}
+        \caption{\label{f.ad.actf}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{activity_moving.png}
+        \caption{\label{f.ad.actnf}}
+    \end{subfigure}
+    \caption{Average cell activity during \subref{f.ad.actf} freezing and \subref{f.ad.actnf} not freezing. Cells in \gls{tg} animals have significantly higher activity during freezing, suggesting a sub-optimal encoding of freezing. Interestingly, \tglu also showed a decreased activity when the animal is not freezing, suggesting that the effect of \tglu maybe a global decrease of cell activity. \label{f.ad.activity_freezing}}
+\end{figure}
+
+
 
 \section{Discussion}
