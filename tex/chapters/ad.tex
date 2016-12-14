@@ -83,8 +83,34 @@ We then investigated that how cell Tg cells encodes freezing. First we looked at
 
 We have also investigated how the animals freeze, by A detailed analysis of the animals' freezing behaviour suggests that the Tg animals often start to freeze, however each freezing period is significantly 
 
-\subsection{Overall cell activity}
+
+The experimental paradigm is summarized in Figure~\ref{paradigm}. Mini-microscope baseplates were surgically implanted in CA1 hippocampus in gCaMP6f expressing wildtype (WT) and APP transgenic (Tg) animals. To transiently increase surface GluA2 density, we used a short interference peptide (TAT-GluA2\textsubscript{3Y}) to block GluA2-containing AMPAR endocytosis. The animals received either vehicle (Veh) or TAT-GluA2\textsubscript{3Y} (Glu) peptide one hour before training. Twenty-four hours later, the animals were tested in the training chamber. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{trace} shows cells recorded from a single animal and a sample of calcium traces. 
+
+
+Figure~\ref{activity} shows overall cell activity during training and testing. Consistent with previous reports in the literature \citep{verret12}, cells in Tg animals have increase overall cell activity. Interestingly, the TAT-GluA2\textsubscript{3Y} administered before the training session corrected the cell activity in Tg to WT levels both during training and during testing. This suggests that either the rescuing effect is long-lasting, or successfully forming and recalling a memory corrects the cell activity to base level.
+
+Figure~\ref{freezing} shows the percent of freezing during testing. Consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by TAT-GluA2\textsubscript{3Y} treatment. 
+
+We have further calculated freezing information content. This measurement reflects how much prediction power a cell has for freezing in a period of time. Again, cells in Tg animals have less freezing information, and this effect is partially rescued by TAT-GluA2\textsubscript{3Y} treatment (Figure~\ref{freeze_info}). This result suggests that, not only do the Tg animals freeze less, but when they are freezing, the information is not well encoded in hippocampus CA1. 
+
+However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. The result is similar and shown in Figure~\ref{freeze_ctrl}. 
+
+In addition, we also checked whether the freezing information coding is a result of different freezing or uneven spatial coverage of the behavioural chamber, which are represented by freezing entropy and spatial entropy respectively. To check these two factors, we have pooled the groups with similar behaviour (WT, WT-GluA2\textsubscript{3Y}, Tg-GluA2\textsubscript{3Y}), and correlated percent freezing, freezing entropy, total distance and spatial entropy against freezing information within the pooled groups. If the behavioural measurement have no influence in the freezing information, we would expect no correlation. Indeed, that is what we have found in Figure~\ref{corrs}. These control measurements have shown that the reduction of freezing encoding in the Tg animals is not affected by the difference in the animals' behaviour.
+
+The next question we investigated is, if the cells are encoding freezing, how do they encode? In figure~\ref{ch_activity} we selected all the cells that have more than 0.01 bits/second (which amounts to ~40\% in the normal groups and 10\% of the cells in the Tg group), and plotted the difference of average activity when the animal is freezing and not freezing. Interestingly, most of the cells encode freezing by decreasing their activity. This can also be seen representatively in the sample trace (Figure~\ref{sample_trace}).
+
+Given the cells tend to have decreased activity during freezing, we also examined the average cell activity when the animal is freezing, and activity when the animal is not (Figure~\ref{activity_freezing}). Consistent with the freezing information result, the Tg animals have higher activity when the animal is freezing, and this is rescued by the TAT-GluA2\textsubscript{3Y}. Interestingly, the rescue group also shows significantly decreased activity when the animal is not freezing. These results suggest the TAT-GluA2\textsubscript{3Y} may rescue the Tg phenotype by globally decrease background cell activity.
+
+
+While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we have build two classifiers: a naive bayes (NB) classifier which models the cells independent of each other, and a gaussian support vector machine (SVM), which also uses the dependency between cells for prediction. The result is shown in Figure~\ref{classifier}. The SVM significantly outperforms the NB classifier, suggesting that the network encodes more information than the cells individually. Moreover, both classifiers perform significantly worse in the Tg group, further supports our hypothesis that Tg animals have inferior fear memory encoding.
+
 \subsection{Freezing Behaviour}
-\subsection{Freezing information encoding}
-\subsection{Decoding freezing using machine learning methods}
+\todo{paradigm}
+\todo{freezing}
+\subsection{\tglu rescues hyperactivity in \gls{tg} cells}
+\subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
+\subsection{\Gls{tg} animals can initiate freezing}
+\subsection{\Gls{tg} animals have deficits recall freezing memory}
+\subsection{\tglu rescues recall by decreasing activity}
+
 \section{Discussion}
