@@ -85,7 +85,7 @@ where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ 
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between levels are contrasted with t-test and Bonferroni correction for multiple conparisons. Comparisons between distributions are performed using Kolmogorov-Smirnov tests. All statistics are performed using $statsmodels$ package in python.
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between levels are contrasted with t-test and Bonferroni correction for multiple conparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics are performed using \texttt{statsmodels} package in python.
 
 
 \section{Results}
@@ -103,19 +103,22 @@ The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-micr
     \caption{Sample cell image and traces. Traces are random coloured and correspond to cells of the same colour. \label{f.ad.trace}}
 \end{figure}
 
-Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by \tglu treatment. 
+Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way \gls{anova} has revealed significant main effect in genotype (F\tsb{1,27}=11.85, p=0.002) as well as a significant interaction between genotype and treatment (F\tsb{1,27}=5.45, p=0.027). Posthoc tests show that \gls{tg} animals have significant lower freezing (\gls{wt}-Veh vs \gls{tg}-Veh, T=4.21, p<0.001), and this effect is fully rescued by \tglu treatment (\gls{tg}-\tglu vs \gls{tg}-Veh, T=2.85, p=0.008; \gls{wt}-Veh vs \gls{tg}-\tglu, T=1.12, P=0.27). \tglu has no significant effect on \gls{wt} animals (\gls{wt}-Veh vs \gls{wt}-\tglu, T=0.355, p=0.72). This result is consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by \tglu treatment. 
 
 \todo{freezing}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freezing.png}
-    \caption{Percent of freezing during testing. \Gls{tg} animals showed significant lower freezing, and \tglu treatment returns the freezing to wildtype level. \label{f.ad.freezing}}
+    \caption{Percent of freezing during testing. \Gls{tg} animals have significant lower freezing, and \tglu treatment returns the freezing to wildtype level. \label{f.ad.freezing}}
 \end{figure}
 
 
 
 \subsection{\tglu rescues hyperactivity in \gls{tg} cells}
 
-Figure~\ref{f.ad.activity} shows overall cell activity during training and testing. Consistent with previous reports in the literature \citep{verret12}, cells in Tg animals have increase overall cell activity. Interestingly, the \tglu administered before the training session corrected the cell activity in Tg to WT levels both during training and during testing. This suggests that either the rescuing effect is long-lasting, or successfully forming and recalling a memory corrects the cell activity to base level.
+Figure~\ref{f.ad.acttrain} shows average cell activity during training session before footshock is delivered. During training, two-way \gls{anova} reveals a significant major effect of treatment (F\tsb{1,3033}=5.1, p=0.02) as well as a significant interaction between genotype and treament (F\tsb{1,3033}=7.7, p=0.006). Posthoc tests shows that \gls{tg}-Veh has significantly higher cell activity (WT-Veh vs Tg-Veh, T=-3.72, p<0.001), and \tglu treatment is able to restore average cell activity to \gls{wt} level. (Tg-\tglu vs Tg-Veh, T=-3.58, p<0.001; WT-Veh vs Tg-\tglu, T=0.14, p=0.89). \tglu does not have any effect on \gls{wt} animals (WT-Veh vs WT-\tglu, T=-0.137, p=0.89) This result is consistent with previous reports in the literature \citep{verret12}, showing cells in Tg animals have increase overall cell activity. Interestingly, while \tglu treatment restores the the mean cell activity during training, the distribution of cell activity is significantly different from \gls{wt} (WT-Veh vs Tg-\tglu, K=0.16, P<0.001). As is shown in the cumulative distribution plot, Tg-\tglu still have a over-proportion of highly active cells. 
+\todo{Discuss: \tglu is not able to rescue cells with very high activity}
+
+Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \gls{anova} revealled significant major effect of genotype and treatment, as well as their interaction(genotype: F\tsb{1,3029}=21.3, p<0.001, treatment: F\tsb{1,3029}=27.4, p<0.001, interaction: F\tsb{1,3029}=78.4, p<0.001). Post-hoc tests show significant increase of cell activity in Tg-Veh group (WT-Veh vs Tg-Veh, T=-10.1, p<0.001), and this effect is corrected by \tglu treament (WT-Veh vs Tg-\tglu, T=0.73, p=0.47; Tg-\tglu vs Tg-Veh, T=-9.97, p<0.001). There is also a trend of increase in cell activity after \tglu treatment in \gls{wt} group, however the p-value is close to threshold after correction of multiple comparison (WT-Veh vs WT-\tglu, T=-2.53, p=0.012, threshold = 0.013). Interestingly during testing, \tglu is able to fully rescue the hyper-activity in \gls{tg} group (\gls{kstest}: Veh-WT vs Tg-\tglu, K=0.06, p=0.07; Tg-Veh vs Tg-\tglu, K=2.29, p<0.001). These results suggest that the rescuing effect of \tglu in \gls{tg} animals is slow and long-lasting.
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -131,7 +134,7 @@ Figure~\ref{f.ad.activity} shows overall cell activity during training and testi
 
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
 
-We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{skaggs93}. This measurement reflects how much prediction power a cell has for freezing in a period of time. Again, cells in Tg animals have less freezing information, and this effect is partially rescued by \tglu treatment (Figure~\ref{f.ad.freeze_info}). This result suggests that, not only do the \gls{tg} animals freeze less, but when they are freezing, the information is not well encoded in hippocampus \gls{ca1}.
+We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{skaggs93}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=107.6, p<0.001) and treatment (F\tsb{1,4380}=7.3, p=0.007), and a significant interaction between the two factors (F\tsb{1,4380}=33.8, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=11.8, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\tglu vs Tg-Veh, T=6.05, p<0.001), as there is a trend that Tg-\tglu group has less freezing information than WT-Veh group (WT-Veh vs Tg-\tglu, T=2.12, p=0.03, threshold=0.0125; Figure~\ref{f.ad.freeze_info}). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_info.png}
     \caption{Freezing information during testing. This measurement represent how much information a cell have in a period of time about whether the animal is freezing. Cells in \gls{tg} animals encode significantly less freezing than the \gls{wt} groups, and \tglu treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
@@ -158,10 +161,10 @@ While all the measurements we have performed considers each cell individually, a
 
 \subsection{Difference of encoding in \gls{tg} animals is not a result of animal's behaviour}
 
-However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}. 
+However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}.  
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_position.png}
-    \caption{Freezing information conditioned on animal's position. This measurement removes the effect of position from freezing information measurement, and the result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the animal is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
+    \caption{Freezing information conditioned on animal's position. This measurement removes the effect of position from freezing information measurement. Two-way \gls{anova} shows significant main effects in genotype (F\tsb{1,4380}=92.4, p<0.001) and treatment (F\tsb{1,4380}=30.4, p<0.001), as well as significant interaction between the two factors (F\tsb{1,4380}=48.6, p<0.001). Posthoc tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=12.5, p<0.001), and partially rescued by \tglu (Tg-\tglu vs Tg-Veh, t=8.85, p<0.001; WT-Veh vs Tg-\tglu, t=3.56, p<0.001). This result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the animal is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
 \end{figure}
 
 
