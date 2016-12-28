@@ -16,8 +16,8 @@ GP5.17 mice transgenically express the flourescence calcium indicator GCaMP6f un
 \subsubsection{Viral vectors}
 In the TgCRND8 mice, GCaMP6f expression is delivered through \gls{aav}. GCaMP6f expression is controlled by \gls{hsyn} promoter. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core. The virus is used undiluted. 
 
-\subsubsection{\tglu~peptide}
-To deliever \glu~construct (YKEGYNVYG) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb} through an unknown mechanism \todo{cite TAT}. The \tglu was synthesized from the sequence YGRKKRRQRRRYKEGYNVYG and desolved in saline. 
+\subsubsection{\tglu peptide}
+To deliever \glu construct (YKEGYNVYG) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb} through an unknown mechanism \todo{cite TAT}. The \tglu was synthesized from the sequence YGRKKRRQRRRYKEGYNVYG and desolved in saline. 
 
 
 \subsection{Viral Infusion}
@@ -67,13 +67,26 @@ While improvement can still be made to this method, with the current implementat
 
 \subsection{Analysis}
 
+\subsubsection{Cell activity}
+
 All traces were normalized to have zero median and unit noise standard deviation. The noise standard deviation was estimated from median absolute deviation of the trace. The signal to noise ratio (SNR) were calculated as the ratio of maximum signal intensity and noise standard deviation. Only traces with more than 10 SNR and animals with more than 20 cells are included in the analysis. The average activity of a cell was calculated by the area under the calcium trace above 3 standard deviation of the noise divided by duration.
+
+\subsubsection{Mutual information}
 
 Freezing information and spatial information (below) were calculated according to \citet{skaggs93}. The information measurement represents how much cell activity at a single time can predict about freezing or location of the animal.  It was calculated using the following formula:
 
 $Information = \displaystyle\sum_{i}^{}P_i  \frac{R_i}{R} log_2 \frac{R_i}{R}$
 
 where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ represents the average cell activity when the animal is in state $i$, and $R$ is the average cell activity during the session. For freezing, the states are freezing and not freezing. For spatial information, environment is divided in \num{12 x 9} grids, and the states are when animal is in one of the grids.
+
+\subsubsection{Machine learning}
+
+\todo{naive bayes and gSVM}
+
+\subsubsection{Statistics}
+
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between levels are contrasted with t-test and Bonferroni correction for multiple conparisons. Comparisons between distributions are performed using Kolmogorov-Smirnov tests. All statistics are performed using $statsmodels$ package in python.
+
 
 \section{Results}
 
