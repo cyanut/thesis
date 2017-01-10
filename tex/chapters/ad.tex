@@ -226,6 +226,21 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
     \caption{Average cell activity during \subref{f.ad.actf} freezing and \subref{f.ad.actnf} not freezing. Cells in \gls{tg} animals have significantly higher activity during freezing, suggesting a sub-optimal encoding of freezing. Interestingly, \tglu also showed a decreased activity when the animal is not freezing, suggesting that the effect of \tglu maybe a global decrease of cell activity. \label{f.ad.activity_freezing}}
 \end{figure}
 
+\subsection{Freezing encoding precedes freezing behaviour}
+
+To examine whether the freezing encoding is an artifact of the freezing behaviour, we plotted average prediction accuracy for the classifiers at the time animals behaviour transits into freezing. The result is summarized in Figure~\ref{f.ad.into_f}. We compared the accuracy of each time point to average accuracy of the classifier (one-sample T-test, one-tailed, Bonferroni corrected for multiple testing), and used the beginning of sequence of significantly devianted frames from behaviour transition as a conservertive estimate of the start of the freezing signal. \Gls{nbc} prediction suggested that freezing signal appears at least \SI{2}{\second} before behaviour (WT-Veh: \SI{2.7}{\second}, WT-\glu: \SI{2.1}{\second}, Tg-Veh: \SI{1.9}{\second}, Tg-\glu: \SI{2.0}{\second}). \Gls{gsvm} prediction showed that, taking the interaction between cells into account, a freezing signal is still present in WT-Veh, WT-\glu, and Tg-\glu at least \SI{0.5}{\second} earlier than behaviour (WT-Veh: \SI{0.6}{\second}, WT-Glu: \SI{0.9}{\second}, Tg-\glu: \SI{0.5}{\second}), however the classifier does not detect any encoding trend in Tg-Veh before behaviour. The results from both classifiers suggest that a neural activity pattern of freezing appears in \gls{ca1} neurons before behavioural change.
+
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{nb_into_freezing.png}
+        \caption{\label{f.ad.nb_into_f}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{svm_into_freezing.png}
+        \caption{\label{f.ad.svm_into_f}}
+    \end{subfigure}
+    \caption{Average accuracy of classifiers at the beginning of freezing behaviour. For \gls{wt} and \gls{tg}-\glu groups, both \gls{nbc} and \gls{gsvm} shows significant lower performance just before the animals show freezing behaviour. This suggests that \gls{ca1} neural activity precedes behaviour.\label{f.ad.into_f}}
+\end{figure}
 
 
 \subsection{\Gls{tg} animals can initiate freezing}
@@ -247,6 +262,11 @@ We then investigated whether the deficits in \gls{tg} mice is due to less freezi
 
 
 \subsection{\Gls{tg} animals have deficits recall freezing memory}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{reminder2.png}
+    \caption{\label{f.ad.actf}}
+\end{figure}
+   
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
         \includegraphics[width=\textwidth]{reminder1.png}
