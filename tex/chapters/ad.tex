@@ -82,10 +82,20 @@ where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ 
 \subsubsection{Machine learning}
 
 \todo{naive bayes and gSVM}
+Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is hold out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. 
+
+Two classifiers were used for characterizing freezing encoding. In a \gls{nbc}, the classifier tries to infer the likelihood of the target class $T_i$ given the features $x_1, x_2, \cdots, x_n$. Therefore, we have:
+\begin{equation}
+    P(T_i|x_1, x_2, \cdots, x_n) = P(T_i|x_1, x_2, \cdots, x_{n-1}) \cdot P(T_i|x_n)
+\end{equation}
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between levels are contrasted with t-test and Bonferroni correction for multiple conparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics are performed using \texttt{statsmodels} package in python.
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in python.
+
+\subsubsection{Bayesian modeling}
+\todo{Bayesian modeling}
+\gls{mcmc} sampling is performed on \texttt{pymc} package in python.
 
 
 \section{Results}
@@ -262,17 +272,22 @@ We then investigated whether the deficits in \gls{tg} mice is due to less freezi
 
 
 \subsection{\Gls{tg} animals have deficits recall freezing memory}
-\begin{figure}[h]
-    \includegraphics[width=\textwidth]{reminder2.png}
-    \caption{\label{f.ad.actf}}
-\end{figure}
-   
+Given that \gls{tg} animals can initiate freezing behaviour, we suspect that their memory deficits is due to memory recall rather than memory encoding. To test this hypothesis, we trained the animals without \tglu, and \SI{3}{\day} later, treat the animal with \tglu or saline vehicle when they are shortly exposed to the training context as a reminder. The memory test occured \SI{24}{\hour} later. The result is summarized in Figure~\ref{f.ad.reminder1}. We found a significant interaction between genotype and treatment (\todo{stats}). Post-hoc tests shows Tg-Veh has a significant memory deficit (\todo{stats}), however this effect is fully rescued by \tglu treatment (\todo{stats}). This result suggests that \gls{tg} animals have intact memory encoding and deficits in memory recall. The recall deficit can be rescued with \tglu treament if the animal is exposed to a reminder.
+
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
         \includegraphics[width=\textwidth]{reminder1.png}
         \caption{\label{f.ad.actf}}
     \end{subfigure}
     \caption{ \label{f.ad.reminder1}}
+\end{figure}
+
+We then investigated whether the effect of the \tglu is memory specific. In a separate cohort of animals, we use a similar protocol as Figure~\ref{f.ad.reminder1}, except the animals received \tglu in their homecage instead of the reminder (Figure~\ref{f.ad.reminder2}). In this case, the \tglu treatment does not have any effect on memory recall. There is a significant main effect of genotype (\todo{stats}), and the genotype $times$ treatment interaction is not significant (\todo{stats}; Figure~\ref{f.ad.reminder2}). Together, these two pieces of results suggest that \gls{tg} animals have normal memory encoding but unable to recall, and \tglu rescues the deficit only when the memory is reminded.
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{reminder2.png}
+    \caption{\label{f.ad.reminder2}}
 \end{figure}
 
 \section{Discussion}
