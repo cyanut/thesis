@@ -82,12 +82,50 @@ where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ 
 \subsubsection{Machine learning}
 
 \todo{naive bayes and gSVM}
-Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is hold out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. 
+Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is hold out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. In the analysis, we used two classifiers, a \gls{nbc} and a \gls{gsvm}. 
 
-Two classifiers were used for characterizing freezing encoding. In a \gls{nbc}, the classifier tries to infer the likelihood of the target class $T_i$ given the features $x_1, x_2, \cdots, x_n$. Therefore, we have:
-\begin{equation}
-    P(T_i|x_1, x_2, \cdots, x_n) = P(T_i|x_1, x_2, \cdots, x_{n-1}) \cdot P(T_i|x_n)
-\end{equation}
+\paragraph{Poisson Naive Bayes Classifier.}
+In a \gls{nbc}, the classifier tries to infer the likelihood of the $i$th target class $T_i$ given the features $\mathbf{x} = (x_1, x_2, \dots, x_n)$. Therefore, we have:
+\begin{equation*}
+    P(T_i|\mathbf{x}) = P(T_i, \mathbf{x}) \over P(\mathbf{x}) 
+\end{equation*}
+The denominator is not relavent for classification purposes, since it does not depend on the target class $T_i$. Therefore, repeatedly applying the chain rule, we have:
+\begin{align*}
+    P(T_i|x_1, \dots, x_n) &\propto P(x_1, \dots, x_n, T_i) \\
+                           &= P(x_1|x_2 \dots, x_n, T_i) \cdot P(x_2, \dots, x_n, T_i) \\
+                           &\vdots \\
+                           &= P(x_1|x_2, \dots, x_n, T_i) \cdot P(x_2|x_3, \dots, x_n, T_i) \dots \cdot P(x_{n-1}|x_n, T_i) \cdot P(x_n|T_i) \cdot P(T_i) \\
+                           &= P(T_i) \cdot \prod_{k=1}^{n-1} P(x_k|x_{k+1}, \dots, x_n, T_i)
+\end{align*}
+To make the product trackable, \gls{nbc} discards the interaction between all the features, and assumes the features are conditionally independent. Therefore, each of the term in the product can be reduced to:
+\begin{equation*}
+    P(x_k|x_{k+1}, \dots, x_n, T_i) = P(x_k|T_i)
+\end{equation*}
+Therefore:
+\begin{equation*}
+    P(T_i|\mathbf{x}) = C\cdot P(T_i) \cdot \prod_{k=1}^n P(x_k|T_i)
+\end{equation*}
+where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $T_{pred}=\underset{i}{\operatorname{argmax}} P(T_i|\mathbf{x})$ is predicted.
+
+\paragraph{Gaussian Support Vector Machine.}
+A support vector machine aims to find a hyperplane $\mathbf{w}_T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the support vector machine aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
+\begin{equation*}
+    \us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}
+\end{equation*}
+
+Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this term, we can scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i cdot (\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1, therefore the original objective function becomes:
+\begin{align*}
+    &\us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}
+\end{align*}
+under the constraints that the data points are correctly separated by the hyperplane with a distance of at least $1$:
+\begin{equation*}
+    y_i \cdot (\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 \geq 0, \forall i
+\end{equation*}
+
+
+
 
 \subsubsection{Statistics}
 
@@ -101,7 +139,7 @@ Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) w
 \section{Results}
 
 
-\subsection{Freezing Behaviour}
+\subsection{\tglu rescues memory deficits in \gls{tg} mice}
 The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope baseplates were surgically implanted in \gls{ca1} hippocampus in gCaMP6f expressing \gls{wt} and \gls{tg} animals. To transiently increase surface GluA2 density, we used a short interference peptide (\tglu) to block GluA2-containing \gls{ampar} endocytosis. The animals received either vehicle (Veh) or \tglu{} (Glu) peptide one hour before training. Twenty-four hours later, the animals were tested in the training chamber. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single animal and a sample of calcium traces. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{paradigm.png}
