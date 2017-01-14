@@ -110,19 +110,43 @@ where $C$ is a constant independent of $T_i$. The conditional probability for ea
 \paragraph{Gaussian Support Vector Machine.}
 A support vector machine aims to find a hyperplane $\mathbf{w}_T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the support vector machine aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
 \begin{equation*}
-    \us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}
+    \us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}
 \end{equation*}
-
-Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this term, we can scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i cdot (\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1, therefore the original objective function becomes:
+ 
+Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this term, we can scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i \cdot (\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1, therefore the original objective function becomes:
 \begin{align*}
-    &\us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
-    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i\cdot(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
-    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}
+    &\us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|} \cdot 1 \\
+    =&\us{\mathbf{w},b}{argmin}\frac{|\mathbf{w}|^2}{2}
 \end{align*}
 under the constraints that the data points are correctly separated by the hyperplane with a distance of at least $1$:
 \begin{equation*}
-    y_i \cdot (\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 \geq 0, \forall i
+    y_i (\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 \geq 0, \forall i
 \end{equation*}
+To find the extrema of the objective function under these constraints, we create the the Lagrangian:
+\begin{equation} \label{lagr}
+    \mathcal{L}(\mathbf{w}, b, \mathbf{\lambda})=\frac{|\mathbf{w}|^2}{2} - \sum_{i=1}^n \lambda_i(y_i(\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1)
+\end{equation}
+where $\mathbf{\lambda}=(\lambda_1, \lambda_2, \ldots, \lambda_n)$, and minimize it by setting its partial derivatives regarding to $\mathbf{w}$ and $b$ to 0:
+\begin{align}
+    \nabla\mathbf{w} &= \mathbf{w} - \sum_{i=1}^n \lambda_i  y_i  \phi(\mathbf{x}_i) = 0 \label{dw}\\ 
+    \frac{\partial{b}}{\partial{\mathcal{L}}} &= - \sum_{i=1}^n \lambda_i y_i = 0 \label{db}
+\end{align}
+Using (\ref{dw}) and (\ref{db}) to eliminate $\mathbf{w}$ and $b$ from the Lagrangian (\ref{lagr}), equivalently we aim to minimize the Lagrangian of $\mathbf{\lambda}$:
+\begin{equation} \label{lagr2}
+    \mathcal{L}^*(\mathbf{\lambda}) = \sum_{i=1}^{n} \lambda_i - \frac{1}{2}\sum_{i=1}^n \sum_{j=1}^n \lambda_i \lambda_j y_i y_j \phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)
+\end{equation}
+subject to:
+\begin{equation*}
+    \lambda_i \geq 0, i = 1,\ldots,n \\
+    \sum_{i=1}^n \lambda_i y_i = 0
+\end{equation*}
+Since equation \ref{lagr2} does not depend on $\phi$, but only the inner product of $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_i), we can replace the term with a function $K(\chi, \chi) \to \mathbb{R}$ where maps $(\mathbf{x}_i, \mathbf{x}_j) \in (\chi, \chi)$ to $\mathbb{R}$, which represents a measure of similarity between $\mathbf{x}_i$ and $ \mathbf{x}_j$. In this way, the data $\mathbf{x}$ can be projected into a high dimensional space (or even infinite-dimension space) to allow a linear separation between the classes. Particularly, here we used the gaussian kernel:
+\begin{equation*}
+    K(\mathbf{x}_i, \mathbf{x}_j) = e^{-\frac{|\mathbf{x}_i - \mathbf{x}_j|^2}{2\sigma^2}}
+\end{equation*}
+The gaussian kernel is a universal kernel, 
 
 
 
