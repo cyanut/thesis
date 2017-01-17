@@ -51,7 +51,7 @@ Videos of animal behaviours were encoded as grey-scale images. Due to a dark bac
 
 \paragraph{Change in intensity.} Difference of pixel intensity at animal's positions in two consecutive frames. This feature captures the fact that animal's colour is relative consistent between frames.
 
-\paragraph{Change in intensity (blurred).} Similar to change in intensity, but using Gaussian blurred images (\SI{10}{\mm} window} to remove effect of random noise.
+\paragraph{Change in intensity (blurred).} Similar to change in intensity, but using Gaussian blurred images (\SI{10}{\mm} window) to remove effect of random noise.
 
 \paragraph{Magnitude of acceleration.} Magnitude of acceleration vector, which is calculated as the vector difference of two consecutive velocity calculations. 
 
@@ -68,23 +68,22 @@ While improvement can still be made to this method, with the current implementat
 \subsection{Analysis}
 
 \subsubsection{Freezing behaviour}
-Freezing behaviour of the mice during first 5 minutes of contextual fear memory testing were assessed by an experimenter who is blind to the genotype and treatment of the mice. 
+Freezing behaviour of the mice during first 5 minutes of contextual fear memory testing were assessed by an experimenter who is blind to the genotype and treatment of the mice. Frame-to-frame timestamps for the beginning and end of freezing periods were recorded.
 
 \subsubsection{Cell activity}
 
-All traces were normalized to have zero median and unit noise standard deviation. The noise standard deviation was estimated from median absolute deviation of the trace. The signal to noise ratio (SNR) were calculated as the ratio of maximum signal intensity and noise standard deviation. Only traces with more than 10 SNR and animals with more than 20 cells are included in the analysis. The average activity of a cell was calculated by the area under the calcium trace above 3 standard deviation of the noise divided by duration.
+All traces were normalized to have zero median and unit noise standard deviation. The noise standard deviation was estimated from median absolute deviation of the trace. The \gls{snr} were calculated as the ratio of maximum signal intensity and noise standard deviation. Only traces with more than 10 \gls{snr} and animals with more than 20 cells are included in the analysis. The average activity of a cell was calculated by the area under the calcium trace above 3 standard deviation of the noise divided by duration.
 
 \subsubsection{Mutual information}
 
 Freezing information and spatial information (below) were calculated according to \citet{skaggs93}. The information measurement represents how much cell activity at a single time can predict about freezing or location of the animal.  It was calculated using the following formula:
-
-$Information = \displaystyle\sum_{i}^{}P_i  \frac{R_i}{R} log_2 \frac{R_i}{R}$
-
+\begin{equation*}
+Information = \displaystyle\sum_{i}^{}P_i  \frac{R_i}{R} log_2 \frac{R_i}{R}
+\end{equation*}
 where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ represents the average cell activity when the animal is in state $i$, and $R$ is the average cell activity during the session. For freezing, the states are freezing and not freezing. For spatial information, environment is divided in \num{12 x 9} grids, and the states are when animal is in one of the grids.
 
 \subsubsection{Machine learning}
 
-\todo{naive bayes and gSVM}
 Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is hold out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. In the analysis, we used two classifiers, a \gls{nbc} and a \gls{gsvm}. 
 
 \paragraph{Poisson Naive Bayes Classifier.}
@@ -134,13 +133,13 @@ under the contraints that data are classified:
 \end{equation*}
 To find the extrema of the objective function under these constraints, we create the the Lagrangian:
 \begin{equation} \label{lagr}
-    \mathcal{L}(\mathbf{w}, b, \mathbf{\lambda})=\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n\varepsilon_i - \sum_{i=1}^n \lambda_i(y_i(\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 + \varepsilon_i) - \sum_{i=1}^n \mu_i\varepsilon_i
+    \mathcal{L}(\mathbf{w}, b, \mathbf{\lambda}, \mathbf{\mu})=\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n\varepsilon_i - \sum_{i=1}^n \lambda_i(y_i(\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 + \varepsilon_i) - \sum_{i=1}^n \mu_i\varepsilon_i
 \end{equation}
-where $\mathbf{\lambda}=(\lambda_1, \lambda_2, \ldots, \lambda_n)$, and minimize it by setting its partial derivatives regarding to $\mathbf{w}$, $b$, $\mathbf{\varepsilon}$ to 0:
+where $\mathbf{\lambda}=(\lambda_1, \lambda_2, \ldots, \lambda_n)$, and $\mathbf{\mu}=(\mu_1, \mu_2, \ldots, \mu_n)$. We can optimize it by setting its partial derivatives regarding to $\mathbf{w}$, $b$, $\mathbf{\varepsilon}$ to 0:
 \begin{align}\label{dw}
     \frac{\partial\mathcal{L}}{\partial\mathbf{w}} &= \mathbf{w} - \sum_{i=1}^n \lambda_i  y_i  \phi(\mathbf{x}_i) = 0 \\ 
     \frac{\partial\mathcal{L}}{\partial{b}} &= - \sum_{i=1}^n \lambda_i y_i = 0 \\
-    \frac{\partial\mathcal{L}}{\partial{\mathbf{\varepsilon_i}}} &= C - \lambda_i - \mu_i = 0 
+    \frac{\partial\mathcal{L}}{\partial{\mathbf{\varepsilon_i}}} &= C - \lambda_i - \mu_i = 0, \forall i 
 \end{align}
 Using (\ref{dw}) to eliminate $\mathbf{w}$, $b$, $\varepsilon$ from the Lagrangian (\ref{lagr}), equivalently we aim to minimize the Lagrangian of $\mathbf{\lambda}$:
 \begin{equation} \label{lagr2}
