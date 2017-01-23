@@ -76,7 +76,36 @@ All traces were normalized to have zero median and unit noise standard deviation
 
 \subsubsection{Mutual information}
 
-Freezing information and spatial information (below) were calculated according to \citet{skaggs93}. The information measurement represents how much cell activity at a single time can predict about freezing or location of the animal.  It was calculated using the following formula:
+The mutual information measurement between two random variables represents the degree of relatedness between them. We estimated the mutual information between the calcium trace for each cell $C$, a continuous random variable and the freezing state of the animal $F$, a discrete random variable. Specificially, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, \todo{cite brian ross, kozachenko}}, and calculated the mutual information as:
+\begin{equation} \label{cond_h}
+    I(C, F) = H(C) - H(C|F)
+\end{equation}
+
+The \gls{kl} is a nearest-neighbour entropy estimator. Given a data point $C_{i,0}$ from a continuous random variable and its m\textsuperscript{th} nearest neighbour $C_{i,m}$, we define $V_{i,m}$ as the volume of ball centered at $C_{i,0}$ with a radius equal to the distance between $C_{i,0}$ and $C_{i,m}$. The entropy of $C$ can be estimated as:
+\begin{equation} \label{est_h}
+    H(C) \approx \langle logV_{i,m}^F\rangle + \phi{N} - \phi{m}
+\end{equation}
+where $N$ is the number of samples, and $<\cdot>$ denotes the average over $1\ldots N$, and $\phi$ is the digamma function. Similarly, we can calculate the entropy for the conditional entropy $H(C|F)$:
+\begin{equation} \label{est_cond_h}
+    H(C|F) \approx \langle logV_{i,k}^{F_i} \rangle + \langle \phi(N_{F_i}) \rangle - \phi(k)
+\end{equation}
+where $N_{F_i}$ is the number of samples in the freezing state of $i$\textsuperscript{th} sample, and here we use the $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$ for the calculation.
+
+To avoid sampling error, we fix $k$ for each sample, but change $m$ as the number of samples between the sample $C_{i,0}$ and its $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$, $C_{i,k}^{F_i}$. Therefore:
+\begin{equation*}
+logV_{i, m_i} = logV_{i, k}^{F_i} 
+\end{equation*}
+Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
+\begin{equation*}
+    I(C, F) \approx \phi(N) - \langle\phi(m_i)\rangle - \langle\phi(N_{F_i})\rangle + \phi(k)
+\end{equation*}
+
+
+
+
+
+
+The mutual information between the calcium trace and freezing (freezing information) was calculated according to \citet{skaggs93}. The information measurement represents how much cell activity at a single time can predict about freezing or location of the animal.  It was calculated using the following formula:
 \begin{equation*}
 Information = \displaystyle\sum_{i}^{}P_i  \frac{R_i}{R} log_2 \frac{R_i}{R}
 \end{equation*}
