@@ -76,7 +76,7 @@ All traces were normalized to have zero median and unit noise standard deviation
 
 \subsubsection{Mutual information}
 
-The mutual information measurement between two random variables represents the degree of relatedness between them. We estimated the mutual information between the calcium trace for each cell $C$, a continuous random variable and the freezing state of the animal $F$, a discrete random variable. Specificially, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, \todo{cite brian ross, kozachenko}}, and calculated the mutual information as:
+The mutual information measurement between two random variables represents the degree of relatedness between them. We estimated the mutual information between the calcium trace for each cell $C$, a continuous random variable and the freezing state of the animal $F$, a discrete random variable. Specificially, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, victor02}, and calculated the mutual information as:
 \begin{equation} \label{cond_h}
     I(C, F) = H(C) - H(C|F)
 \end{equation}
@@ -102,14 +102,6 @@ Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
 
 
 
-
-
-
-The mutual information between the calcium trace and freezing (freezing information) was calculated according to \citet{skaggs93}. The information measurement represents how much cell activity at a single time can predict about freezing or location of the animal.  It was calculated using the following formula:
-\begin{equation*}
-Information = \displaystyle\sum_{i}^{}P_i  \frac{R_i}{R} log_2 \frac{R_i}{R}
-\end{equation*}
-where $P_i$ represents the probability of the animal being in state $i$,  $R_i$ represents the average cell activity when the animal is in state $i$, and $R$ is the average cell activity during the session. For freezing, the states are freezing and not freezing. For spatial information, environment is divided in \num{12 x 9} grids, and the states are when animal is in one of the grids.
 
 \subsubsection{Machine learning}
 
@@ -344,6 +336,13 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
 
 \subsection{Freezing encoding precedes freezing behaviour}
 
+
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{bayes_model.png}
+    \caption{\todo{bayes model}}
+\end{figure}
+
 To examine whether the freezing encoding is an artifact of the freezing behaviour, we plotted average prediction accuracy for the classifiers at the time animals behaviour transits into freezing. The result is summarized in Figure~\ref{f.ad.into_f}. We compared the accuracy of each time point to average accuracy of the classifier (one-sample T-test, one-tailed, Bonferroni corrected for multiple testing), and used the beginning of sequence of significantly devianted frames from behaviour transition as a conservertive estimate of the start of the freezing signal. \Gls{nbc} prediction suggested that freezing signal appears at least \SI{2}{\second} before behaviour (WT-Veh: \SI{2.7}{\second}, WT-\glu: \SI{2.1}{\second}, Tg-Veh: \SI{1.9}{\second}, Tg-\glu: \SI{2.0}{\second}). \Gls{gsvm} prediction showed that, taking the interaction between cells into account, a freezing signal is still present in WT-Veh, WT-\glu, and Tg-\glu at least \SI{0.5}{\second} earlier than behaviour (WT-Veh: \SI{0.6}{\second}, WT-Glu: \SI{0.9}{\second}, Tg-\glu: \SI{0.5}{\second}), however the classifier does not detect any encoding trend in Tg-Veh before behaviour. The results from both classifiers suggest that a neural activity pattern of freezing appears in \gls{ca1} neurons before behavioural change.
 
 \begin{figure}[h]
@@ -357,6 +356,39 @@ To examine whether the freezing encoding is an artifact of the freezing behaviou
     \end{subfigure}
     \caption{Average accuracy of classifiers at the beginning of freezing behaviour. For \gls{wt} and \gls{tg}-\glu groups, both \gls{nbc} and \gls{gsvm} shows significant lower performance just before the animals show freezing behaviour. This suggests that \gls{ca1} neural activity precedes behaviour.\label{f.ad.into_f}}
 \end{figure}
+
+nb stats:
+selector: 1 - 50000
+tau: 132.12258 (-2.1225799999999992, +1.8774200000000008)
+selector: 1 - 50000
+tau: 143.77956 (-2.7795600000000036, +2.2204399999999964)
+selector: 1 - 50000
+tau: 143.11568 (-5.115679999999998, +3.8843200000000024)
+selector: 1 - 50000
+tau: 147.21364 (-2.213639999999998, +1.786360000000002)
+dtau (0, 1) : 0 / 250.0
+dtau (0, 2) : 33 / 250.0
+dtau (0, 3) : 0 / 250.0
+dtau (1, 2) : 7843 / 250.0
+dtau (1, 3) : 1558 / 250.0
+dtau (2, 3) : 2257 / 250.0
+
+svm stats:
+selector: 1 - 50000
+tau: 188.25876 (-1.2587599999999952, +0.7412400000000048)
+selector: 1 - 50000
+tau: 148.36312 (-5.363120000000009, +4.636879999999991)
+selector: 0 - 48944, 1 - 1056
+tau: 101.97882 (-96.97882, +97.02118)
+selector: 1 - 50000
+tau: 194.2293 (-3.229299999999995, +1.770700000000005)
+dtau (0, 1) : 0 / 250.0
+dtau (0, 2) : 261 / 250.0
+dtau (0, 3) : 95 / 250.0
+dtau (1, 2) : 255 / 250.0
+dtau (1, 3) : 0 / 250.0
+dtau (2, 3) : 227 / 250.0
+
 
 
 \subsection{\Gls{tg} animals can initiate freezing}
