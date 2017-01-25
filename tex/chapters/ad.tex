@@ -61,39 +61,20 @@ Videos of animal behaviours were encoded as grey-scale images. Due to a dark bac
 
 The animal's position over time is modeled as a \gls{hmm}, as show in Figure \todo{hmm figure} where animal's true position at time $i$ is represented by the hidden variables $z_i$, and we can make measurements using the various features above and get measurements at each time point, represented as $x_i$. 
 
-Using particle filter, we use importance sampling to approximate the posterior distribution of $p(z_n|X_n)$ with $k$ weighted particles ${a_n^i, w_n^i}_{i=1}^k$. We sample the particles from the state transition distribution:
-\begin{equation}
-    a_n^i \sim P(z_n|X_{n-1}
-
-To predict the position of the animal at next time point $z_{n+1}$, each particle is transformed through the state transition function:
-\begin{equation}
-    a_{n+1}^i = f(a_n^i, \varepsilon).
+Using particle filter, we approximate the poosterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^n$ with weights $\{w^i\}_{i=1}^n$, such that the posterior distribution can be approximated as a mixture of Dirac distribution:
+\begin{equation} \label{zn_appox}
+    f_{z_n}(z_n|X_n) \approx \sum_{i=1}^Lw_n^i\delta(z_n - a_n^i)
 \end{equation}
-Each particle is then reweighted according to the posterior probability of the measurement at time $n+1$, $x_{n+1}$. Using Bayes rule:
+
+On the other hand, using Bayes rule and independencies form the \gls{hmm} structure, we have:
 \begin{align*}
-    w_{n+1}^i &= P(a_{n+1}^i|x_{n+1}) \\
-              &\propto P(x_{n+1}|a_{n+1}^i) \cdot P(a_{n+1}^i) \\
-              &= \frac{P(x_n|z_n) \cdot P(z_n|X_{n-1})}{P(x_n|X_{n-1})} \\
+    f_{z_n}(z_n|X_n) &\propto f_{x_n}(x_n|z_n, X_{n-1}) \cdot f_{z_n}(z_n|X_{n-1}) \\
+                     &= f_{x_n}(x_n|z_n) \int f_{z_n}(z_n|z_{n-1})f_{z_{n-1}}(z_{n-1}|X_{n-1})dz_{n-1}  \\
+                     &\approx f_{x_n}(x_n|z_n) \int f_{z_n}(z_n|z_{n-1})\cdot \sum_{i=1}^Lw_{n-1}^i\delta(z_{n-1}-a_{n-1}^i)dz_{n-1} \\
+                     &= f_{x_n}(x_n|z_n)  \sum_{i=1}^Lw_{n-1}^i \int f_{z_n}(z_n|z_{n-1})\delta(z_{n-1} - a_{n-1}^i)dz_{n-1} \\
+                     &= f_{x_n}(x_n|z_n) \sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i) \\
 \end{align*}
-
-We used particle filter to find out the position of the animal $z_i$. Specifically, we the distribution of the animal's position using $k$ weighted particles $\{x^i, w^i\}_{i=1}^k$. At each time point $i$, 
-
-During prediction, the goal is to estimate $z_n$ given all previous measurements $X_n = (x_1,ldots,x_n)$.
-
-Therefore using the Bayes rule and the fact that $z_n$ and $X_{n-1}$ is independent from the structure of the \gls{hmm}, we have:
-
-
-
-For a single pixel, we can calculate its score as the summation of likelihood for all the features\todo{formula}, and normalize the sum of the score to $1$ to get $P(x_n|z_n)$. Since we are only interested in the mean of $P(z_n|X_n)$, we resort to sequential importance sampling, and use $k$ particles with weights $ to estimate the mean. Therefore, 
-\begin{align*}
-    \langle P(z_n|X_n) \rangle &= P(x_n|z_n) \cdot \displaystyle\sum_{i=1}^k
-        
-
-
-The pixel with the highest score is the most likely position of the animal. However, calculating score for every pixel is computationally intensive. Instead, we took advantage of particle filters to estimate the distribution of score over pixels. \todo{cite particle filters, formula, detailed description}.
-
-While improvement can still be made to this method, with the current implementation the algorithm is able to correctly track animals with minimal human intervention. \todo{ref code}
-
+where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, which we approximate with a mixture of distributions of all features. The motion model $f_{z_n}(z_n|z_{n-1})$ is approximated with the distribution of speed at all directions. We used \num{2x10e4} particles for reliable tracking of the animals. The center of mass of all particles is used an an estimate of the animal's position $z_n$.
 
 \subsection{Analysis}
 
