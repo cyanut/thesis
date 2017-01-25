@@ -58,9 +58,39 @@ Videos of animal behaviours were encoded as grey-scale images. Due to a dark bac
 \paragraph{Segmentation area.} Edges in the frame is detected (Canny, \todo{threshold size}). The edges are then morphologically closed (6 iterations) to remove sporadic edges. The area enclosing the position of the animal is then calculated. This feature tries to capture the size of the animal.
 
 \subsubsection{Tracking}
-\todo{particle filter}
 
-For a single pixel, we calculate its score as the summation of likelihood for all the features\todo{formula}. The pixel with the highest score is the most likely position of the animal. However, calculating score for every pixel is computationally intensive. Instead, we took advantage of particle filters to estimate the distribution of score over pixels. \todo{cite particle filters, formula, detailed description}.
+The animal's position over time is modeled as a \gls{hmm}, as show in Figure \todo{hmm figure} where animal's true position at time $i$ is represented by the hidden variables $z_i$, and we can make measurements using the various features above and get measurements at each time point, represented as $x_i$. 
+
+Using particle filter, we use importance sampling to approximate the posterior distribution of $p(z_n|X_n)$ with $k$ weighted particles ${a_n^i, w_n^i}_{i=1}^k$. We sample the particles from the state transition distribution:
+\begin{equation}
+    a_n^i \sim P(z_n|X_{n-1}
+
+To predict the position of the animal at next time point $z_{n+1}$, each particle is transformed through the state transition function:
+\begin{equation}
+    a_{n+1}^i = f(a_n^i, \varepsilon).
+\end{equation}
+Each particle is then reweighted according to the posterior probability of the measurement at time $n+1$, $x_{n+1}$. Using Bayes rule:
+\begin{align*}
+    w_{n+1}^i &= P(a_{n+1}^i|x_{n+1}) \\
+              &\propto P(x_{n+1}|a_{n+1}^i) \cdot P(a_{n+1}^i) \\
+              &= \frac{P(x_n|z_n) \cdot P(z_n|X_{n-1})}{P(x_n|X_{n-1})} \\
+\end{align*}
+
+We used particle filter to find out the position of the animal $z_i$. Specifically, we the distribution of the animal's position using $k$ weighted particles $\{x^i, w^i\}_{i=1}^k$. At each time point $i$, 
+
+During prediction, the goal is to estimate $z_n$ given all previous measurements $X_n = (x_1,ldots,x_n)$.
+
+Therefore using the Bayes rule and the fact that $z_n$ and $X_{n-1}$ is independent from the structure of the \gls{hmm}, we have:
+
+
+
+For a single pixel, we can calculate its score as the summation of likelihood for all the features\todo{formula}, and normalize the sum of the score to $1$ to get $P(x_n|z_n)$. Since we are only interested in the mean of $P(z_n|X_n)$, we resort to sequential importance sampling, and use $k$ particles with weights $ to estimate the mean. Therefore, 
+\begin{align*}
+    \langle P(z_n|X_n) \rangle &= P(x_n|z_n) \cdot \displaystyle\sum_{i=1}^k
+        
+
+
+The pixel with the highest score is the most likely position of the animal. However, calculating score for every pixel is computationally intensive. Instead, we took advantage of particle filters to estimate the distribution of score over pixels. \todo{cite particle filters, formula, detailed description}.
 
 While improvement can still be made to this method, with the current implementation the algorithm is able to correctly track animals with minimal human intervention. \todo{ref code}
 
@@ -340,8 +370,8 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{bayes_model.png}
-    \caption{\todo{bayes model}}
-\end{figure}
+    \caption{}
+\end{figure}\todo{bayes model}
 
 To examine whether the freezing encoding is an artifact of the freezing behaviour, we plotted average prediction accuracy for the classifiers at the time animals behaviour transits into freezing. The result is summarized in Figure~\ref{f.ad.into_f}. We compared the accuracy of each time point to average accuracy of the classifier (one-sample T-test, one-tailed, Bonferroni corrected for multiple testing), and used the beginning of sequence of significantly devianted frames from behaviour transition as a conservertive estimate of the start of the freezing signal. \Gls{nbc} prediction suggested that freezing signal appears at least \SI{2}{\second} before behaviour (WT-Veh: \SI{2.7}{\second}, WT-\glu: \SI{2.1}{\second}, Tg-Veh: \SI{1.9}{\second}, Tg-\glu: \SI{2.0}{\second}). \Gls{gsvm} prediction showed that, taking the interaction between cells into account, a freezing signal is still present in WT-Veh, WT-\glu, and Tg-\glu at least \SI{0.5}{\second} earlier than behaviour (WT-Veh: \SI{0.6}{\second}, WT-Glu: \SI{0.9}{\second}, Tg-\glu: \SI{0.5}{\second}), however the classifier does not detect any encoding trend in Tg-Veh before behaviour. The results from both classifiers suggest that a neural activity pattern of freezing appears in \gls{ca1} neurons before behavioural change.
 
