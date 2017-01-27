@@ -1,7 +1,7 @@
 \chapter{Memory formation in Alzheimer's Disease}
 \section{Introduction}
 
-\section{Material and Methods}\todo{edit methods}
+\section{Material and Methods}
 
 \subsection{Animals and vectors}
 All animals were housed in groups of 3--5, with a 12-hour light/dark cycle. Food and water are provided \textit{ad libitum} to all animals. Experiments were performed during the light phase of the circadian cycle. Mice were at least 8 weeks old at the beginning of all experiments. All experiments were conducted in accordance to the Hospital for Sick Children Animal Care and Use Committee.
@@ -17,7 +17,7 @@ GP5.17 mice transgenically express the fluorescence calcium indicator GCaMP6f un
 In the TgCRND8 mice, GCaMP6f expression is delivered through \gls{aav}. GCaMP6f expression is controlled by \gls{hsyn} promoter. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core. The virus is used undiluted. 
 
 \subsubsection{\tglu peptide}
-To deliver \glu construct (YKEGYNVYG) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb} through a mechanism which is still unknown \todo{cite TAT}. The \tglu was synthesized from the sequence YGRKKRRQRRRYKEGYNVYG and dissolved in saline. 
+To deliver \glu construct (\texttt{YKEGYNVYG}) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb} through a mechanism which is still unknown \todo{cite TAT}. The \tglu was synthesized from the sequence \texttt{YGRKKRRQRRRYKEGYNVYG} and dissolved in saline. 
 
 
 \subsection{Viral Infusion}
@@ -72,9 +72,9 @@ On the other hand, using Bayes rule and independencies form the \gls{hmm} struct
                      &= f_{x_n}(x_n|z_n) \int f_{z_n}(z_n|z_{n-1})f_{z_{n-1}}(z_{n-1}|X_{n-1})dz_{n-1}  \\
                      &\approx f_{x_n}(x_n|z_n) \int f_{z_n}(z_n|z_{n-1})\cdot \sum_{i=1}^Lw_{n-1}^i\delta(z_{n-1}-a_{n-1}^i)dz_{n-1} \\
                      &= f_{x_n}(x_n|z_n)  \sum_{i=1}^Lw_{n-1}^i \int f_{z_n}(z_n|z_{n-1})\delta(z_{n-1} - a_{n-1}^i)dz_{n-1} \\
-                     &= f_{x_n}(x_n|z_n) \sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i) \\
+                     &= f_{x_n}(x_n|z_n) \sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i) 
 \end{align*}
-where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, which we approximate with a mixture of distributions of all features. The motion model $f_{z_n}(z_n|z_{n-1})$ is approximated with the distribution of speed at all directions. We used \num{2x10e4} particles for reliable tracking of the animals. The center of mass of all particles is used an an estimate of the animal's position $z_n$.
+where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, which we approximate with a mixture of distributions of all features. The motion model $f_{z_n}(z_n|z_{n-1})$ is approximated with the distribution of speed at all directions. Conbined with (\ref{zn_approx}), we can find $\{a_n^i\}$ by sampling from the mixture of pulses $\sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i)$, and calculate $w_n^i = f_{x_n}(x_n|a_n^i)$. The center of mass of all particles is used as an estimate of the animal's position $z_n$. This is then repeated for every frame.
 
 \subsection{Analysis}
 
@@ -94,11 +94,11 @@ The mutual information measurement between two random variables represents the d
 
 The \gls{kl} is a nearest-neighbour entropy estimator. Given a data point $C_{i,0}$ from a continuous random variable and its m\textsuperscript{th} nearest neighbour $C_{i,m}$, we define $V_{i,m}$ as the volume of ball centered at $C_{i,0}$ with a radius equal to the distance between $C_{i,0}$ and $C_{i,m}$. The entropy of $C$ can be estimated as:
 \begin{equation} \label{est_h}
-    H(C) \approx \langle logV_{i,m}^F\rangle + \phi{N} - \phi{m}
+    H(C) \approx \langle logV_{i,m}^F\rangle + \varphi(N) - \varphi(m)
 \end{equation}
-where $N$ is the number of samples, and $<\cdot>$ denotes the average over $1\ldots N$, and $\phi$ is the digamma function. Similarly, we can calculate the entropy for the conditional entropy $H(C|F)$:
+where $N$ is the number of samples, and $<\cdot>$ denotes the average over $1\ldots N$, and $\varphi$ is the digamma function. Similarly, we can calculate the entropy for the conditional entropy $H(C|F)$:
 \begin{equation} \label{est_cond_h}
-    H(C|F) \approx \langle logV_{i,k}^{F_i} \rangle + \langle \phi(N_{F_i}) \rangle - \phi(k)
+    H(C|F) \approx \langle logV_{i,k}^{F_i} \rangle + \langle \varphi(N_{F_i}) \rangle - \varphi(k)
 \end{equation}
 where $N_{F_i}$ is the number of samples in the freezing state of $i$\textsuperscript{th} sample, and here we use the $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$ for the calculation.
 
@@ -108,7 +108,7 @@ logV_{i, m_i} = logV_{i, k}^{F_i}
 \end{equation*}
 Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
 \begin{equation*}
-    I(C, F) \approx \phi(N) - \langle\phi(m_i)\rangle - \langle\phi(N_{F_i})\rangle + \phi(k)
+    I(C, F) \approx \varphi(N) - \langle\varphi(m_i)\rangle - \langle\varphi(N_{F_i})\rangle + \varphi(k)
 \end{equation*}
 
 
@@ -142,16 +142,16 @@ Therefore:
 where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $T_{pred}=\underset{i}{\operatorname{argmax}} P(T_i|\mathbf{x})$ is predicted.
 
 \paragraph{Gaussian Support Vector Machine.}
-A \gls{svm} aims to find a hyperplane $\mathbf{w}_T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the \gls{svm} aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
+A \gls{svm} aims to find a hyperplane $\mathbf{w}^T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the \gls{svm} aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
 \begin{equation} \label{dist}
-    \us{\mathbf{w},b}{argmax}\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}
+    \us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|})
 \end{equation}
  
 Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this term, we can scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i \cdot (\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1. The original objective function therefore becomes:
 \begin{align*}
-    &\us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} + C\sum_{i=1}^n\varepsilon_i)\\
-    =&\us{\mathbf{w},b}{argmax}\frac{C\sum_{i=1}^n\varepsilon_i}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
-    =&\us{\mathbf{w},b}{argmax}\frac{C\sum_{i=1}^n\varepsilon_i}{|\mathbf{w}|} \cdot 1 \\
+    &\us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
+    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|} \cdot 1 \\
     =&\us{\mathbf{w},b}{argmin}\frac{|\mathbf{w}|^2}{2}
 \end{align*}
 To allow the classifier to perform with datasets that are not linearly separable, we also add an error term for each data point $\varepsilon_i$. The value of $\varepsilon_i$ will be $0$ if the distance from the data point to the classifying hyperplane is at least 1, and $0>\varepsilon_i>1$ if it lies within the margin but still correctly classified, and $varepsilon \geq 1$ if it is incorrectly separated. The error is controlled by a parameter $C$, which dictates how relaxed is the classifying boundary. Therefore the objective function is:
@@ -159,19 +159,19 @@ To allow the classifier to perform with datasets that are not linearly separable
     \us{\mathbf{w},b}{argmin}(\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n \varepsilon_i)
 \end{equation*}
 under the contraints that data are classified:
-\begin{equation*}
+\begin{align*}
     y_i (\mathbf{w}^T\phi(\mathbf{x}_i) + b) \geq 1 - \varepsilon_i , \forall i\\
     \varepsilon_i \geq 0, \forall i
-\end{equation*}
+\end{align*}
 To find the extrema of the objective function under these constraints, we create the the Lagrangian:
 \begin{equation} \label{lagr}
     \mathcal{L}(\mathbf{w}, b, \mathbf{\lambda}, \mathbf{\mu})=\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n\varepsilon_i - \sum_{i=1}^n \lambda_i(y_i(\mathbf{w}^T\phi(\mathbf{x}_i) + b) - 1 + \varepsilon_i) - \sum_{i=1}^n \mu_i\varepsilon_i
 \end{equation}
 where $\mathbf{\lambda}=(\lambda_1, \lambda_2, \ldots, \lambda_n)$, and $\mathbf{\mu}=(\mu_1, \mu_2, \ldots, \mu_n)$. We can optimize it by setting its partial derivatives regarding to $\mathbf{w}$, $b$, $\mathbf{\varepsilon}$ to 0:
 \begin{align}\label{dw}
-    \frac{\partial\mathcal{L}}{\partial\mathbf{w}} &= \mathbf{w} - \sum_{i=1}^n \lambda_i  y_i  \phi(\mathbf{x}_i) = 0 \\ 
+    \frac{\partial\mathcal{L}}{\partial\mathbf{w}} &= \mathbf{w} - \sum_{i=1}^n \lambda_i  y_i  \phi(\mathbf{x}_i) = 0 \nonumber\\ 
     \frac{\partial\mathcal{L}}{\partial{b}} &= - \sum_{i=1}^n \lambda_i y_i = 0 \\
-    \frac{\partial\mathcal{L}}{\partial{\mathbf{\varepsilon_i}}} &= C - \lambda_i - \mu_i = 0, \forall i 
+    \frac{\partial\mathcal{L}}{\partial{\mathbf{\varepsilon}_i}} &= C - \lambda_i - \mu_i = 0, \forall i  \nonumber 
 \end{align}
 Using (\ref{dw}) to eliminate $\mathbf{w}$, $b$, $\varepsilon$ from the Lagrangian (\ref{lagr}), equivalently we aim to minimize the Lagrangian of $\mathbf{\lambda}$:
 \begin{equation} \label{lagr2}
@@ -182,7 +182,7 @@ subject to:
     0 \leq \lambda_i \leq C, i &= 1,\ldots,n \\
     \sum_{i=1}^n \lambda_i y_i &= 0
 \end{align*}
-The parameters $\lambda_i$ can then be solved numerically through quadratic programming. Since equation \ref{lagr2} does not depend on $\phi$, but only the inner product of $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_i)$, we can replace the term with a function $K(\chi, \chi) \to \mathbb{R}$, which represents a measure of similarity between $\mathbf{x}_i$ and $ \mathbf{x}_j$. In this way, the data $\mathbf{x}$ can be projected into a high dimensional space (or even infinite-dimension space) to allow a linear separation between the classes. Particularly, here we used the gaussian kernel:
+The parameters $\lambda_i$ can then be solved numerically through quadratic programming. Since equation \ref{lagr2} does not depend on $\phi$, but only the inner product of $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$, we can replace the term with a function $K(\chi, \chi) \to \mathbb{R}$, which represents a measure of similarity between $\mathbf{x}_i$ and $ \mathbf{x}_j$. In this way, the data $\mathbf{x}$ can be projected into a high dimensional space (or even infinite-dimension space) to allow a linear separation between the classes. Particularly, here we used the gaussian kernel:
 \begin{equation*}
     K(\mathbf{x}_i, \mathbf{x}_j) = e^{-\frac{|\mathbf{x}_i - \mathbf{x}_j|^2}{2\sigma^2}}
 \end{equation*}
@@ -200,18 +200,17 @@ We used the \texttt{SVC} module from \texttt{scikit-learn} Python package for \g
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in the Python programming language.
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in the Python programming language.
 
 \subsubsection{Bayesian modeling}
 \todo{Bayesian modeling}
-\gls{mcmc} sampling is performed on \texttt{pymc} package in python.
-
+\Gls{mcmc} sampling is performed on \texttt{pymc} package in python. Samples were drawn using Metropolis-Hasting steps. \num{540000} samples were drawn with \num{40000} in the burn-in period. The rest are thinned \num{10} times, resulting \num{50000} total samples for each model.
 
 \section{Results}
 
 
 \subsection{\tglu rescues memory deficits in \gls{tg} mice}
-The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope baseplates were surgically implanted in \gls{ca1} hippocampus in gCaMP6f expressing \gls{wt} and \gls{tg} animals. To transiently increase surface GluA2 density, we used a short interference peptide (\tglu) to block GluA2-containing \gls{ampar} endocytosis. The animals received either vehicle (Veh) or \tglu{} (Glu) peptide one hour before training. Twenty-four hours later, the animals were tested in the training chamber. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single animal and a sample of calcium traces. 
+The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope baseplates were surgically implanted in \gls{ca1} hippocampus in gCaMP6f expressing \gls{wt} and \gls{tg} animals. To transiently increase surface GluA2 density, we used a short interference peptide (\tglu) to block GluA2-containing \gls{ampar} endocytosis. The animals received either vehicle (Veh) or \tglu (Glu) peptide one hour before training. Twenty-four hours later, the animals were tested in the training chamber. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single animal and a sample of calcium traces. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{paradigm.png}
     \caption{Experimental paradigm. Adult \gls{wt} and \gls{tg} animals (with gCaMP6f expression) were implanted with a mini-microscope baseplate targeting CA1 hippocampus on day 0. The cells were visible three weeks later. Animals received \tglu peptide (i.p.) \SI{1}{\hour} before contextual fear conditioning. Animals were tested \SI{24}{\hour} later for freezing behaviour. Calcium activity were recorded for both training and testing session. \label{f.ad.paradigm}}
@@ -222,7 +221,8 @@ The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-micr
     \caption{Sample cell image and traces. Traces are random coloured and correspond to cells of the same colour. \label{f.ad.trace}}
 \end{figure}
 
-Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way \gls{anova} has revealed significant main effect in genotype (F\tsb{1,27}=12.79, p=0.001) as well as a significant interaction between genotype and treatment (F\tsb{1,27}=5.45, p=0.027). Posthoc tests show that \gls{tg} animals have significant lower freezing (\gls{wt}-Veh vs \gls{tg}-Veh, T=4.21, p<0.001), and this effect is fully rescued by \tglu treatment (\gls{tg}-\tglu vs \gls{tg}-Veh, T=2.85, p=0.008; \gls{wt}-Veh vs \gls{tg}-\tglu, T=1.12, P=0.27). \tglu has no significant effect on \gls{wt} animals (\gls{wt}-Veh vs \gls{wt}-\tglu, T=0.355, p=0.72). This result is consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by \tglu treatment. 
+
+Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way \gls{anova} has revealed significant main effect in genotype (F\tsb{1,27}=12.79, p=0.001) as well as a significant interaction between genotype and treatment (F\tsb{1,27}=5.45, p=0.027). Posthoc tests show that \gls{tg} animals have significant lower freezing (\gls{wt}-Veh vs \gls{tg}-Veh, T=4.21, p<0.001), and this effect is fully rescued by \tglu treatment (\gls{tg}-\glu vs \gls{tg}-Veh, T=2.85, p=0.008; \gls{wt}-Veh vs \gls{tg}-\glu, T=1.12, P=0.27). \tglu has no significant effect on \gls{wt} animals (\gls{wt}-Veh vs \gls{wt}-\glu, T=0.355, p=0.72). This result is consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by \tglu treatment. 
 
 \todo{freezing}
 \begin{figure}[h]
@@ -234,10 +234,10 @@ Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way
 
 \subsection{\tglu rescues hyperactivity in \gls{tg} cells}
 
-Figure~\ref{f.ad.acttrain} shows average cell activity during training session before footshock is delivered. During training, two-way \gls{anova} reveals significant major effects of genotype (F\tsb{1,3033}=6.2, p=0.01) and treatment (F\tsb{1,3033}=5.1, p=0.02) as well as a significant interaction between genotype and treament (F\tsb{1,3033}=7.7, p=0.006). Posthoc tests shows that \gls{tg}-Veh has significantly higher cell activity (WT-Veh vs Tg-Veh, T=-3.72, p<0.001), and \tglu treatment is able to restore average cell activity to \gls{wt} level. (Tg-\tglu vs Tg-Veh, T=-3.58, p<0.001; WT-Veh vs Tg-\tglu, T=0.14, p=0.89). \tglu does not have any effect on \gls{wt} animals (WT-Veh vs WT-\tglu, T=-0.137, p=0.89) This result is consistent with previous reports in the literature \citep{verret12}, showing cells in Tg animals have increase overall cell activity. Interestingly, while \tglu treatment restores the the mean cell activity during training, the distribution of cell activity is significantly different from \gls{wt} (WT-Veh vs Tg-\tglu, K=0.16, P<0.001). As is shown in the cumulative distribution plot, Tg-\tglu still have a over-proportion of highly active cells. 
+Figure~\ref{f.ad.acttrain} shows average cell activity during training session before footshock is delivered. During training, two-way \gls{anova} reveals significant major effects of genotype (F\tsb{1,3033}=6.2, p=0.01) and treatment (F\tsb{1,3033}=5.1, p=0.02) as well as a significant interaction between genotype and treament (F\tsb{1,3033}=7.7, p=0.006). Posthoc tests shows that \gls{tg}-Veh has significantly higher cell activity (WT-Veh vs Tg-Veh, T=-3.72, p<0.001), and \tglu treatment is able to restore average cell activity to \gls{wt} level. (Tg-\glu vs Tg-Veh, T=-3.58, p<0.001; WT-Veh vs Tg-\glu, T=0.14, p=0.89). \tglu does not have any effect on \gls{wt} animals (WT-Veh vs WT-\glu, T=-0.137, p=0.89) This result is consistent with previous reports in the literature \citep{verret12}, showing cells in Tg animals have increase overall cell activity. Interestingly, while \tglu treatment restores the the mean cell activity during training, the distribution of cell activity is significantly different from \gls{wt} (WT-Veh vs Tg-\glu, K=0.16, P<0.001). As is shown in the cumulative distribution plot, Tg-\glu still have a over-proportion of highly active cells. 
 \todo{Discuss: \tglu is not able to rescue cells with very high activity}
 
-Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \gls{anova} revealled significant major effect of genotype (F\tsb{1,3029}=32.7, p<0.001) and treatment (F\tsb{1,3029}=27.4, p<0.001), as well as their interaction (F\tsb{1,3029}=78.4, p<0.001). Post-hoc tests show significant increase of cell activity in Tg-Veh group (WT-Veh vs Tg-Veh, T=-10.1, p<0.001), and this effect is corrected by \tglu treament (WT-Veh vs Tg-\tglu, T=0.73, p=0.47; Tg-\tglu vs Tg-Veh, T=-9.97, p<0.001). There is also a trend of increase in cell activity after \tglu treatment in \gls{wt} group, however the p-value is close to threshold after correction of multiple comparison (WT-Veh vs WT-\tglu, T=-2.53, p=0.012, threshold = 0.013). Interestingly during testing, \tglu is able to fully rescue the hyper-activity in \gls{tg} group (\gls{kstest}: Veh-WT vs Tg-\tglu, K=0.06, p=0.07; Tg-Veh vs Tg-\tglu, K=2.29, p<0.001). These results suggest that the rescuing effect of \tglu in \gls{tg} animals is slow and long-lasting.
+Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \gls{anova} revealled significant major effect of genotype (F\tsb{1,3029}=32.7, p<0.001) and treatment (F\tsb{1,3029}=27.4, p<0.001), as well as their interaction (F\tsb{1,3029}=78.4, p<0.001). Post-hoc tests show significant increase of cell activity in Tg-Veh group (WT-Veh vs Tg-Veh, T=-10.1, p<0.001), and this effect is corrected by \tglu treament (WT-Veh vs Tg-\glu, T=0.73, p=0.47; Tg-\glu vs Tg-Veh, T=-9.97, p<0.001). There is also a trend of increase in cell activity after \tglu treatment in \gls{wt} group, however the p-value is close to threshold after correction of multiple comparison (WT-Veh vs WT-\glu, T=-2.53, p=0.012, threshold = 0.013). Interestingly during testing, \tglu is able to fully rescue the hyper-activity in \gls{tg} group (\gls{kstest}: Veh-WT vs Tg-\glu, K=0.06, p=0.07; Tg-Veh vs Tg-\glu, K=2.29, p<0.001). These results suggest that the rescuing effect of \tglu in \gls{tg} animals is slow and long-lasting.
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -253,18 +253,16 @@ Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \g
 
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
 
-We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{skaggs93}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=114.8, p<0.001) and treatment (F\tsb{1,4380}=7.3, p=0.007), and a significant interaction between the two factors (F\tsb{1,4380}=33.8, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=11.8, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\tglu vs Tg-Veh, T=6.05, p<0.001), as there is a trend that Tg-\tglu group has less freezing information than WT-Veh group (WT-Veh vs Tg-\tglu, T=2.12, p=0.03, threshold=0.0125; Figure~\ref{f.ad.freeze_info}). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
+We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{ross14, victor02}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=114.8, p<0.001) and treatment (F\tsb{1,4380}=7.3, p=0.007), and a significant interaction between the two factors (F\tsb{1,4380}=33.8, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=11.8, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=6.05, p<0.001), as there is a trend that Tg-\glu group has less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=2.12, p=0.03, threshold=0.0125; Figure~\ref{f.ad.freeze_info}). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_info.png}
     \caption{Freezing information during testing. This measurement represent how much information a cell have in a period of time about whether the animal is freezing. Cells in \gls{tg} animals encode significantly less freezing than the \gls{wt} groups, and \tglu treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
 \end{figure}
     
 
-Then using machine learning methods, we investigated how freezing is encoded at a network level by training general classifiers to predict animals' behaviour from recorded cell activity. Both approach suggest that Tg animals have consistent worse freezing encoding both at a cellular level but also at a network level. 
-
 While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we have build two classifiers: a \gls{nbc} which models the cells independent of each other, and a \gls{gsvm}, which also uses the dependency between cells for prediction. The result is shown in Figure~\ref{f.ad.classifier}. 
 
-A three-way \gls{anova} of genotype * treatment * classifier was carried out. There are significant main effect of genotype (F\tsb{1,50}=15.6, p<0.001), treatment (F\tsb{1,50}=5.5, p=0.02) and classifier (F\tsb{1,50}=9.0, p=0.004). There is also a significant interaction between genotype and treatment (F\tsb{1,50}=14.2, p<0.001), and no significant interactions involving classifier factor. Since the classifier factor only have a significant major effect, for the posthoc tests we used F-test to only compare different levels of genotype and treatment. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu treatment (Tg-\tglu vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\tglu (F\tsb{2,50}=0.63, p=0.54), and \tglu treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\tglu, F\tsb{2,50}=0.20, p=0.81).  
+A three-way \gls{anova} of genotype $\times$ treatment $\times$ classifier was carried out. There are significant main effect of genotype (F\tsb{1,50}=15.6, p<0.001), treatment (F\tsb{1,50}=5.5, p=0.02) and classifier (F\tsb{1,50}=9.0, p=0.004). There is also a significant interaction between genotype and treatment (F\tsb{1,50}=14.2, p<0.001), and no significant interactions involving the classifier factor. Since the classifier factor only have a significant major effect, for the posthoc tests we used F-test to only compare different levels of genotype and treatment. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu treatment (Tg-\glu vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu (F\tsb{2,50}=0.63, p=0.54), and \tglu treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
 
 These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} animals have inferior fear memory encoding. Moreover, this deficit is fully rescued by \tglu treatment.
 
@@ -285,14 +283,14 @@ These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier
 
 \subsection{Difference of encoding in \gls{tg} animals is not a result of animal's behaviour}
 
-However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. Two-way \gls{anova} shows significant main effects in genotype (F\tsb{1,4380}=112.8, p<0.001) and treatment (F\tsb{1,4380}=30.4, p<0.001), as well as significant interaction between the two factors (F\tsb{1,4380}=48.6, p<0.001). Posthoc tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=12.5, p<0.001), and partially rescued by \tglu (Tg-\tglu vs Tg-Veh, t=8.85, p<0.001; WT-Veh vs Tg-\tglu, t=3.56, p<0.001). The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}.  
+However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. Two-way \gls{anova} shows significant main effects in genotype (F\tsb{1,4380}=112.8, p<0.001) and treatment (F\tsb{1,4380}=30.4, p<0.001), as well as significant interaction between the two factors (F\tsb{1,4380}=48.6, p<0.001). Posthoc tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=12.5, p<0.001), and partially rescued by \tglu (Tg-\glu vs Tg-Veh, t=8.85, p<0.001; WT-Veh vs Tg-\glu, t=3.56, p<0.001). The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}.  
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_position.png}
     \caption{Freezing information conditioned on animal's position. This measurement removes the effect of position from freezing information measurement. This result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the animal is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
 \end{figure}
 
 
-An additional potential confound comes from the animal's behaviour. Within \gls{wt} animals, there is a significant correlation between freezing information and freezing \todo{stats and figure}. Given that \gls{tg} animals do not freeze well during testing, we ask is the encoding deficit found in \gls{tg} animals explained by the correlation of freezing and encoding? To investigate this question, we added freezing as a covariate into the two-way \gls{anova} model for position-controlled freezing information. The resulting model shows while percent of freezing is a significant confound in measuring freezing information (F\tsb{1,4379}=42.0, p<0.001), there is still significant major effect of genotype (F\tsb{1,4379}=34.0, p<0.001) and treatment (F\tsb{1,4379}=6.7, p=0.009), as well as a significant interaction between the two factors (F\tsb{1,4379}=5.6, p=0.017). Similarly to Figure~\ref{f.ad.freeze_ctrl}, Posthoc tests have found a significant decrease of freezing information in Tg-Veh with freezing level controlled (WT-Veh vs Tg-Veh, t=5.46, p<0.001), as well as a partial rescue by \tglu treatment (Tg-\tglu vs Tg-Veh, t=3.45, p=0.001; WT-Veh vs Tg-\tglu, t=2.93, p=0.003). And again, no effect of \tglu on \gls{wt} animals (WT-Veh vs WT-\tglu, t=-0.30, p=0.75). These results suggest that while freezing information is correlated with percent of freezing, \gls{tg} animals have additional deficit in encoding freezing, and this deficit is partially rescued by \tglu treatment. 
+An additional potential confound comes from the animal's behaviour. Within \gls{wt} animals, there is a significant correlation between freezing information and freezing \todo{stats and figure}. Given that \gls{tg} animals do not freeze well during testing, we ask is the encoding deficit found in \gls{tg} animals explained by the correlation of freezing and encoding? To investigate this question, we added freezing as a covariate into the two-way \gls{anova} model for position-controlled freezing information. The resulting model shows while percent of freezing is a significant confound in measuring freezing information (F\tsb{1,4379}=42.0, p<0.001), there is still significant major effect of genotype (F\tsb{1,4379}=34.0, p<0.001) and treatment (F\tsb{1,4379}=6.7, p=0.009), as well as a significant interaction between the two factors (F\tsb{1,4379}=5.6, p=0.017). Similarly to Figure~\ref{f.ad.freeze_ctrl}, Posthoc tests have found a significant decrease of freezing information in Tg-Veh with freezing level controlled (WT-Veh vs Tg-Veh, t=5.46, p<0.001), as well as a partial rescue by \tglu treatment (Tg-\glu vs Tg-Veh, t=3.45, p=0.001; WT-Veh vs Tg-\glu, t=2.93, p=0.003). And again, no effect of \tglu on \gls{wt} animals (WT-Veh vs WT-\glu, t=-0.30, p=0.75). These results suggest that while freezing information is correlated with percent of freezing, \gls{tg} animals have additional deficit in encoding freezing, and this deficit is partially rescued by \tglu treatment. 
 
 \begin{comment}
 In addition, we also checked whether the freezing information coding is a result of different freezing or uneven spatial coverage of the behavioural chamber, which are represented by freezing entropy and spatial entropy respectively. To check these two factors, we have pooled the groups with similar behaviour (\gls{wt}, \gls{wt}-\tglu, \gls{tg}-\tglu), and correlated percent freezing, freezing entropy, total distance and spatial entropy against freezing information within the pooled groups. If the behavioural measurement have no influence in the freezing information, we would expect no correlation. Indeed, that is what we have found in Figure~\ref{f.ad.corrs}. These control measurements have shown that the reduction of freezing encoding in the Tg animals is not affected by the difference in the animals' behaviour.
@@ -320,7 +318,7 @@ In addition, we also checked whether the freezing information coding is a result
 
 \subsection{\tglu rescues recall by decreasing activity}
 
-The next question we investigated is, if the cells are encoding freezing, how do they encode? In figure~\ref{f.ad.ch_activity} we selected all the cells that have more than 0.01 bits/second (which amounts to ~40\% in the normal groups and 10\% of the cells in the \gls{tg} group), and plotted the difference of average activity when the animal is freezing and not freezing. Interestingly, majority of the cells encode freezing by decreasing their activity. This can also be seen representatively in the sample trace (Figure~\ref{f.ad.sample_trace}).
+The next question we investigated is, if the cells are encoding freezing, how do they encode? In figure~\ref{f.ad.ch_activity} we selected all the cells that have more than 0.01 bits/second (which amounts to ~40\% in the normal groups and 10\% of the cells in the \gls{tg} group), and plotted the difference of average activity when the animal is freezing and not freezing. Interestingly, the majority of the cells encode freezing by decreasing their activity. This can also be seen representatively in the sample trace (Figure~\ref{f.ad.sample_trace}).
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{sample_trace.png}
     \caption{Sample traces from cells with highest freezing information in an animal. It appears that cells encode freezing by decreasing their activity. \label{f.ad.sample_trace}}
