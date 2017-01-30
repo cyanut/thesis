@@ -60,7 +60,12 @@ Videos of animal behaviours were encoded as grey-scale images. Due to a dark bac
 
 \subsubsection{Tracking}
 
-The animal's position over time is modeled as a \gls{hmm}, as show in Figure \todo{hmm figure} where animal's true position at time $i$ is represented by the hidden variables $z_i$, and we can make measurements using the various features above and get measurements at each time point, represented as $x_i$. 
+The animal's position over time is modeled as a \gls{hmm}, as show in Figure \ref{f.ad.hmm} where animal's true position at time $i$ is represented by the hidden variables $z_i$, and we can make measurements using the various features above and get measurements at each time point, represented as $x_i$. 
+
+\begin{figure}[h]
+    \input{../figs/ad/hmm.tex}
+    \caption{\gls{hmm} model for tracking animal. Animal's true position at time $i$ is represented by the latent variables $z_i$, measurements of the animal's position is represented by $x_i$. \label{f.ad.hmm}}
+\end{figure}
 
 Using particle filter, we approximate the posterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated with a mixture of Dirac delta function: 
 \begin{equation} \label{zn_approx}
@@ -194,7 +199,7 @@ The gaussian kernel is a universal kernel \todo{reference gaussian kernel}, mean
 
 The parameters of the model, $\lambda_i$ and $\mu_i$ are fitted with training data. To predict a new data point $\mathbf{x}'$, we calculate the sign of the distance from it to the classification boundary (\ref{dist}), using (\ref{dw}) to eliminate $\mathbf{w}$, and $b$:
 \begin{equation*}
-    \operatorname{sgn}(\sum_{i=1}^n\lambda_iy_iK(\mathbf{x}', \mathbf{x}_i) + b)
+    \operatorname{sgn}\Big(\sum_{i=1}^n\lambda_iy_iK(\mathbf{x}', \mathbf{x}_i) + b\Big)
 \end{equation*}
 as the prediction of whether the animal is freezing or not freezing.
 

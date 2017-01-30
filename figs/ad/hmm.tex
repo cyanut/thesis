@@ -1,0 +1,25 @@
+
+\begin{tikzpicture}[biglatent/.style={latent, minimum width={width("$z_{n+1}$")+6pt}}, bigobs/.style={biglatent, fill=gray!25}]
+    \node[biglatent] (z0) {$z_0$};
+    \node[biglatent, right=of z0] (z1) {$z_{1}$};
+    \node[biglatent, right=of z1] (z2) {$z_2$};
+    \node[right=of z2] (z25) {\Large{$\cdots$}};
+    \node[biglatent, right=of z25] (z3) {$z_{n-1}$};
+    \node[biglatent, right=of z3] (z4) {$z_{n}$};
+    \node[biglatent, right=of z4] (z5) {$z_{n+1}$};
+    \node[right=of z5] (z55) {};
+
+    \foreach \t [count=\i from 0] in {0,1,2,n-1,n,n+1}{
+        \node[bigobs, below=of z\i] (x\i) {$x_{\t}$};
+        \edge {z\i} {x\i};
+    };
+    \node[right=of x2] (x25) {\Large{$\cdots$}};
+    \edge {z0} {z1};
+    \edge {z1} {z2};
+    \edge {z2} {z25};
+    \edge {z25} {z3};
+    \edge {z3} {z4};
+    \edge {z4} {z5};
+    \edge {z5} {z55};
+
+\end{tikzpicture}
