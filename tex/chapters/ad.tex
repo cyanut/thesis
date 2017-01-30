@@ -36,7 +36,7 @@ Animals underwent contextual fear conditioning three weeks after mini-microscope
 
 \subsection{Animal tracing}
 \todo{Animal tracing method}
-Videos of animal behaviours were encoded as grey-scale images. Due to a dark background, overlaying mini-microscope wire and commutators and changing shadows, no simple feature is able to reliably identify the animal from the background. Instead, we used multiple features, calculate the distribution of the features in tracked animals, and use all the features together to estimate the position of the animal for each frame. During model fitting, distribution of every feature was estimated with a Gaussian kernel, with a bandwidth calculated using Silverman's rule of thumb\todo{cite Silverman 1986} as: $1.06\sigma n^{-frac{1}{5}}$, where $\sigma$ is the standard deviation of the samples, and $n$ is the number of samples.
+Videos of animal behaviours were encoded as grey-scale images. Due to a dark background, overlaying mini-microscope wire and commutators and changing shadows, no simple feature is able to reliably identify the animal from the background. Instead, we used multiple features, calculate the distribution of the features in tracked animals, and use all the features together to estimate the position of the animal for each frame. During model fitting, distribution of every feature was estimated with a Gaussian kernel, with a bandwidth calculated using Silverman's rule of thumb\todo{cite Silverman 1986} as: $1.06\sigma n^{-\frac{1}{5}}$, where $\sigma$ is the standard deviation of the samples, and $n$ is the number of samples.
 
 \subsubsection{Features}
 
@@ -62,7 +62,7 @@ Videos of animal behaviours were encoded as grey-scale images. Due to a dark bac
 
 The animal's position over time is modeled as a \gls{hmm}, as show in Figure \todo{hmm figure} where animal's true position at time $i$ is represented by the hidden variables $z_i$, and we can make measurements using the various features above and get measurements at each time point, represented as $x_i$. 
 
-Using particle filter, we approximate the poosterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated as a mixture of Dirac delta function: 
+Using particle filter, we approximate the posterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated with a mixture of Dirac delta function: 
 \begin{equation} \label{zn_approx}
     f_{z_n}(z_n|X_n) \approx \sum_{i=1}^Lw_n^i\delta(z_n - a_n^i)
 \end{equation}
@@ -75,7 +75,7 @@ On the other hand, using Bayes rule and independencies form the \gls{hmm} struct
                      &= f_{x_n}(x_n|z_n)  \sum_{i=1}^Lw_{n-1}^i \int f_{z_n}(z_n|z_{n-1})\delta(z_{n-1} - a_{n-1}^i)dz_{n-1} \\
                      &= f_{x_n}(x_n|z_n) \sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i) 
 \end{align*}
-where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, which we approximate with the normalized product of all distributions. The motion model $f_{z_n}(z_n|z_{n-1})$ is approximated with the distribution of speed at all directions. Conbined with (\ref{zn_approx}), we can find $\{a_n^i\}$ by sampling from the mixture $\sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i)$, and calculate $w_n^i = f_{x_n}(x_n|a_n^i)$. The center of mass of all particles is used as an estimate of the animal's position $z_n$. This process is then iterated for all frames to track the mouse's position in one behavioural video.
+where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, which we approximate with the normalized product of all feature distributions. The motion model $f_{z_n}(z_n|z_{n-1})$ is approximated with the distribution of speed at all directions. Conbined with (\ref{zn_approx}), we can find $\{a_n^i\}_{i=1}^L$ by sampling from the mixture $\sum_{i=1}^Lw_{n-1}^if_{z_n}(z_n|a_{n-1}^i)$, and calculate $w_n^i = f_{x_n}(x_n|a_n^i)$. The center of mass of all particles is used as an estimate of the animal's position $z_n$. This process is then iterated for all frames to track the mouse's position in one behavioural video.
 
 \subsection{Analysis}
 
@@ -88,24 +88,27 @@ All traces were normalized to have zero median and unit noise standard deviation
 
 \subsubsection{Mutual information}
 
-The mutual information measurement of two random variables represents the degree of relatedness between them. We estimated the mutual information between the calcium trace for each cell $C$, a continuous random variable and the freezing state of the animal $F$, a discrete random variable. Specificially, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, victor02}, and calculated the mutual information using the identity:
+The mutual information measurement of two random variables represents the degree of relatedness between them. The mutual information between the calcium trace for each cell $C$, a continuous random variable and the freezing state of the animal $F$, a discrete random variable, is defined as:
+\begin{equation*}
+    I(C, F) = \int\limits_{c \in C} \sum_{f \in F} P(c,f)\log\frac{P(c,f)}{P(c)P(f)}dc
+\end{equation*}
+To estimate the mutual information between freezing and cell activity, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, victor02}, and calculated the mutual information using the identity:
 \begin{equation} \label{cond_h}
     I(C, F) = H(C) - H(C|F)
 \end{equation}
-
 The \gls{kl} is a nearest-neighbour entropy estimator. Given a data point $C_{i,0}$ from a continuous random variable and its m\textsuperscript{th} nearest neighbour $C_{i,m}$, we define $V_{i,m}$ as the volume of ball centered at $C_{i,0}$ with a radius equal to the distance between $C_{i,0}$ and $C_{i,m}$. The entropy of $C$ can be estimated as:
 \begin{equation} \label{est_h}
-    H(C) \approx \langle logV_{i,m}^F\rangle + \varphi(N) - \varphi(m)
+    H(C) \approx \langle \log V_{i,m}^F\rangle + \varphi(N) - \varphi(m)
 \end{equation}
-where $N$ is the number of samples, and $<\cdot>$ denotes the average over $1\ldots N$, and $\varphi$ is the digamma function. Similarly, we can calculate the entropy for the conditional entropy $H(C|F)$:
+where $N$ is the number of samples, and $\langle\cdot\rangle$ denotes the average over $1\ldots N$, and $\varphi$ is the digamma function \todo{reference digamma}. Similarly, we can calculate the entropy for the conditional entropy $H(C|F)$:
 \begin{equation} \label{est_cond_h}
-    H(C|F) \approx \langle logV_{i,k}^{F_i} \rangle + \langle \varphi(N_{F_i}) \rangle - \varphi(k)
+    H(C|F) \approx \langle \log V_{i,k}^{F_i} \rangle + \langle \varphi(N_{F_i}) \rangle - \varphi(k)
 \end{equation}
 where $N_{F_i}$ is the number of samples in the freezing state of $i$\textsuperscript{th} sample, and here we use the $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$ for the calculation.
 
-To avoid sampling error, we fix $k$ for each sample, but change $m$ to the total number of samples between the sample $C_{i,0}$ and its $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$, $C_{i,k}^{F_i}$. Therefore:
+To avoid sampling error, we fix $k$ for each sample, but change $m$ to the total number of samples between the sample $C_{i,0}$ and its $k$\textsuperscript{th} nearest neighbour conditioned on $F_i$, $C_{i,k}^{F_i}$. Therefore we have:
 \begin{equation*}
-logV_{i, m_i} = logV_{i, k}^{F_i} 
+\log V_{i, m_i} = \log V_{i, k}^{F_i}, \forall i 
 \end{equation*}
 Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
 \begin{equation*}
@@ -117,7 +120,7 @@ Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
 
 \subsubsection{Machine learning}
 
-Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is hold out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. In the analysis, we used two classifiers, a \gls{nbc} and a \gls{gsvm}. 
+Time-course data for the calcium traces and animal behavioural states are paired and shuffled across time. Activity for each cell is regarded as a single feature. The classifiers are then train and validated using 5-fold cross validation. Specifically, the shuffled data are divided into 5 equal blocks. Each block is held out one at a time, and the classifier is trained using the rest 4 blocks. The hold out block is then used to test the performance of the classifier. The classifier prediction from each block is then concatenated and sorted into the original order. In the analysis, we used two classifiers, a \gls{nbc} and a \gls{gsvm}. 
 
 \paragraph{Poisson Naive Bayes Classifier.}
 In a \gls{nbc}, the classifier tries to infer the likelihood of the $i$th target class $T_i$ given the features $\mathbf{x} = (x_1, x_2, \dots, x_n)$. Therefore, we have:
@@ -127,10 +130,10 @@ In a \gls{nbc}, the classifier tries to infer the likelihood of the $i$th target
 The denominator is not relavent for classification purposes, since it does not depend on the target class $T_i$. Therefore, repeatedly applying the chain rule, we have:
 \begin{align*}
     P(T_i|x_1, \dots, x_n) &\propto P(x_1, \dots, x_n, T_i) \\
-                           &= P(x_1|x_2 \dots, x_n, T_i) \cdot P(x_2, \dots, x_n, T_i) \\
+                           &= P(x_1|x_2 \dots, x_n, T_i) P(x_2, \dots, x_n, T_i) \\
                            &\vdots \\
-                           &= P(x_1|x_2, \dots, x_n, T_i) \cdot P(x_2|x_3, \dots, x_n, T_i) \dots \cdot P(x_{n-1}|x_n, T_i) \cdot P(x_n|T_i) \cdot P(T_i) \\
-                           &= P(T_i) \cdot \prod_{k=1}^{n-1} P(x_k|x_{k+1}, \dots, x_n, T_i)
+                           &= P(x_1|x_2, \dots, x_n, T_i)  P(x_2|x_3, \dots, x_n, T_i) \ldots  P(x_{n-1}|x_n, T_i)  P(x_n|T_i)  P(T_i) \\
+                           &= P(T_i)  \prod_{k=1}^{n-1} P(x_k|x_{k+1}, \dots, x_n, T_i)
 \end{align*}
 To make the product trackable, \gls{nbc} discards the interaction between all the features, and assumes the features are conditionally independent. Therefore, each of the term in the product can be reduced to:
 \begin{equation*}
@@ -140,7 +143,7 @@ Therefore:
 \begin{equation*}
     P(T_i|\mathbf{x}) = C\cdot P(T_i) \cdot \prod_{k=1}^n P(x_k|T_i)
 \end{equation*}
-where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $T_{pred}=\underset{i}{\operatorname{argmax}} P(T_i|\mathbf{x})$ is predicted.
+where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $\hat{T}=\underset{i}{\operatorname{argmax}} P(T_i|\mathbf{x})$ is predicted.
 
 \paragraph{Gaussian Support Vector Machine.}
 A \gls{svm} aims to find a hyperplane $\mathbf{w}^T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the \gls{svm} aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
@@ -148,7 +151,7 @@ A \gls{svm} aims to find a hyperplane $\mathbf{w}^T\mathbf{x}+b=0$ which separat
     \us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|})
 \end{equation}
  
-Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this term, we can scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i \cdot (\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1. The original objective function therefore becomes:
+Given that $\mathbf{w}$ and $b$ can be scaled without changing the value of this term, we scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i(\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1. The original objective function therefore becomes:
 \begin{align*}
     &\us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
     =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
@@ -157,11 +160,11 @@ Given that we can scale $\mathbf{w}$ and $b$ without changing the value of this 
 \end{align*}
 To allow the classifier to perform with datasets that are not linearly separable, we also add an error term for each data point $\varepsilon_i$. The value of $\varepsilon_i$ will be $0$ if the distance from the data point to the classifying hyperplane is at least 1, and $0>\varepsilon_i>1$ if it lies within the margin but still correctly classified, and $\varepsilon_i \geq 1$ if it is incorrectly separated. The error is controlled by a parameter $C$, which dictates how relaxed the classifying boundary is. Therefore the objective function becomes:
 \begin{equation*}
-    \us{\mathbf{w},b}{argmin}(\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n \varepsilon_i)
+    \us{\mathbf{w},b}{argmin}\Big(\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n \varepsilon_i\Big)
 \end{equation*}
 under the contraints that data are classified for all $i$:
 \begin{align*}
-    y_i (\mathbf{w}^T\phi(\mathbf{x}_i) + b) &\geq 1 - \varepsilon_i 
+    y_i (\mathbf{w}^T\phi(\mathbf{x}_i) + b) &\geq 1 - \varepsilon_i \\ 
     \varepsilon_i &\geq 0
 \end{align*}
 To find the extrema of the objective function under these constraints, we create the the Lagrangian:
@@ -189,23 +192,22 @@ The parameters $\lambda_i$ can then be solved numerically through quadratic prog
 \end{equation*}
 The gaussian kernel is a universal kernel \todo{reference gaussian kernel}, meaning that with proper regulation, with it an \gls{svm} can create a classification boundary approaching any function at arbitrary precision. Therefore using a gaussian kernel, we would be able to capture any structure present in the training data which helps in prediction.
 
-The parameters of the model, $\lambda_i$ and $\mu_i$ are fitted with training data. For predicting a new data point $\mathbf{x}'$, we calculate the sign of the distance from it to the classification boundary (\ref{dist}), using (\ref{dw}):
+The parameters of the model, $\lambda_i$ and $\mu_i$ are fitted with training data. To predict a new data point $\mathbf{x}'$, we calculate the sign of the distance from it to the classification boundary (\ref{dist}), using (\ref{dw}) to eliminate $\mathbf{w}$, and $b$:
 \begin{equation*}
-    sgn(\sum_{i=1}^n\lambda_iy_iK(\mathbf{x}', \mathbf{x}_i) + b)
+    \operatorname{sgn}(\sum_{i=1}^n\lambda_iy_iK(\mathbf{x}', \mathbf{x}_i) + b)
 \end{equation*}
 as the prediction of whether the animal is freezing or not freezing.
 
-We used the \texttt{SVC} module from \texttt{scikit-learn} Python package for \gls{gsvm} classification. The regularization hyperparameter $C=1$ and gaussian kernel variance hyperparameter $2\sigma^2=dimension(\mathbf{x})$ were set to the default provided by the Python package \texttt{scikit-learn}. Since these sets of parameters gives satisfactory performance, they are not optimized to prevent overfitting of the classifier to this particular dataset.
+We used the \texttt{SVC} module from \texttt{scikit-learn} Python package for \gls{gsvm} classification. The regularization hyperparameter $C=1$ and gaussian kernel variance hyperparameter $2\sigma^2=\operatorname{dim}(\mathbf{x})$ were set to the default provided by the Python package \texttt{scikit-learn}. Since these sets of parameters gives satisfactory performance, they are not optimized to prevent overfitting of the classifier to this particular dataset.
 
 
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) was evaluated with two-way \gls{anova}. Covariables are controlled in a \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in the Python programming language.
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) was evaluated with two-way \gls{anova}. Covariables are controlled with \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in the Python programming language.
 
 \subsubsection{Bayesian modeling}
-\todo{Bayesian modeling}
-\Gls{mcmc} sampling is performed on \texttt{pymc} package in python. Samples were drawn using Metropolis-Hasting steps. \num{540000} samples were drawn with \num{40000} in the burn-in period. The rest are thinned \num{10} times, resulting \num{50000} total samples for each model.
+\Gls{mcmc} sampling was performed on \texttt{pymc} package in python. Samples were drawn using Metropolis-Hasting steps. \num{540000} samples were drawn with \num{40000} in the burn-in period. The rest are thinned \num{10} times, resulting \num{50000} total samples for each model. Bayes factors of alternative hypothesis versus null hypothesis (BF\tsb{10}) were calculated. Interpretation of Bayes factors is reported according to \todo{cite Kass and Raftery, 1995}. Where there is positive evidence if Bayes factor is between 3 and 20, strong evidence if between 20 and 150, and very strong evidence if greater than 150.
 
 \section{Results}
 
@@ -254,7 +256,7 @@ Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \g
 
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
 
-We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{ross14, victor02}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=114.8, p<0.001) and treatment (F\tsb{1,4380}=7.3, p=0.007), and a significant interaction between the two factors (F\tsb{1,4380}=33.8, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=11.8, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=6.05, p<0.001), as there is a trend that Tg-\glu group has less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=2.12, p=0.03, threshold=0.0125; Figure~\ref{f.ad.freeze_info}). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
+We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{ross14, victor02}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=254.0, p<0.001) and treatment (F\tsb{1,4380}=54.7, p<0.001), and a significant interaction between the two factors (F\tsb{1,4380}=126.7, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=19.3, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=13.2, p<0.001), as Tg-\glu group has significantly less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=6.0, p<0.001; Figure~\ref{f.ad.freeze_info}). WT-\glu has significantly less freezing information than WT-Veh, although the significance is close to threshold (WT-Veh vs WT-\glu, T=2.5, p=0.011, threshold=0.125). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_info.png}
     \caption{Freezing information during testing. This measurement represent how much information a cell have in a period of time about whether the animal is freezing. Cells in \gls{tg} animals encode significantly less freezing than the \gls{wt} groups, and \tglu treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
@@ -284,7 +286,7 @@ These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier
 
 \subsection{Difference of encoding in \gls{tg} animals is not a result of animal's behaviour}
 
-However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. Two-way \gls{anova} shows significant main effects in genotype (F\tsb{1,4380}=112.8, p<0.001) and treatment (F\tsb{1,4380}=30.4, p<0.001), as well as significant interaction between the two factors (F\tsb{1,4380}=48.6, p<0.001). Posthoc tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=12.5, p<0.001), and partially rescued by \tglu (Tg-\glu vs Tg-Veh, t=8.85, p<0.001; WT-Veh vs Tg-\glu, t=3.56, p<0.001). The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}.  
+However, given that the Tg animals also show behavioural difference, we then try to answer the question: is the difference in neural coding inherit of the Alzheimer animal, or a result of the different behaviour? Given that CA1 cells are known to represent place, we have calculated the freezing information marginalized over all animal positions, therefore eliminating it's effect in the calculation of freezing information. Two-way \gls{anova} shows significant main effects in genotype (F\tsb{1,4380}=241.3, p<0.001) and treatment (F\tsb{1,4380}=147.4, p<0.001), as well as significant interaction between the two factors (F\tsb{1,4380}=126.7, p<0.001). Posthoc tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=19.0, p<0.001), and fully rescued by \tglu (Tg-\glu vs Tg-Veh, t=16.5, p<0.001; WT-Veh vs Tg-\glu, t=1.9, p=0.06, threshold=0.0125). The result is similar and shown in Figure~\ref{f.ad.freeze_ctrl}.  
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_position.png}
     \caption{Freezing information conditioned on animal's position. This measurement removes the effect of position from freezing information measurement. This result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the animal is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
