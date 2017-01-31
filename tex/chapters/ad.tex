@@ -148,24 +148,24 @@ Therefore:
 \begin{equation*}
     P(T_i|\mathbf{x}) = C\cdot P(T_i) \cdot \prod_{k=1}^n P(x_k|T_i)
 \end{equation*}
-where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $\hat{T}=\underset{i}{\operatorname{argmax}} P(T_i|\mathbf{x})$ is predicted.
+where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Poisson distribution\todo{reference poisson dist}. During testing, the target class with maximum likelihood $\hat{T}=\underset{i}{\operatorname{arg\,max}} P(T_i|\mathbf{x})$ is predicted.
 
 \paragraph{Gaussian Support Vector Machine.}
 A \gls{svm} aims to find a hyperplane $\mathbf{w}^T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the \gls{svm} aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
 \begin{equation} \label{dist}
-    \us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|})
+    \us{\mathbf{w},b}{arg\,max}\Big(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}\Big)
 \end{equation}
  
 Given that $\mathbf{w}$ and $b$ can be scaled without changing the value of this term, we scale $\mathbf{w}$ and $b$ such that the minimum distance to classifying plane $\min_{i=1}^n(y_i(\mathbf{w}^T\phi(\mathbf{x}_i + b))$ is equal to 1. The original objective function therefore becomes:
 \begin{align*}
-    &\us{\mathbf{w},b}{argmax}(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|} \\
-    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
-    =&\us{\mathbf{w},b}{argmax}\frac{1}{|\mathbf{w}|} \cdot 1 \\
-    =&\us{\mathbf{w},b}{argmin}\frac{|\mathbf{w}|^2}{2}
+    &\us{\mathbf{w},b}{arg\,max}\Big(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}\Big) \\
+    =&\us{\mathbf{w},b}{arg\,max}\frac{1}{|\mathbf{w}|}\min_{i=1}^{n}(y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)) \\
+    =&\us{\mathbf{w},b}{arg\,max}\frac{1}{|\mathbf{w}|} \cdot 1 \\
+    =&\us{\mathbf{w},b}{arg\,min}\frac{|\mathbf{w}|^2}{2}
 \end{align*}
 To allow the classifier to perform with datasets that are not linearly separable, we also add an error term for each data point $\varepsilon_i$. The value of $\varepsilon_i$ will be $0$ if the distance from the data point to the classifying hyperplane is at least 1, and $0>\varepsilon_i>1$ if it lies within the margin but still correctly classified, and $\varepsilon_i \geq 1$ if it is incorrectly separated. The error is controlled by a parameter $C$, which dictates how relaxed the classifying boundary is. Therefore the objective function becomes:
 \begin{equation*}
-    \us{\mathbf{w},b}{argmin}\Big(\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n \varepsilon_i\Big)
+    \us{\mathbf{w},b}{arg\,min}\Big(\frac{|\mathbf{w}|^2}{2} + C\sum_{i=1}^n \varepsilon_i\Big)
 \end{equation*}
 under the contraints that data are classified for all $i$:
 \begin{align*}
@@ -356,7 +356,25 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
 
 
 \begin{figure}[h]
-    \includegraphics[width=\textwidth]{bayes_model.png}
+    \centering
+    \begin{minipage}[b]{0.45\linewidth}
+        \input{../figs/ad/bayes_model.tex}
+    \end{minipage}
+    \begin{minipage}[b]{0.45\linewidth}
+        \begin{align*}
+            \mu_0 &\sim \operatorname{Gaussian}(0, 1000) \\
+            a &\sim \operatorname{Gaussian}(0, 1000) \\
+            a &> 0 \\
+            \tau &\sim \operatorname{DiscreteUniform}(T_{min}, 0) \\
+            s &\sim \operatorname{Bernoulli}(0.5) \\
+            acc &\sim \operatorname{Gaussian}(\mu, \sigma) \\
+            \mu &=
+                \begin{cases}
+                    \mu_0 & \text{if }s=0\text{ or }t>\tau \\
+                    \mu_0 - a(t-\tau) & \text{otherwise}
+                \end{cases}
+        \end{align*}
+    \end{minipage}
     \caption{Bayes model for change point detection. The accuracy is modelled as a gaussian distribution with mean as a function of time and constant variance. In the null hypothesis, the mean is constant and estimated from the data. In the alternative hypothesis, the mean is modeled as constant up to the change point, then as a linear function of time with a negative slope. A Bernoulli variable $selector$ is estimated to choose from each of the hypothesis. \label{f.ad.bayesmodel}}
 \end{figure}\todo{bayes model}
 

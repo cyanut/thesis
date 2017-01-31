@@ -1,0 +1,16 @@
+
+\begin{tikzpicture}
+    \node[obs] (acc) {acc};
+    \node[latent, left= of acc] (sig) {$\sigma$};
+    \node[det, above= of acc] (mu) {$\mu$};     
+    \node[obs, above=of mu] (t) {$t$};
+    \node[latent, left=of t] (mu0) {$\mu_0$};
+    \node[latent, right= of mu] (s) {$s$};
+    \node[latent, left=of mu] (tau) {$\tau$};
+    \node[latent, right=of t] (a) {$a$};
+
+    \edge {tau,s,t,mu0,a} {mu};
+    \edge {mu, sig} {acc};
+   
+    \plate{tplate} {(t) (mu) (acc)} {$\forall t \in [T_{min}, 0)$};
+\end{tikzpicture}
