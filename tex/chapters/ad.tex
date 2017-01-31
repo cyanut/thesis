@@ -97,7 +97,7 @@ The mutual information measurement of two random variables represents the degree
 \begin{equation*}
     I(C, F) = \int\limits_{c \in C} \sum_{f \in F} P(c,f)\log\frac{P(c,f)}{P(c)P(f)}dc
 \end{equation*}
-To estimate the mutual information between freezing and cell activity, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and the conditional entropy $H(C|F)$ \citep{ross14, victor02}, and calculated the mutual information using the identity:
+To estimate the mutual information between freezing and cell activity, we used the \gls{kl} twice to estimate the entropy of calcium trace $H(C)$ and its conditional entropy on freezing $H(C|F)$ \citep{ross14, victor02}. The mutual information was then calculated using the identity:
 \begin{equation} \label{cond_h}
     I(C, F) = H(C) - H(C|F)
 \end{equation}
@@ -209,7 +209,7 @@ We used the \texttt{SVC} module from \texttt{scikit-learn} Python package for \g
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) was evaluated with two-way \gls{anova}. Covariables are controlled with \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. Comparisons between distributions are performed using \gls{kstest}. All statistics were performed using \texttt{statsmodels} package in the Python programming language.
+Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) was evaluated with two-way \gls{anova}. Covariables are controlled with \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. For analysis where the number of samples are large, if comparison of means is not significant, a two-sample \gls{kstest} is performed to detect any difference in the distribution of the two samples. All statistical tests were performed using \texttt{statsmodels} package in the Python programming language.
 
 \subsubsection{Bayesian modeling}
 \Gls{mcmc} sampling was performed on \texttt{pymc} package in python. Samples were drawn using Metropolis-Hasting steps. \num{540000} samples were drawn with \num{40000} in the burn-in period. The rest are thinned \num{10} times, resulting \num{50000} total samples for each model. Bayes factors of alternative hypothesis versus null hypothesis (BF\tsb{10}) were calculated. Interpretation of Bayes factors is reported according to \todo{cite Kass and Raftery, 1995}. Where there is positive evidence if Bayes factor is between 3 and 20, strong evidence if between 20 and 150, and very strong evidence if greater than 150.
@@ -218,7 +218,11 @@ Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \glu) wa
 
 
 \subsection{\tglu rescues memory deficits in \gls{tg} mice}
-The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope baseplates were surgically implanted in \gls{ca1} hippocampus in gCaMP6f expressing \gls{wt} and \gls{tg} animals. To transiently increase surface GluA2 density, we used a short interference peptide (\tglu) to block GluA2-containing \gls{ampar} endocytosis. The animals received either vehicle (Veh) or \tglu (Glu) peptide one hour before training. Twenty-four hours later, the animals were tested in the training chamber. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single animal and a sample of calcium traces. 
+\todo{intro results}
+ To transiently increase surface GluA2 density, we used a short interference peptide (\tglu) to block GluA2-containing \gls{ampar} endocytosis.
+We hypothesized that the \gls{tg} mice will have deficits in contextual fear memory, and this deficit can be rescued by \tglu treatment.
+
+The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope baseplates were surgically implanted in \gls{ca1} hippocampus in gCaMP6f expressing \gls{wt} and \gls{tg} animals. The animals received either vehicle (Veh) or \tglu (Glu) peptide one hour before training. Twenty-four hours later, the animals were put back to the training chamber to test for freezing. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single animal and a sample of calcium traces. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{paradigm.png}
     \caption{Experimental paradigm. Adult \gls{wt} and \gls{tg} animals (with gCaMP6f expression) were implanted with a mini-microscope baseplate targeting CA1 hippocampus on day 0. The cells were visible three weeks later. Animals received \tglu peptide (i.p.) \SI{1}{\hour} before contextual fear conditioning. Animals were tested \SI{24}{\hour} later for freezing behaviour. Calcium activity were recorded for both training and testing session. \label{f.ad.paradigm}}
@@ -230,7 +234,9 @@ The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-micr
 \end{figure}
 
 
-Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way \gls{anova} has revealed significant main effect in genotype (F\tsb{1,27}=12.79, p=0.001) as well as a significant interaction between genotype and treatment (F\tsb{1,27}=5.45, p=0.027). Posthoc tests show that \gls{tg} animals have significant lower freezing (\gls{wt}-Veh vs \gls{tg}-Veh, T=4.21, p<0.001), and this effect is fully rescued by \tglu treatment (\gls{tg}-\glu vs \gls{tg}-Veh, T=2.85, p=0.008; \gls{wt}-Veh vs \gls{tg}-\glu, T=1.12, P=0.27). \tglu has no significant effect on \gls{wt} animals (\gls{wt}-Veh vs \gls{wt}-\glu, T=0.355, p=0.72). This result is consistent with our hypothesis, Tg animals showed decreased freezing, and this was rescued by \tglu treatment. 
+Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way \gls{anova} has revealed significant main effect in genotype (F\tsb{1,27}=12.79, p=0.001) as well as a significant interaction between genotype and treatment (F\tsb{1,27}=5.45, p=0.027). Posthoc tests show that \gls{tg} animals have significant lower freezing (\gls{wt}-Veh vs \gls{tg}-Veh, T=4.21, p<0.001), and this effect is fully rescued by \tglu treatment (\gls{tg}-\glu vs \gls{tg}-Veh, T=2.85, p=0.008; \gls{wt}-Veh vs \gls{tg}-\glu, T=1.12, P=0.27). \tglu has no significant effect on \gls{wt} animals (\gls{wt}-Veh vs \gls{wt}-\glu, T=0.355, p=0.72). 
+
+This result is consistent with previous report \todo{cite} that the \gls{tg} animals have deficits in hippocampal-related memory tasks. It also confirms our hypothesis that the memory deficit of \gls{tg} mice can be rescued by \tglu treatment. 
 
 \todo{freezing}
 \begin{figure}[h]
@@ -238,14 +244,32 @@ Figure~\ref{f.ad.freezing} shows the percent of freezing during testing. Two-way
     \caption{Percent of freezing during testing. \Gls{tg} animals have significant lower freezing, and \tglu treatment returns the freezing to wildtype level. \label{f.ad.freezing}}
 \end{figure}
 
+\subsection{\Gls{tg} animals can initiate freezing}
+We then investigated whether the deficits in \gls{tg} mice is due to less freezing initiation or freezing maintanence. \todo{intro}
+
+Figure~\ref{f.ad.freezing_profile} summarizes the number and length of freezing periods in each group. There is no significant difference between groups in the number of freezing periods (Figure~\ref{f.ad.freezing_freq}, omnibus F\tsb{3,27}=0.84, p=0.48). On the length of freezing periods, there is significant main effect of genotype (F\tsb{1,27}=17.7, p<0.001), and a significant interaction between genotype and treatment (F\tsb{1,27}=6.5, p=0.01). Poshhoc tests shows Tg-Veh mice have significantly shorter freezing periods (WT-Veh vs Tg-Veh, T=4.75, p<0.001), and this deficit is fully rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=3.10, p=0.002; WT-Veh vs Tg-\glu, T=1.66, p=0.10). There is no effect of \tglu on \gls{wt} mice (T=0.22, p=0.83). This result suggest that the \gls{tg} mice do not have a deficit in initiating the freezing behaviour, however are unable to maintain freezing period for a longer time. 
+
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{freezing_frequency.png}
+        \caption{\label{f.ad.freezing_freq}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{freezing_length.png}
+        \caption{\label{f.ad.freezing_length}}
+    \end{subfigure}
+    \caption{Average number of freezing periods (\subref{f.ad.freezing_freq}) and length of freezing periods (\subref{f.ad.freezing_length}). \Gls{tg} mice freeze as often as \gls{wt} mice, but with less duration. This is rescued by \tglu treatment. \label{f.ad.freezing_profile}}
+\end{figure}
 
 
 \subsection{\tglu rescues hyperactivity in \gls{tg} cells}
 
-Figure~\ref{f.ad.acttrain} shows average cell activity during training session before footshock is delivered. During training, two-way \gls{anova} reveals significant major effects of genotype (F\tsb{1,3033}=6.2, p=0.01) and treatment (F\tsb{1,3033}=5.1, p=0.02) as well as a significant interaction between genotype and treament (F\tsb{1,3033}=7.7, p=0.006). Posthoc tests shows that \gls{tg}-Veh has significantly higher cell activity (WT-Veh vs Tg-Veh, T=-3.72, p<0.001), and \tglu treatment is able to restore average cell activity to \gls{wt} level. (Tg-\glu vs Tg-Veh, T=-3.58, p<0.001; WT-Veh vs Tg-\glu, T=0.14, p=0.89). \tglu does not have any effect on \gls{wt} animals (WT-Veh vs WT-\glu, T=-0.137, p=0.89) This result is consistent with previous reports in the literature \citep{verret12}, showing cells in Tg animals have increase overall cell activity. Interestingly, while \tglu treatment restores the the mean cell activity during training, the distribution of cell activity is significantly different from \gls{wt} (WT-Veh vs Tg-\glu, K=0.16, P<0.001). As is shown in the cumulative distribution plot, Tg-\glu still have a over-proportion of highly active cells. 
-\todo{Discuss: \tglu is not able to rescue cells with very high activity}
+It has been known that amygloid plaques in \gls{tg} animals disturbs the excitatory-inhibitory balance \todo{cite}. In the hippocampus \gls{ca1}, previous reports have found cells hyperactive. Here we aim to confirm the hyperactivity in \gls{tg} \gls{ca1} cells, and hypothesized that \tglu treatment maybe able to rescue the hyperexcitable phonotype.
 
-Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \gls{anova} revealled significant major effect of genotype (F\tsb{1,3029}=32.7, p<0.001) and treatment (F\tsb{1,3029}=27.4, p<0.001), as well as their interaction (F\tsb{1,3029}=78.4, p<0.001). Post-hoc tests show significant increase of cell activity in Tg-Veh group (WT-Veh vs Tg-Veh, T=-10.1, p<0.001), and this effect is corrected by \tglu treament (WT-Veh vs Tg-\glu, T=0.73, p=0.47; Tg-\glu vs Tg-Veh, T=-9.97, p<0.001). There is also a trend of increase in cell activity after \tglu treatment in \gls{wt} group, however the p-value is close to threshold after correction of multiple comparison (WT-Veh vs WT-\glu, T=-2.53, p=0.012, threshold = 0.013). Interestingly during testing, \tglu is able to fully rescue the hyper-activity in \gls{tg} group (\gls{kstest}: Veh-WT vs Tg-\glu, K=0.06, p=0.07; Tg-Veh vs Tg-\glu, K=2.29, p<0.001). These results suggest that the rescuing effect of \tglu in \gls{tg} animals is slow and long-lasting.
+Figure~\ref{f.ad.acttrain} shows average cell activity during training session before footshock is delivered. During training, two-way \gls{anova} reveals significant major effects of genotype (F\tsb{1,3033}=6.2, p=0.01) and treatment (F\tsb{1,3033}=5.1, p=0.02) as well as a significant interaction between genotype and treament (F\tsb{1,3033}=7.7, p=0.006). Posthoc tests shows that \gls{tg}-Veh has significantly higher cell activity (WT-Veh vs Tg-Veh, T=-3.72, p<0.001), and \tglu treatment is able to restore average cell activity to \gls{wt} level. (Tg-\glu vs Tg-Veh, T=-3.58, p<0.001; WT-Veh vs Tg-\glu, T=0.14, p=0.89). \tglu does not have any effect on \gls{wt} animals (WT-Veh vs WT-\glu, T=-0.137, p=0.89) This result is consistent with previous reports in the literature \citep{verret12}, showing cells in Tg animals have increase overall cell activity. Interestingly, while \tglu treatment restores the the mean cell activity during training, the distribution of cell activity is significantly different from \gls{wt} (WT-Veh vs Tg-\glu, K=0.16, P<0.001). As is shown in the cumulative distribution plot, Tg-\glu still have a over-proportion of highly active cells. 
+\todo{In Discussion: \tglu is not able to rescue cells with very high activity}
+
+Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \gls{anova} revealled significant major effect of genotype (F\tsb{1,3029}=32.7, p<0.001) and treatment (F\tsb{1,3029}=27.4, p<0.001), as well as their interaction (F\tsb{1,3029}=78.4, p<0.001). Post-hoc tests show significant increase of cell activity in Tg-Veh group (WT-Veh vs Tg-Veh, T=-10.1, p<0.001), and this effect is corrected by \tglu treament (WT-Veh vs Tg-\glu, T=0.73, p=0.47; Tg-\glu vs Tg-Veh, T=-9.97, p<0.001). There is also a trend of increase in cell activity after \tglu treatment in \gls{wt} group, however the p-value is close to threshold after correction of multiple comparison (WT-Veh vs WT-\glu, T=-2.53, p=0.012, threshold = 0.013). Interestingly during testing, \tglu is able to fully rescue the hyper-activity in \gls{tg} group (\gls{kstest}: Veh-WT vs Tg-\glu, K=0.06, p=0.07; Tg-Veh vs Tg-\glu, K=2.29, p<0.001). These results suggest \tglu treatment completely rescues hyperactivity in \gls{tg} animals during testing, however the effect is not complete during training.  
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -261,31 +285,14 @@ Similar effect were found during testing (Figure~\ref{f.ad.acttest}). Two-way \g
 
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
 
-We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing. First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{ross14, victor02}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=254.0, p<0.001) and treatment (F\tsb{1,4380}=54.7, p<0.001), and a significant interaction between the two factors (F\tsb{1,4380}=126.7, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=19.3, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=13.2, p<0.001), as Tg-\glu group has significantly less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=6.0, p<0.001; Figure~\ref{f.ad.freeze_info}). WT-\glu has significantly less freezing information than WT-Veh, although the significance is close to threshold (WT-Veh vs WT-\glu, T=2.5, p=0.011, threshold=0.125). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
+Previous reports have suggested that \gls{ca1} neurons in \gls{tg} animals have deficits encoding spatial information \todo{cite ji}. We then investigated that how \gls{wt} and \gls{tg} cells encodes freezing.  \todo{intor}
+
+First we looked at cells individually, and calculated the mutual information between cell firing and freezing \citep{ross14, victor02}. This measurement reflects how much prediction power a cell has for freezing in a period of time. The group differences in freezing information is then compared using two-way \gls{anova}. There is significant main effect in both genotype (F\tsb{1,4380}=254.0, p<0.001) and treatment (F\tsb{1,4380}=54.7, p<0.001), and a significant interaction between the two factors (F\tsb{1,4380}=126.7, p<0.001). Posthoc tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=19.3, p<0.001), and this deficit is partially rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=13.2, p<0.001), as Tg-\glu group has significantly less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=6.0, p<0.001; Figure~\ref{f.ad.freeze_info}). WT-\glu has significantly less freezing information than WT-Veh, although the significance is close to threshold (WT-Veh vs WT-\glu, T=2.5, p=0.011, threshold=0.013). This result suggests in the \gls{tg} group, the cell activity in hippocampus \gls{ca1} does not predict the animal's behaviour well, however this is improved with \tglu treatment but not fully rescued. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_info.png}
     \caption{Freezing information during testing. This measurement represent how much information a cell have in a period of time about whether the animal is freezing. Cells in \gls{tg} animals encode significantly less freezing than the \gls{wt} groups, and \tglu treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
 \end{figure}
     
-
-While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we have build two classifiers: a \gls{nbc} which models the cells independent of each other, and a \gls{gsvm}, which also uses the dependency between cells for prediction. The result is shown in Figure~\ref{f.ad.classifier}. 
-
-A three-way \gls{anova} of genotype $\times$ treatment $\times$ classifier was carried out. There are significant main effect of genotype (F\tsb{1,50}=15.6, p<0.001), treatment (F\tsb{1,50}=5.5, p=0.02) and classifier (F\tsb{1,50}=9.0, p=0.004). There is also a significant interaction between genotype and treatment (F\tsb{1,50}=14.2, p<0.001), and no significant interactions involving the classifier factor. Since the classifier factor only have a significant major effect, for the posthoc tests we used F-test to only compare different levels of genotype and treatment. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu treatment (Tg-\glu vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu (F\tsb{2,50}=0.63, p=0.54), and \tglu treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
-
-These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} animals have inferior fear memory encoding. Moreover, this deficit is fully rescued by \tglu treatment.
-
-\begin{figure}[h]
-    \begin{subfigure}[h]{\textwidth}
-        \includegraphics[width=\textwidth]{nb.png}
-        \caption{\label{f.ad.nb}}
-    \end{subfigure}
-    \begin{subfigure}[h]{\textwidth}
-        \includegraphics[width=\textwidth]{svm.png}
-        \caption{\label{f.ad.svm}}
-    \end{subfigure}
-    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured as F1 score. Both classifiers showed inferior performance in \gls{tg} group, further supports the hypothesis that \gls{tg} animals have sub-optimal freezing encoding. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the coordination between the activity of the cells. \label{f.ad.classifier}}
-\end{figure}
-
 
 
 
@@ -351,6 +358,25 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
     \caption{Average cell activity during \subref{f.ad.actf} freezing and \subref{f.ad.actnf} not freezing. Cells in \gls{tg} animals have significantly higher activity during freezing, suggesting a sub-optimal encoding of freezing. Interestingly, \tglu also showed a decreased activity when the animal is not freezing, suggesting that the effect of \tglu maybe a global decrease of cell activity. \label{f.ad.activity_freezing}}
 \end{figure}
 
+While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we have build two classifiers: a \gls{nbc} which models the cells independent of each other, and a \gls{gsvm}, which also uses the dependency between cells for prediction. The result is shown in Figure~\ref{f.ad.classifier}. 
+
+A three-way \gls{anova} of genotype $\times$ treatment $\times$ classifier was carried out. There are significant main effect of genotype (F\tsb{1,50}=15.6, p<0.001), treatment (F\tsb{1,50}=5.5, p=0.02) and classifier (F\tsb{1,50}=9.0, p=0.004). There is also a significant interaction between genotype and treatment (F\tsb{1,50}=14.2, p<0.001), and no significant interactions involving the classifier factor. Since the classifier factor only have a significant major effect, for the posthoc tests we used F-test to only compare different levels of genotype and treatment. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu treatment (Tg-\glu vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu (F\tsb{2,50}=0.63, p=0.54), and \tglu treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
+
+These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} animals have inferior fear memory encoding. Moreover, this deficit is fully rescued by \tglu treatment.
+
+\begin{figure}[h]
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{nb.png}
+        \caption{\label{f.ad.nb}}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \includegraphics[width=\textwidth]{svm.png}
+        \caption{\label{f.ad.svm}}
+    \end{subfigure}
+    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured as F1 score. Both classifiers showed inferior performance in \gls{tg} group, further supports the hypothesis that \gls{tg} animals have sub-optimal freezing encoding. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the coordination between the activity of the cells. \label{f.ad.classifier}}
+\end{figure}
+
+
 \subsection{Freezing encoding precedes freezing behaviour}
 
 
@@ -396,21 +422,6 @@ On the other hand in the \gls{gsvm}, we have found very strong evidence for chan
     \caption{Average accuracy of classifiers at the beginning of freezing behaviour. For \gls{wt} and \gls{tg}-\glu groups, both \gls{nbc} and \gls{gsvm} shows significant lower performance just before the animals show freezing behaviour. This suggests that \gls{ca1} neural activity precedes behaviour. The errorbars on the top shows \SI{95}{\percent} credible interval of the change point, if the alternative hypothesis is favoured. \label{f.ad.into_f}}
 \end{figure}
 
-
-\subsection{\Gls{tg} animals can initiate freezing}
-We then investigated whether the deficits in \gls{tg} mice is due to less freezing initiation or freezing maintanence. Figure~\ref{f.ad.freezing_profile} summarizes the number and length of freezing periods in each group. There is no significant difference between groups in the number of freezing periods (Figure~\ref{f.ad.freezing_freq}, omnibus F\tsb{3,27}=0.84, p=0.48). On the length of freezing periods, there is significant main effect of genotype (F\tsb{1,27}=17.7, p<0.001), and a significant interaction between genotype and treatment (F\tsb{1,27}=6.5, p=0.01). Poshhoc tests shows Tg-Veh mice have significantly shorter freezing periods (WT-Veh vs Tg-Veh, T=4.75, p<0.001), and this deficit is fully rescued by \tglu treatment (Tg-\glu vs Tg-Veh, T=3.10, p=0.002; WT-Veh vs Tg-\glu, T=1.66, p=0.10). There is no effect of \tglu on \gls{wt} mice (T=0.22, p=0.83). 
-
-\begin{figure}[h]
-    \begin{subfigure}[h]{\textwidth}
-        \includegraphics[width=\textwidth]{freezing_frequency.png}
-        \caption{\label{f.ad.freezing_freq}}
-    \end{subfigure}
-    \begin{subfigure}[h]{\textwidth}
-        \includegraphics[width=\textwidth]{freezing_length.png}
-        \caption{\label{f.ad.freezing_length}}
-    \end{subfigure}
-    \caption{Average number of freezing periods (\subref{f.ad.freezing_freq}) and length of freezing periods (\subref{f.ad.freezing_length}). \Gls{tg} mice freeze as often as \gls{wt} mice, but with less duration. This is rescued by \tglu treatment. \label{f.ad.freezing_profile}}
-\end{figure}
 
 
 
