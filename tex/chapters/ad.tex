@@ -293,11 +293,14 @@ Comparing the cell activity between testing and training, we found that the \gls
 
 \subsection{\tglu rescues recall by decreasing activity}
 
-The next question we investigated is, if the cells are encoding freezing, how do they encode? In figure~\ref{f.ad.ch_activity} we selected all the cells that have more than 0.01 bits/second (which amounts to ~40\% in the normal groups and 10\% of the cells in the \gls{tg} group), and plotted the difference of average activity when the animal is freezing and not freezing. Interestingly, the majority of the cells encode freezing by decreasing their activity. This can also be seen representatively in the sample trace (Figure~\ref{f.ad.sample_trace}).
+We then investigated the average cell activity during freezing and not freezing. \todo{refer to literature}. The result is summarized in figure~\ref{f.ad.activity_freezing}.  
 
-Given the cells tend to have decreased activity during freezing, we also examined the average cell activity when the animal is freezing, and activity when the animal is not (Figure~\ref{f.ad.activity_freezing}). Two-way \gls{anova} on the average activity when animals are freezing shows significant main effect in genotype (F\tsb{1,3034}=6.9, p=0.008) and treatment (F\tsb{1,3034}=18.7, p<0.001). The interaction between them is not significant (F\tsb{1,3034}=-0.03, p=0.97). \Gls{tg} animals show significantly increased activity during freezing, and \tglu treatment has a significant inhibitory effect on cell activity. \todo{discuss about highly active cells in the cumulative distribution plot}
+Two-way \gls{anova} on the average activity when animals are freezing shows significant main effect in genotype (F\tsb{1,3034}=6.9, p=0.008) and treatment (F\tsb{1,3034}=18.7, p<0.001). The interaction between them is not significant (F\tsb{1,3034}=-0.03, p=0.97). \Gls{tg} animals show significantly increased activity during freezing, and \tglu treatment has a significant inhibitory effect on cell activity. \todo{discuss about highly active cells in the cumulative distribution plot}
 
 Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12.3, p<0.001) and a significant genotype $\times$ treatment interaction (F\tsb{1,3029}=13.6, p<0.001). \tglu treatment only significantly decreased activity in the \gls{tg} animals (Tg-\glu vs Tg-Veh, T=-5.4, p<0.001). These results suggest the \tglu{} may rescue the \gls{tg} phenotype by globally decrease background cell activity.
+
+Figure \ref{f.ad.ch_acitivity} summarizes the activity difference between not freezing and freezing. Majority of the cells decreased their activity during freezing (\todo{percentage summary}). These results suggest that during freezing, \gls{ca1} have decrease activity. \tglu treatment is able to decrease cell activity during freezing for both gls{tg} and gls{wt} animals, however it also decrease cell activity in gls{tg} when the animal is not freezing.
+
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
         \includegraphics[width=\textwidth]{activity_freezing.png}
@@ -315,7 +318,7 @@ Two-way \gls{anova} revealed a significant effect of treatment (F\tsb{1,3029}=12
 \end{figure}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{ch_activity.png}
-    \caption{Distribution and mean of activity difference between freezing and none-freezing, in cell with freezing information more than 0.01. This confirms the intuition from Figure~\ref{f.ad.sample_trace} that most of the cells encode freezing by decreasing activity. \label{f.ad.ch_activity}}
+    \caption{Distribution and mean of activity difference between not-freezing and freezing. This confirms the intuition from Figure~\ref{f.ad.sample_trace} that most of the cells decrease activity during freezing. \label{f.ad.ch_activity}}
 \end{figure}
 
 \subsection{\tglu rescues freezing encoding deficit in \gls{tg} cells}
@@ -369,11 +372,15 @@ In addition, we also checked whether the freezing information coding is a result
 
 \subsection{Network encoding of freezing behaviour}
 
-While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we have build two classifiers: a \gls{nbc} which models the cells independent of each other, and a \gls{gsvm}, which also uses the dependency between cells for prediction. The result is shown in Figure~\ref{f.ad.classifier}. 
+While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? \todo{relate to literature}
+
+To answer this question, we took advantage of different capacities of machine learning algorithms. A \gls{nbc} models the cells independent of each other, but a general classifier such as a \gls{gsvm} is able to take advantage of both information encoded by individual cells as well as information encoded by the synergy of cell activity in the network. We trained both an \gls{nbc} and a \gls{gsvm} to predict freezing from the cell activity at each time point, and uses the prediction accuracy of the classifiers to gauge the information encoded in individual cells and network, respectively. The result is shown in Figure~\ref{f.ad.classifier}. 
 
 A three-way \gls{anova} of genotype $\times$ treatment $\times$ classifier was carried out. There are significant main effect of genotype (F\tsb{1,50}=15.6, p<0.001), treatment (F\tsb{1,50}=5.5, p=0.02) and classifier (F\tsb{1,50}=9.0, p=0.004). There is also a significant interaction between genotype and treatment (F\tsb{1,50}=14.2, p<0.001), and no significant interactions involving the classifier factor. Since the classifier factor only have a significant major effect, for the posthoc tests we used F-test to only compare different levels of genotype and treatment. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu treatment (Tg-\glu vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu (F\tsb{2,50}=0.63, p=0.54), and \tglu treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
 
-These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} animals have inferior fear memory encoding. Moreover, this deficit is fully rescued by \tglu treatment.
+These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more informationabout freezing than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} animals have inferior fear memory encoding. Moreover, this deficit is fully rescued by \tglu treatment. 
+
+\todo{calculate the difference between \gls{nbc} and \gls{gsvm}: is it different between groups?}
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -384,12 +391,11 @@ These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier
         \includegraphics[width=\textwidth]{svm.png}
         \caption{\label{f.ad.svm}}
     \end{subfigure}
-    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured as F1 score. Both classifiers showed inferior performance in \gls{tg} group, further supports the hypothesis that \gls{tg} animals have sub-optimal freezing encoding. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the coordination between the activity of the cells. \label{f.ad.classifier}}
+    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured  using the F1 score, calculated by the harmonic mean of precision and recall. Both classifiers showed inferior performance in \gls{tg} group, further supports the hypothesis that \gls{tg} animals have sub-optimal freezing encoding. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the coordination between the activity of the cells. \label{f.ad.classifier}}
 \end{figure}
 
 
 \subsection{Freezing encoding precedes freezing behaviour}
-
 
 
 \begin{figure}[h]
@@ -412,14 +418,15 @@ These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier
                 \end{cases}
         \end{align*}
     \end{minipage}
-    \caption{Bayes model for change point detection. The accuracy is modelled as a gaussian distribution with mean as a function of time and constant variance. In the null hypothesis, the mean is constant and estimated from the data. In the alternative hypothesis, the mean is modeled as constant up to the change point, then as a linear function of time with a negative slope. A Bernoulli variable $selector$ is estimated to choose from each of the hypothesis. \label{f.ad.bayesmodel}}
-\end{figure}\todo{bayes model}
+    \caption{Bayes model for change point detection. The accuracy is modelled as a gaussian distribution with mean as a function of time and constant variance. In the null hypothesis, the mean is constant and estimated from the data. In the alternative hypothesis, the mean is modeled as constant up to the change point, then as a linear function of time with a negative slope. A Bernoulli variable $selector$ is estimated to choose from each of the hypothesis. All variables have non-informative priors \label{f.ad.bayesmodel}}
+\end{figure}
 
-To examine whether the freezing encoding is an artifact of the freezing behaviour, we plotted average prediction accuracy for the classifiers at the time animals behaviour transits into freezing. We used Bayes modelling (Figure \ref{f.ad.bayesmodel}) to detect and compare whether the prediction accuracy changes before behaviour change.  
+Here we examined whether freezing encoding in the network precedes behaviour onset. \todo{relate to literature} We plotted average prediction accuracy for the classifiers at the time animals behaviour transits into freezing. We hypothesized that if freezing signal in the network precedes, the classifiers will predict freezing earlier than the behavioural onset, which will result in a reduction prediction accuracy before behavioural onset.
 
-The result is summarized in Figure~\ref{f.ad.into_f}. In the \gls{nbc}, we have found very strong evidence for a change point in every group (all Bayes factors BF\tsb{10} > \num{5e4}). The change point appears $3.4_{-0.1}^{+0.1}$\SI{}{\s} in WT-Veh, $2.8_{-0.1}^{+0.1}$\SI{}{\second} in WT-\glu, $2.8_{-0.3}^{+0.2}$\SI{}{\second} in Tg-Veh, and $2.6_{-0.1}^{+0.1}$\SI{}{\second} in Tg-\glu before freezing onset (uncertainties are \SI{95}{\percent} credible intervals). Pairwise comparisons show very strong evidence that the change point in WT-Veh occurs earlier, while the other three groups occur at the same time (WT-Veh vs WT-\glu, BF\tsb{10} > \num{250}; WT-Veh vs Tg-Veh, BF\tsb{10} = \num{7.5}; WT-Veh vs Tg-\glu, BF\tsb{10} > \num{250}; all other comparisons BF\tsb{10} < \num{0.2}). Since \gls{nbc} regards each cell independently, this result suggest that the freezing signal in individual cells occurs earlier than the onset of freezing behaviour.
+We used Bayes modelling (Figure \ref{f.ad.bayesmodel}) to detect whether the prediction accuracy changes before behaviour change, and compare change points between groups. The result is summarized in Figure~\ref{f.ad.into_f}. In the \gls{nbc}, we have found very strong evidence for a change point in every group (all Bayes factors BF\tsb{10} > \num{5e4}). The change point appears $3.4_{-0.1}^{+0.1}$\SI{}{\s} in WT-Veh, $2.8_{-0.1}^{+0.1}$\SI{}{\second} in WT-\glu, $2.8_{-0.3}^{+0.2}$\SI{}{\second} in Tg-Veh, and $2.6_{-0.1}^{+0.1}$\SI{}{\second} in Tg-\glu before freezing onset (uncertainties are \SI{95}{\percent} credible intervals). Pairwise comparisons show very strong evidence that the change point in WT-Veh occurs earlier, while the other three groups occur at the same time (WT-Veh vs WT-\glu, BF\tsb{10} > \num{250}; WT-Veh vs Tg-Veh, BF\tsb{10} = \num{7.5}; WT-Veh vs Tg-\glu, BF\tsb{10} > \num{250}; all other comparisons BF\tsb{10} < \num{0.2}). Since \gls{nbc} regards each cell independently, this result suggest that the freezing signal in individual cells occurs earlier than the onset of freezing behaviour.
 
 On the other hand in the \gls{gsvm}, we have found very strong evidence for change point in WT-Veh (BF\tsb{10} > \num{5e4}), WT-\glu (BF\tsb{10} > \num{5e4}) and Tg-\glu (BF\tsb{10} > \num{5e4}), and also strong evidence that a change point does not present in Tg-Veh (BF\tsb{10} < \num{0.02}). The change points are estimated to be $0.6_{-0.1}^{+0.0}$\SI{}{\s} in WT-Veh, $2.6_{-0.3}^{+0.2}$\SI{}{\second} in WT-\glu, and $0.3_{-0.2}^{+0.1}$\SI{}{\s} in Tg-\glu, before the freezing onset. Pairwise comparisons show very strong evidence of a earlier change point in WT-\glu than the other groups (WT-\glu vs WT-Veh, BF\tsb{10} > \num{250}; WT-\glu vs Tg-\glu, BF\tsb{10} > \num{250}). There is minimal evidence that the change point in WT-Veh is earlier than Tg-\glu (BF\tsb{10} = \num{2.5}). These results suggest that the freezing signal in the network occur earlier than freezing behaviour in \gls{wt} groups, however not present in the \gls{tg} group. \tglu treatment of the \gls{tg} animals is able to partially rescues this effect. In addition, the network freezing signal occur earlier in WT-\glu than the other groups.
+
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -434,30 +441,30 @@ On the other hand in the \gls{gsvm}, we have found very strong evidence for chan
 \end{figure}
 
 
-
-
-
 \subsection{\Gls{tg} animals have deficits recall freezing memory}
-Given that \gls{tg} animals can initiate freezing behaviour, we suspect that their memory deficits is due to memory recall rather than memory encoding. To test this hypothesis, we trained the animals without \tglu, and \SI{3}{\day} later, treat the animal with \tglu or saline vehicle when they are shortly exposed to the training context as a reminder. The memory test occured \SI{24}{\hour} later. The result is summarized in Figure~\ref{f.ad.reminder1}. We found a significant interaction between genotype and treatment (\todo{stats}). Post-hoc tests shows Tg-Veh has a significant memory deficit (\todo{stats}), however this effect is fully rescued by \tglu treatment (\todo{stats}). This result suggests that \gls{tg} animals have intact memory encoding and deficits in memory recall. The recall deficit can be rescued with \tglu treament if the animal is exposed to a reminder.
+Given that \gls{tg} animals have significant neuronal signal before freezing, and they are able to initiate freezing as often as \gls{wt} animals, we hypothesized that they have deficits in memory recall rather than memory encoding. \todo{relate to lit., e.g. tonegawa paper, and reinstatement}
+
+To test this hypothesis, we trained the animals treatment-free, and \SI{3}{\day} later, treat the animal with \tglu or saline vehicle when they are shortly exposed to the training context as a reminder. The memory test occured \SI{24}{\hour} later. The result is summarized in Figure~\ref{f.ad.reminder1}. We found a significant interaction between genotype and treatment (\todo{stats}). Post-hoc tests shows Tg-Veh has a significant memory deficit (\todo{stats}), however this effect is fully rescued by \tglu treatment (\todo{stats}). This result suggests that \gls{tg} animals have intact memory encoding and deficits in memory recall. The recall deficit can be rescued with \tglu treament if the animal is exposed to a reminder.
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
         \includegraphics[width=\textwidth]{reminder1.png}
         \caption{\label{f.ad.actf}}
     \end{subfigure}
-    \caption{ \label{f.ad.reminder1}}
+    \caption{\gls{tg} animals have deficits in memory recall but not memory encoding. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given a reminder \SI{3}{\day} later with treatment and tested on the following day. \gls{tg} mice showed significantly less freezing, however this effect is rescued by \tglu treatement. \label{f.ad.reminder1}}
 \end{figure}
 
-We then investigated whether the effect of the \tglu is memory specific. In a separate cohort of animals, we use a similar protocol as Figure~\ref{f.ad.reminder1}, except the animals received \tglu in their homecage instead of the reminder (Figure~\ref{f.ad.reminder2}). In this case, the \tglu treatment does not have any effect on memory recall. There is a significant main effect of genotype (\todo{stats}), and the genotype $times$ treatment interaction is not significant (\todo{stats}; Figure~\ref{f.ad.reminder2}). Together, these two pieces of results suggest that \gls{tg} animals have normal memory encoding but unable to recall, and \tglu rescues the deficit only when the memory is reminded.
+We then investigated whether the effect of the \tglu is memory specific. In a separate cohort of animals, we use a similar protocol as Figure~\ref{f.ad.reminder1}, except the animals received \tglu in their homecage instead of the reminder (Figure~\ref{f.ad.reminder2}). In this case, the \tglu treatment does not have any effect on memory recall. There is a significant main effect of genotype (\todo{stats}), and the genotype $times$ treatment interaction is not significant (\todo{stats}; Figure~\ref{f.ad.reminder2}). Together, these two pieces of results suggest that \gls{tg} animals have normal memory encoding but unable to recall, and \tglu can rescues the recall deficit during reinstatement. 
 
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{reminder2.png}
-    \caption{\label{f.ad.reminder2}}
+    \caption{\tglu does not rescue memory recall without reminder. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given treatment in home cage and tested on the following day. \tglu treatment without reminder is unable to rescue recall deficit in \gls{tg} animals. \label{f.ad.reminder2}}
 \end{figure}
 
 \section{Discussion}
 \todo{Summary of result}
+
 \todo{Hyperactivity}
 \todo{Freezing encoding: not behavioural}
 \todo{Direction of causation}
