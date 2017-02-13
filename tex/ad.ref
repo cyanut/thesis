@@ -1,0 +1,71 @@
+
+@article {wood16,
+author ={Wood, Heather},
+title = {Alzheimer disease: Meta-analysis finds high reversion rate from MCI to normal cognition},
+year = {2016},
+journal={Nature Reviews. Neurology},
+volume={12},
+number={4},
+pages={189},
+pmid={26965671},
+doi={10.1038/nrneurol.2016.29},
+keywords={}
+}
+@article {malek-ahmadi16,
+author ={Malek-Ahmadi, Michael},
+title = {Reversion From Mild Cognitive Impairment to Normal Cognition: A Meta-Analysis},
+year = {2016},
+journal={Alzheimer Disease And Associated Disorders},
+volume={30},
+number={4},
+pages={324--330},
+pmid={26908276},
+doi={10.1097/WAD.0000000000000145},
+keywords={}
+}
+@article {reiman16,
+author ={Reiman, Eric M and Langbaum, Jessica B and Tariot, Pierre N and Lopera, Francisco and Bateman, Randall J and Morris, John C and Sperling, Reisa A and Aisen, Paul S and Roses, Allen D and Welsh-Bohmer, Kathleen A and Carrillo, Maria C and Weninger, Stacie},
+title = {CAP--advancing the evaluation of preclinical Alzheimer disease treatments},
+year = {2016},
+journal={Nature Reviews. Neurology},
+volume={12},
+number={1},
+pages={56--61},
+pmid={26416539},
+doi={10.1038/nrneurol.2015.177},
+keywords={}
+}
+@article {pandya16,
+author ={Pandya, Seema Y and Clem, Matthew A and Silva, Lynette M and Woon, Fu L},
+title = {Does mild cognitive impairment always lead to dementia? A review},
+year = {2016},
+journal={Journal Of The Neurological Sciences},
+volume={369},
+pages={57--62},
+pmid={27653867},
+doi={10.1016/j.jns.2016.07.055},
+keywords={Alzheimer's disease,Dementia,Mild cognitive impairment,Neuropsychology,Reversion,Stability}
+}
+@article {dubois16,
+author ={Dubois, Bruno and Hampel, Harald and Feldman, Howard H and Scheltens, Philip and Aisen, Paul and Andrieu, Sandrine and Bakardjian, Hovagim and Benali, Habib and Bertram, Lars and Blennow, Kaj and Broich, Karl and Cavedo, Enrica and Crutch, Sebastian and Dartigues, Jean-François and Duyckaerts, Charles and Epelbaum, Stéphane and Frisoni, Giovanni B and Gauthier, Serge and Genthon, Remy and Gouw, Alida A and Habert, Marie-Odile and Holtzman, David M and Kivipelto, Miia and Lista, Simone and Molinuevo, José-Luis and O'Bryant, Sid E and Rabinovici, Gil D and Rowe, Christopher and Salloway, Stephen and Schneider, Lon S and Sperling, Reisa and Teichmann, Marc and Carrillo, Maria C and Cummings, Jeffrey and Jack, Cliff R},
+title = {Preclinical Alzheimer's disease: Definition, natural history, and diagnostic criteria},
+year = {2016},
+journal={Alzheimer'S & Dementia : The Journal Of The Alzheimer'S Association},
+volume={12},
+number={3},
+pages={292--323},
+pmid={27012484},
+doi={10.1016/j.jalz.2016.02.002},
+keywords={Alzheimer's disease,Amyloid PET,Asymptomatic,Biomarkers,Blood biomarkers,CSF biomarkers,Diagnostic criteria,Genetics,MRI,Pathophysiology,Preclinical,Tau PET}
+}
+@article {hubbard90,
+author ={Hubbard, B M and Fenton, G W and Anderson, J M},
+title = {A quantitative histological study of early clinical and preclinical Alzheimer's disease},
+year = {1990},
+journal={Neuropathology And Applied Neurobiology},
+volume={16},
+number={2},
+pages={111--21},
+pmid={2345598},
+keywords={}
+}
