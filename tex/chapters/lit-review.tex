@@ -127,7 +127,7 @@ While it has been established that hippocampus plays a cardinal role in learning
 The readers are also reminded that these theories should be regarded as multiple facets, instead of competing hypothesis, of hippocampal functions. There are significant overlap between the theories, and each theory only aim to provide a perspective of hippocampal function. In light of this, more recently effort has been put for unification of many of theories, and each of the theories continuously receive support or challenge from emerging experimental evidence.
 
 
-\subsubsection{Marr Model}
+\subsubsection{Marr Model \label{hpc-marr}}
 In his seminal paper, \citet{marr71} first used mathematical term to describe the kind of computation hippocampus does. He proposed that the neocortex, being a complex structure, must have performed a complex computation task, while the archicortex, with a simpler structure, must have a simpler computational function. In terms of memory function, and based on the symptoms of patient \gls{hm}, he proposed that the role of hippocampus is to provide short-term storage for ``simple memories'', where the sensory inputs are stored with minimal modification. The representation of ``simple memories'' are then transferred to neocortex, in a process where statistical regularities of the ``simple memories'' are extracted, and stored in the neocortex to form long-term memory. 
 
 In his model, \citet{marr71} has also described how hippocampus stores ``simple memories''. He argues this task can be completed with a three-layer neural network: an input layer, a codon layer and an output layer. The input layer represents the sensory pattern. The patterns are then encoded with the codon layer, which have a larger number of nodes with sparse activity in order to store patterns reliably. He also proposed that the output layer should have a recurrent connection, which will allow the system to reconstruct a pattern with only a partial input pattern. 
@@ -302,20 +302,16 @@ In conclusion, evidence from both mouse models and human studies suggest that th
 \citep{zhao14}
 \citep{kunz15} grid cells in human, science paper!
 \subsubsection{pattern separation and completion}
-\citep{palmer11} pattern separation in \gls{ad}
-\citep{ally13} pattern separation / completion in human patients
-\citep{maruszak14} review
+Two of the vital functions of hippocampus, as first predicted by the Marr model, are pattern separation and pattern completion (Discussed in \ref{hpc-marr}). It is thought the function of \gls{dg} is pattern separation, which is to pulling similar pattern apart to reduce memory interference, and that the role of \gls{ca1} is pattern completion, where noisy or incomplete patterns are mapped to the original, complete pattern \todo{cite}. Given the hippocampal deficit, it is hypothesized that the process of pattern separation and pattern completion are compromised in \gls{ad}, however, few studies have investigated this hypothesis \citep{maruszak14}. 
 
-    \citep{smith14} cotext representations review
-    homeostatic regulation \citep{mizumori13}
-    \citep{draguhn14} hpc oscillation
+\citet{palmer11} has used c-Fos expression to study hippocampal cell activity in the \gls{app} transgenic mice, Tg2576. In the experiments, the mice were exposed to either a similar environment or a novel environment, and the hippocampal cell activity were examined by analyzing the expression of the \gls{ieg}, c-Fos. The authors found that while wild-type mice show increased \gls{dg} activation during novel environment, potentially supporting a pattern separation process, and transgenic mice show similar \gls{dg} activation, however an increased \gls{ca3} activation. The authors concluded that the Tg2576 mice have a deficit in pattern separation, and this leads to a shift to an overactive pattern completion process, leading to memory deficit \citep{palmer11}.
 
+However, this theory is conflicted by a later human study. \citet{ally13} studied behavioural pattern separation and pattern completion processes in human patients of \gls{mci} and mild \gls{ad}. In their study, \gls{mci} patients, \gls{ad} patients and age-matched controls are presented with a lag-based continous list of pictures during memory training. The list of pictures contains repeated, similar, and novel items, and the participants were asked to label the tiems. The authors found that for items similar during memory training, the \gls{ad} patients performed significantly worse in telling them apart during testing, and the performance of the \gls{mci} group is negatively correlated with the lag, with performance of low-lag items similar to control group and that of high-lag comparable to \gls{ad}.  In addition, \citet{ally13} also looked at the pattern completion process. Interestingly, while the \gls{mci} patients have intact behavioural pattern completion, the \gls{ad} patients have a significant deficit \citep{ally13}. These results suggest that in \gls{ad}, both behavioural pattern completion and behavioral pattern separation are impaired, while in \gls{mci}, only behavioural pattern separation is impaired, and this deficit is time-dependent \citep{ally13}.
 
-\citep{moodley14} hpc in \gls{ad}
-\citep{mufson15} hpc plasticity in \gls{ad}
-\citep{saura15} gene expression diff in \gls{ad} hpc
+However, it is worth keep in mind that neither the \citet{palmer11} nor \citet{ally13} studies directly addressed the pattern separation and pattern completion process originally defined computationally, and conflicting results are not uncommon once the definition is loosed, and the result maybe influneced by processes other than pattern separation or pattern completion \citep{
+santoro13}. While computational studies have long proposed that pattern separation and pattern completion processes can be compromised in \gls{ad} \citep{horn93, hasselmo94, hasselmo97}, validating these hypothesis requires simutaneous recording of large ensemble of hippocampal neurons \textit{in vivo} during behaviour, which is not possible until recently (discussed in Section \ref{tech}). 
 
-\section{Methods and tools for investigating neural population activity}
+\section{Methods and tools for investigating neural population activity \label{tech}}
 \subsection{\textit{In vivo} electrophysiology recording}
 \subsection{Immunohistochemistry and \textit{In situ} hybridization against \glspl{ieg}}
 \subsection{Two-photon calcium imaging}
