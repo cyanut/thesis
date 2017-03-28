@@ -134,6 +134,10 @@ In his model, \citet{marr71} has also described how hippocampus stores ``simple 
 
 The Marr model is remarkable even viewed from now. While in the original paper Marr \citep{marr71} regarded the neucortex, entorhinal cortex and the whole hippocampus as the input, codon and output layer respectively, under modern interpretation the entorhinal cortex is better fit as the input layer, \gls{dg} as the codon layer and both \gls{ca3} and \gls{ca1} as the output layer \citep{willshaw15}. Not only does the large number of sparsely active granular cells in \gls{dg} and the recurrent connections in \gls{ca3}, fits the anatomy described in \citet{marr71}'s model, the function of \gls{dg} and \gls{ca3} is also congruent with the model. For example, \gls{dg} has been shown to perform pattern separation, and the \gls{ca3} is shown to perform pattern completion through its recurrent connections (discussed in Section \ref{pattern}).  Moreover, the idea of dissociate the memory system into a fast, simple system and a slow, complex system also forms the basis of the modern theory of system memory consolidation \citep{squire92, mcclelland13}. 
 
+One of the most important prediction of the Marr model \citep{marr71} is the concept of pattern separation and pattern completion. The Marr model predicts that the \gls{dg}, with its large number of neurons, perform the function of pattern sepration, where similar inputs are mapped onto more different representations in \gls{dg}. One the other hand in \gls{ca3}, the strong recurrent connections is able to perform the function of pattern completion, which maps partial or noisy input patterns back into their complete representation \citep{rolls13, knierim16}. 
+
+While the process of pattern separation and pattern completion has been inferred from \gls{dg} and \gls{ca1} ensamble activity or even bahavioural performances \citep{santoro13, rolls13}, direct evidence for the pattern separation and pattern completion is not available until recently, mostly due to the difficulty of simutaneous recording of large number of neurons in behaving animals \gls{knierim16}. Using multi-tetrode arrays, \citet{neunuebel14} simulaneously recorded neural activity from both \gls{dg} and \gls{ca3} in behaving rats. The rats where placed in an environment where local spatial cues and global spatial cues are presented in a conflict. The authors found while \gls{dg} responses are highly different from the degree of environmental conflict, \gls{ca3} responses are more coherent \citep{neunuebel14}. This result therefore directly confirms the long-standing prediction from Marr model \cite{rolls13, knierim16}. 
+
 However, the \citet{marr71} model is unfortunately limited the data available at its time. The discovery of place cells \citep{o'keefe71} other specialized position-related cells in entorhinal cortex and hippocampus such as grid cells and head-direction cells \citep{taube90, fyhn04, hafting05}, suggest hippocampus processes context information (discussed in \ref{hpc-spatial}), and is not a mere pattern store. Modern theoretical development has also shown that \citet{marr71}'s proporsition of an overnight transfer from the fast system to the slow system is overly simplified \todo{cite system consolidation}. 
 
 In conclusion, while \citet{marr71}'s model is sometimes titled as a ``noble failure'' \citep{willshaw15}, the model and its ideas have inspired modern theoretical development and still exerts a strong influence on the learning and memory literature today. 
@@ -184,6 +188,7 @@ There are also neural correlation of the relationship formed in the hippocampus.
 
 On the other hand, it is unclear why certain kinds of association can be mediated by hippocampus and others are not, especially given that many association learning involving very similar sensory and motivation pairings, have different requirement for hippocampus (e.g. auditory fear conditioning, \citep{phillips92}). The relational theory also do not take the unique anatomical structure of hippocampus into account, and explain how the anatomy of hippocampus give raise to the function.Nevertheless, the relational theory is able to explain a wide range of findings for hippocampus, has the advantage of being applicable across species.
 
+\begin{comment}
 \subsubsection{Conclusion}
 \citep{opitz14} hpc and memory
 \citep{shohamy13} hpc in cognition
@@ -194,13 +199,7 @@ On the other hand, it is unclear why certain kinds of association can be mediate
 \citep{middei14} hpc in learning disorder
 \citep{eichenbaum14} hpc where vs episodic
 \citep{sasaki15} hpc memory circuit
-
-\subsection{Pattern Separation and pattern Completion \label{pattern}}
-\citep{knierim16} review!
-\citep{rolls13} review
-\citep{kesner15} computational
-    Kinerim J, neuron 2014
-    \citep{mehta15} spatial map plasticity in hpc
+\end{comment}
 
 \section{Synaptic mechanisms for memory}
 \subsection{Introduction}
@@ -313,6 +312,14 @@ santoro13}. While computational studies have long proposed that pattern separati
 
 \section{Methods and tools for investigating neural population activity \label{tech}}
 \subsection{\textit{In vivo} electrophysiology recording}
+\textit\{In vivo} single-unit recording is one of the oldest technique to record neural activity from a living brain. In single-unit recording, one or multiple fine-tipped microeletrodes are inserted into the brain region of interest. If the tips of the electrodes are placed close to or within the cell membrane of the neurons, changes of the membrane potential when the neuron generates an action potential can be detected by the microeletrode. The signal is then amplified, sampled and recoded. 
+
+Since in single-unit recording the electrical activity of the cell is measured directly, cell activity can be measured in a time resolution of less than \SI{1}{\ms}, which allows the shape of the action potential to be resolved \citep{lutcke13}. Moreover, since the microelectrode generates minimal tissue damage, it is possible to reach deep in the brain, and therefore preferred for recording in larger model animals such as cat and monkeys \citep{lutcke13}. The chronic implantation is stable for months, allowing repeated recordings from the same animal. With a eletrode array, it is possible to record 10s of neurons simutaneously. Another unique advantage of single unit recording is that it is very easy to deliver neural stimulation. Small eletrical current can be precisely delievered through the same recording eletrode, which is useful for brain-computer interfaces. Moreover, concurrent stimulation of neural population is possible through optogenetics. Neurons can be made to express light-sensitive ion channels, and the neural population with channelrhopsin expression can be identified and stimulated with light. 
+
+With the flexibility of single unit recording, however, comes with less stability. Firstly, single unit recording requires extraordinary mechanical stability, experimenters often need to wait for months before getting a stable recording, possibly because of the formation of scar tissue which stabilizes the electrodes. Secondly, while neuron identity across recording sessions can be inferred by the unique signature in the action potential shape, it is unfortunately unable to verify the sample neuron is recorded. In fact, the recording tend to become unstable quickly over time, where half of the stable units can drop in the first three days. Thirdly, while it is possible to cluster units into regular spiking (and often from excitatory cells) and fast spiking (and often from inhibitory cells), single unit recording is otherwise unable to differentiate subpopulation of neurons. And lastly, recordings from single units is heavy biased towards neurons which fires across the whole experimental sessions, neurons staying silent for a long time will be missed. Therefore the recorded population is often not representative of the real neural population. 
+
+In conclusion, single unit recording is useful to identify circuitry mechanism which relies on the activity of individual neurons. However, it is unable to identity statistics about the neural population. This can be improved by combining single unit recording with optogenetics, however the low number of simutaneous recorded neurons in offers limits its usefulness in identify circuitry mechanisms where synergy of neural activity is crucial. 
+
 \subsection{Immunohistochemistry and \textit{In situ} hybridization against \glspl{ieg}}
 \subsection{Two-photon calcium imaging}
 \subsection{Miniature endoscopes}
