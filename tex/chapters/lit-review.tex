@@ -338,15 +338,20 @@ In conclusion, while \gls{ieg} detection provides almost perfect spatial range a
 
 \subsection{\textit{In vivo} imaging}
 
-limitations:
-behaviour
-depth
-    - but two/three photon
-    - grin lens based
+\textit{In vivo} imaging records neural activity using molecular sensors which convert physiological events in the neuron to detectable optical signals. While traditional imaging techniques usually use small-molecule dyes which respond to membrane pontential, pH or \ce{Ca^2+} concentration in the cell, recent development of \gls{geci} \ce{Ca^2+} sensors have surpassed the performance of small-molecule \ce{Ca^2+} dyes in both sensitivity and responsiveness. Given the additional advantages of \gls{geci} that they can be expressed in cell-type specific manner, non-invasive, and most importantly, allow long-term expression in weeks to months, the \glspl{geci} have largely replaced traditional dyes. 
 
-only one brain area:
-    - two-arm microscope
-price 
+After the sensors are introduced to the animal, a cranial window is created above the region of interest. During imaging, the animal's head is firmly fixed on the microscope stage, and flourescence from the sensors are directly imaged through the cranial window. 
+
+\textit{In vivo} calcium imaging has overcomed many of the short-comings of electrical recording. First, the cell identification is equivocal. The unique distribution of neurons and blood vessels in the field of view allows the same population of neurons being imaged (if chronically expressing a \gls{geci}) from weeks to months. Second, \textit{in vivo} calcium imaging is able to capture a large and dense set of neurons, often able to record hundreds of neurons simutaneously. Thirdly, subpopulations of neurons are easily identifiable, either through specific expression pattern of \gls{geci}, or using fluorescent marker in a separate colour channel. These advantage makes the \textit{in vivo} calcium imaging ideal for studying fast dynamics of neural ensemble. 
+
+Moreover, the spatial resolution in calcium imaging is only limited by that of the microscope, which can usually reach, or with recent development of super-resolution microscopy, surpass the diffraction limit. This allows the researchers to track subcellular  overtime. Moreover, combined with optogenetics or caged glutamate, the excitation light from the microscope can also be used to induce activity, either at cellular or subcellular level. These advantage of \textit{in vivo} imaging also makes it a powerful tool for the study of dynamic subcellular processes. 
+
+One of the major disadvantage of \textit{in vivo} imaging is the limitation to the region of interest. Since the brain is opaque, there is a limitation of much deep the excitation light and emission flourescence can penetrate the tissue. Even with recent development of multi-photon imaging, where short burst of intense laser at long-wavelength is used to stimulate the flourescent molecule, the depth of imaging is often limited at about \SI{1}{\mm} from the top of the brain, limiting this technique to surface cortical regions in small rodents. Recently, instead of a cranial window, \todo{cite schnitzer} have implanted a \gls{grin} lens into .. .. The \gls{grin} lens relays light from one end to the other end, and \todo{cite schnitzer} are able to image cells in the .. .. through the \gls{grin} lens. Although disruptive, this method however does provide a way for \textit{in vivo} imaging of deep brain regions. 
+
+A second limitation of \textit{in vivo} imaging technique is the requirement of a firm head fixation of the animal, which limits the behavioural paradigm available to the animal, as well may induce stress for the animal. \todo{cite} has modified the microscope stage to include a virtual environment setup. In their setup, the mouse is placed on a large omni-direction ball, which measures the movement of the mice, and translated to movement in the virtual environment. This system allows exploration of mice in an environment during imaging. 
+
+In conclusion, the data \textit{in vivo} imaging can acquire is well-suited for studies of the dynamic neural circuit. However, the behavioural and spatial limitations of the microscope restricts it's application to only a few behavioural paradigms and cortical imaging, and the result may not reflect that of a naturally behaviouring animal. In addition, setting up \textit{in vivo} imaging system usually requires significant effort and time of the researchers, as well as a huge finacial cost to the laboratory. These restrictions have limited its application in neuroscience research. 
+
 
 \subsection{Miniature endoscopes}
 \subsubsection{Fiber bundle based fluorescence endoscopes}
