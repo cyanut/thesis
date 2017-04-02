@@ -346,7 +346,7 @@ After the sensors are introduced to the animal, a cranial window is created abov
 
 Moreover, the spatial resolution in calcium imaging is only limited by that of the microscope, which can usually reach, or with recent development of super-resolution microscopy, surpass the diffraction limit. This allows the researchers to track subcellular  overtime. Moreover, combined with optogenetics or caged glutamate, the excitation light from the microscope can also be used to induce activity, either at cellular or subcellular level. These advantage of \textit{in vivo} imaging also makes it a powerful tool for the study of dynamic subcellular processes. 
 
-One of the major disadvantage of \textit{in vivo} imaging is the limitation to the region of interest. Since the brain is opaque, there is a limitation of much deep the excitation light and emission flourescence can penetrate the tissue. Even with recent development of multi-photon imaging, where short burst of intense laser at long-wavelength is used to stimulate the flourescent molecule, the depth of imaging is often limited at about \SIRange{1}{2}{\mm} from the top of the brain, limiting this technique to surface cortical regions in small rodents \citep{horton13}. Recently, instead of a cranial window, \todo{cite schnitzer} have implanted a \gls{grin} lens into .. .. The \gls{grin} lens relays light from one end to the other end, and \todo{cite schnitzer} are able to image cells in the .. .. through the \gls{grin} lens. Although disruptive, this method however does provide a way for \textit{in vivo} imaging of deep brain regions. 
+One of the major disadvantage of \textit{in vivo} imaging is the limitation to the region of interest. Since the brain is opaque, there is a limitation of much deep the excitation light and emission flourescence can penetrate the tissue. Even with recent development of multi-photon imaging, where short burst of intense laser at long-wavelength is used to stimulate the flourescent molecule, the depth of imaging is often limited at about \SIRange{1}{2}{\mm} from the top of the brain, limiting this technique to surface cortical regions in small rodents \citep{horton13}. This limitation can be overcomed by physically insert a \gls{grin} lens to the region of interest, which relays image to the surface. This allows imaging deep brain regions such as hippocampus, thalamus and hypothalamus without significantly affecting imaging quality \citep{attardo15}.
 
 A second limitation of \textit{in vivo} imaging technique is the requirement of a firm head fixation of the animal, which limits the behavioural paradigm available to the animal, as well may induce stress for the animal. \todo{cite} has modified the microscope stage to include a virtual environment setup. In their setup, the mouse is placed on a large omni-direction ball, which measures the movement of the mice, and translated to movement in the virtual environment. This system allows exploration of mice in an environment during imaging. 
 
@@ -357,20 +357,38 @@ In conclusion, the data \textit{in vivo} imaging can acquire is well-suited for 
 
 The flourescent endoscopy approach aims to allow \textit{in vivo} imaging in live animals. In flourescent endoscopy, a thin relay \gls{grin} lens is placed in the brain, just above the region of interest. The relay lens forms an image of the cells at the surface of the brain. The image is then transferred away from the animal, while allowing its natural behaviour. In this thesis I will briefly review two approaches which mainly differ on the method of guiding the excitation and emission light. 
 
-\subsubsection{Fiber bundle based fluorescence endoscopes}
-In the fiber bundle flourescence endoscopy, the \gls{grin} lens is attached to a optic fiber bundle. The flexibility of the fiber bundle allows animal to behave freely, while traditional flourescence microscopy techniques can be used to capture the image of cells at the end of the fiber bundle. 
-\todo{cite and explain cite}
+\subsubsection{Fiber based fluorescence endoscopes}
+In the fiber based flourescence endoscopy, the \gls{grin} lens is attached to a optic fiber bundle. The flexibility of the fiber bundle allows animal to behave freely, while traditional flourescence microscopy techniques can be used to capture the image of cells at the end of the fiber bundle \citep{flusberg08}. 
 
-The fiber bundle approach has several advantages. First since it can be coupled with traditional microscopy techniques, strong stimulation light can be applied, and faint signals of flourescences can be detected. It is also easy to combine optogenetics with the fiber bundle approach. With a arbitrary-patterned illuminator, indivdiual cells in the field of view can be selected and stimulated, at the same time of calcium imaging. This advantage allows traditional eletrophysiology to perform in freely behaving animals, which can be very powerful for observe and control local neural circuits.
+The fiber bundle approach has several advantages. First since it can be coupled with traditional microscopy techniques, strong stimulation light can be applied, and faint signals of flourescences can be detected. It is also easy to combine optogenetics with the fiber bundle approach. With a arbitrary-patterned illuminator, indivdiual cells in the field of view can be selected and stimulated, at the same time of calcium imaging. This advantage allows traditional eletrophysiology to perform in freely behaving animals, which can be very powerful for observe and control local neural circuits \citep{szabo14}.
 
-The main disadvantage for the fiber bundle based approach is the resolution and field-of-view limited by the fiber bundle. Currently single fibers in the fiber bundle can only be as small as \SI{4}{\um} in diameter, which is barely enough for resolving individual cells, and therefore multiple overlapping cells may be detected as a single cell, and strong flourescence in neuronal processes can also be falsely detected as cellular signal. The field of view is determined by the diameter of the fiber bundle. However, thicker fiber bundle is also significantly more rigid, and potentially limits the behaviour of the animal. 
+The main disadvantage for the fiber bundle based approach is the resolution and field-of-view limited by the fiber bundle. Currently single fibers in the fiber bundle can only be as small as \SI{4}{\um} in diameter, which is barely enough for resolving individual cells, and therefore multiple overlapping cells may be detected as a single cell, and strong flourescence in neuronal processes can also be falsely detected as cellular signal. The field of view is determined by the diameter of the fiber bundle. However, thicker fiber bundle is also significantly more rigid, and potentially limits the behaviour of the animal \citep{yang17}. 
 
 
 \subsubsection{miniature integrated flourescence endoscopes}
-A second approach is integrating all components of the flourescent microscope on the animal's head, and only transmit the image encoded in eletronic signals. 
+A second approach is integrating all components of the flourescent microscope, including light source, filters and sensors, on the animal's head, and only transmit the image encoded in eletronic signals. Earlier attempts focused on miniature two-photon microscopes with an external pulse laser source\citep{flusberg05, piyawattanametha09}. While these mini-microscope are able to produce optical slices in freely behaving rats \citep{sawinski09}, their complexity in engineering and slow frame rates prevents their popularity in neuroscience laboratories \citep{hamel15, yang17}.
+
+Later development of the miniature endoscopes used camera based single photon approach, with a high-intensity \gls{led} as light source \citep{ghosh11}. Single photon imaging provides a large \gls{fov} and fast frame rate than the two-photon approach. Even though it cannot provide optical slices and therefore generates significant background flourescence, recent development of calcium indicators are bright enough to provide a strong \gls{snr}. The original development from \citet{ghosh11} is able to record calcium transients from hundreds of neurons in \gls{ca1} at more than 20 frames per second. It has later being demonstrated in recording brain activity in sensory, cognitive and motor tasks \citep{ziv13}.
+
+The integrated single-photon endoscopes developed by \citet{ghosh11} is primarily designed to record green flourescence from gCaMP calcium indicators. It is therefore unable to detect a second image channel, which can be useful for distinguishing neural subpopulations. In addition, the design described by \citet{ghosh11} is still not accessible to the majority of neuroscience laboratories which have little expertise in microfabrication, optics and eletronic engineering. I attempt to address these two limitations in Section \ref{chap-scope} in this thesis. 
 
 \subsection{Conclusion}
 
+In conclusion, the ideal tool for examine neural circuits need to have good spatial resolution, large field of view, good temporal resolution, and minimal disturbance to animals natural behaviour. Table \ref{tech-compare} provides a summary of the advantages and disadvantages of the discussed technologies in this section. The choice of technology to investigate neuronal activity depends on the trade of advantages and disadvantages researchers is willing to make. It can be predicted that in the foreseeable future, studies of neural circuit mechanisms will continue to take a hyrid approach, where multiple techniques will be used for the best performance. 
+
+\begin{table}
+    \centering
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        & \textit{In vivo} electrical recording & \Gls{ieg} detection & \textit{In vivo} calcium imaging & miniature microscopes \\ \hline
+        Number of cells & ~10 & unlimited & hundreds & hundreds \\ \hline
+        Distinguishing subpopulation & hard & easy & easy & possible \\ \hline
+        Temporal resolution & <\SI{1}{\ms} & minutes to hours & \SIRange{10}{100}{\ms} & \SIRange{10}{100}{\ms} \\ \hline
+        Brain region & unlimited & unlimited & surface & unlimited \\ \hline
+        Compatible with behaviour & unlimited & at most several sessions & head-fixed & unlimited \\ \hline
+    \end{tabular}
+    \caption{Comparison of techniques for studying neural activity at cellular level. \label{tech-compare}} 
+\end{table}
 
 \section{Hypothesis and Research Aims}
 \citep{rozeske15} contextual fear conditioning
