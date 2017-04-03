@@ -41,6 +41,8 @@
 \usepackage{amsmath} % for align*
 \usepackage{amsfonts} % math fonts
 \usepackage[inline]{enumitem}
+\usepackage{tocloft} % toc formatting
+
 \titlespacing*{\chapter}{0pt}{4ex}{1ex}%pbk
 
 \titleformat{\chapter}[display]
@@ -119,10 +121,13 @@
     \renewcommand{\footrulewidth}{0pt}
 }
 
+\cftsetindents{subsubsection}{9em}{2em}
+\renewcommand{\cftsubsubsecfont}{\itshape} %italic subsubsection in toc
 
 \renewcommand{\figurename}{Figure~}
 
 \DeclareSIUnit{\Molar}{\textsc{m}}
+\DeclareSIUnit{\year}{year}
 
 %confine figures to sections
 \let\Oldsection\section
