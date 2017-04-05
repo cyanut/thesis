@@ -42,6 +42,7 @@
 \usepackage{amsfonts} % math fonts
 \usepackage[inline]{enumitem}
 \usepackage{tocloft} % toc formatting
+\usepackage{makecell} % table
 
 \titlespacing*{\chapter}{0pt}{4ex}{1ex}%pbk
 
@@ -128,6 +129,7 @@
 
 \DeclareSIUnit{\Molar}{\textsc{m}}
 \DeclareSIUnit{\year}{year}
+\DeclareSIUnit{\week}{week}
 
 %confine figures to sections
 \let\Oldsection\section
@@ -147,3 +149,5 @@
                      color=red, scale=1.2, vshift=0.8cm}     
     \linenumbers
 }
+
+\renewcommand{\theadfont}{\bfseries}
