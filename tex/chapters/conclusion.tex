@@ -1,22 +1,42 @@
 \chapter{General Discussion}
+\begin{comment}
 \section{Summary of result}
 \subsection{Summary of result}
 \subsubsection{Hyperactivity}
-    \citep{busche12} cells close to plaque are more excitable
 \subsubsection{Cellular freezing encoding}
 \subsubsection{Network freezing encoding}
-\section{improvement of mini-microscope}
+\end{comment}
+\section{mini-microscope}
 \subsection{prisms}
 \subsection{realignment with clarity}
-\section{activity on \gls{ad}}
+\section{\gls{ad}}
 
+\subsection{Contextual fear memory}
 The TgCRND8 mice are tested free of \tglu. This suggest that the effect of \tglu is long lasting. Given that the \tglu treatment is also able to rescue the memory deficit, only if a reminder is present, it suggests that the \tglu treatment transforms the underlying neural representation of the memory.  
+
+\subsection{\gls{ca1} hyperexcitability}
+In the current project, we have found that \gls{ca1} neurons in TgCRND8 miceare more active than those in the \gls{wt} mice, both during context exposure and during contextual memory recall. \tglu{} treatment during training is able to reduce the overall cell activity to \gls{wt} level. Moreover to control for the behavioural state of the mice, we investigated cell activity when the mice were freezing and non-freezing. We found the TgCRND8 genotype has a signficant major effect in increasing the cell activity during freezing, and \tglu treatment reduces the cell activity in both \gls{wt} and TgCRND8 mice. When the mice were not freezing during memory test, only TgCRND8 mice treated with \tglu has a significant decrease of cell activity compared to the other three groups. 
+
+Our results confirm the consistent findings that \gls{ca1} cells in \gls{ad} is hyperactive, although the underlying mechanism is still not fully known, but closely related to \gls{ad} pathology \todo{cite}. We have also found that while during memory test the average cell activity in \gls{wt} mice is at the same level as it is during contextual exposure, the cell activity in the TgCRND8 mice have an increase of cell activity during memory testing compared to the memory encoding session \todo{ref figure}. This result suggest that in addition to the hyperactivity induced by \gls{ad} pathology, the TgCRND8 mice show additional activity in response to the memory recall task. This finding parallels those found in human patients in early \gls{ad}, where \gls{fmri} studies have found hyperactive hippocampus only during memory recall, and negatively correlate with memory performance \citep{sperling09, reiman12, kunz15}. It has been hypothesized that this task-dependent increase of hippocampal cell activity may present as a compensation mechanism in response of degraded hippocampal function in \gls{ad} \citep{kunz15}.
+
+While the hyperexcitability in \gls{ad} is present when the mice is freezing, however the cell activity when the mice is not freezing is not different between groups. Considering that the majority of \gls{ca1} cells lower their activity during freezing, it is possible that the hyperactivity of \gls{ca1} neurons is caused by an innability to keep silent. This is congruent with the \gls{nmdar} pathology in \gls{ad}, where the \gls{nmdar} is found prone to spontaneously activate in \gls{ad}, and excite the neuron \todo{cite}. Under higher input, the spontaneous activities of the neuron can be masked by external input. This is also hinted by \citet{chang13}, who investigated spatial encoding in another mouse model of \gls{ad}. When their mouse is in the receptive field of the place cell, the cell is normally active. However when their mouse is outside the receptive field of the cell, the cell is unable to stop firing, leading to enlarged place fields \citep{chang13}. 
+
+It is somewhat counter-intuitive that the \tglu{} treatment, which increases synaptic \gls{ampar} density and therefore strengthens excitatory synapses, results in a decrease of overall neural activity in \gls{ca1}. However, considering that the hyperexcitability in \gls{ad} is hypothesized to be a result of increased \gls{ltd} and decreased \gls{ltp} in the synapse \todo{cite}, and \tglu{} have been shown to block \gls{ltd}, it is possible that \tglu treatment is able rescue excitability by reversing the \gls{ltp} -- \gls{ltd} imbalance. It is still unclear how an \gls{ltp}--\gls{ltd} imbalance will lead to hyperexcitability. Computational models of \gls{ad} neurons suggest this may be caused by a loss of synaptic spines in the hippocampal neurons. This morphological change of the neuronal dendrites in \gls{ad} creates less hinderance for the transmission of incoming \glspl{epsp}, therefore allowing the neurons to be more excitable \citep{siskova14}. It is possible that the \tglu{} rescues the hyperexcitability by restoring the morphology of the neurons. There is a close correlation between synaptic \gls{ampar} density and spine size, and GluA2-containing \glspl{ampar} can trigger change in dendritic spine size \citep{hanley08}. Indeed, in unpublished data from this project \todo{include spine data?}, we have found \tglu{} treatment protects from spine density decrease in both \gls{ca1} and \gls{dg} after an acute expression of \gls{app} \todo{cite?}, supporting the possibility that the \tglu{ } rescues hyperexcitability by restoring normal neuronal morphology in \gls{ad}. 
+
+The \tglu{} treatment is only applied to TgCRND8 mice \SI{1}{\hour} before contextual fear training, however the effect \tglu{} is present both during contextual fear training and during memory testing. This suggest that \tglu{}
+starts to affect cell excitablity within \SI{1}{\hour}, and have a long-term effect. A closer investigation of the cell activity during training show that while the \tglu{} is able to correct mean cell activity in TgCRND8 mice to \gls{wt} level, the distribution of cell activity between Tg-\tglu and WT-Veh is still significantly different. From the cumulative plot \todo{ref figure}, the distribution of the lower \SI{90}{\percent} cell activity in Tg-\tglu is similar to WT-Veh, however the most active \SI{10}{\percent} cells are similar to Tg-Veh. This difference is not present \SI{24}{\hour} later during memory testing. This suggest that the rescuing effect of \tglu{} is a gradual process which take hours to complete. Cells that are less hyperactive are first rescued, and cells with very high activity require longer time for the effect of \tglu{} to appear. Given that cells close to amyloid plaques are more excitable\citep{busche12}, it is possible these cells with very high activity are located near amyloid plaques, have more damage from the \gls{ad} pathology, and require longer time for the process to reverse. 
+
+
+
+\section{Encoding}
 
 The finding that the prediction of the classifier preceeds the behaviour of the mice suggest that the neural activity pattern is not a result of the mice's behaviour.  
 
-Resilience of the network: as can be seen from the descrepency of mutual information result vs classifier result. This is also seen in early \gls{ad}, wwhere significant pathology does not impact cognitive performance. 
+Resilience of the network: as can be seen from the descrepency of mutual information result vs classifier result. This is also seen in early \gls{ad}, wwhere significant pathology does not impact cognitive performance. Similar result is found in place encoding, where while individual neurons in a \gls{ad} mouse model have degraded spatial encoding, the ensemble is still able to accurately represent the mouse's position \citep{cheng13}. 
 
 The difference of \gls{gsvm} and \gls{nbc} performance suggest that the network encode more information than individual cells. This maybe a universal phenomenon across the brain, as it is also found in encoding auditory fear memory in \gls{bla} \todo{grewe17}. 
+
+
 
 \subsection{Other memories}
 what about memories which require excitability to recall?
@@ -36,5 +56,9 @@ Eplepsy drug etc.
 \todo{Freezing encoding: not behavioural}
 \todo{Direction of causation}
 \todo{\tglu rescue - how?}
-\chapter{Conclusions and Future Directions}
+
+\subsection{Conclusion}
+The long term effect of \tglu is in accordance with the idea that \gls{ad} pathology is a vicious loop, that the effect of the \gls{ad} pathology including synaptic degeneration and aberrent neural activity in turn accelerates the signature pathologies. In the current study, we an acute \tglu treatment is able to have lasting effect at least \SI{24}{\hour} when the \tglu is not longer present, suggesting that in the TgCRND8 mice, which is a model of early \gls{ad}, correcting the synaptic pathology is not only able to rescue the cognitive ability, but may also prevent the vicious loop of \gls{ad} patholgy in the short term. However, experiments examining the \gls{ad} pathology or the outcome of the TgCRND8 mice is still needed to confirm this hypothesis. 
+
+\chapter{Future Directions}
 4-5 pages
