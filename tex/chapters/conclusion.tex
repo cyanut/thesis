@@ -11,9 +11,6 @@
 \subsection{realignment with clarity}
 \section{\gls{ad}}
 
-\subsection{Contextual fear memory}
-The TgCRND8 mice are tested free of \tglu. This suggest that the effect of \tglu is long lasting. Given that the \tglu treatment is also able to rescue the memory deficit, only if a reminder is present, it suggests that the \tglu treatment transforms the underlying neural representation of the memory.  
-
 \subsection{\gls{ca1} hyperexcitability}
 In the current project, we have found that \gls{ca1} neurons in TgCRND8 miceare more active than those in the \gls{wt} mice, both during context exposure and during contextual memory recall. \tglu{} treatment during training is able to reduce the overall cell activity to \gls{wt} level. Moreover to control for the behavioural state of the mice, we investigated cell activity when the mice were freezing and non-freezing. We found the TgCRND8 genotype has a signficant major effect in increasing the cell activity during freezing, and \tglu treatment reduces the cell activity in both \gls{wt} and TgCRND8 mice. When the mice were not freezing during memory test, only TgCRND8 mice treated with \tglu has a significant decrease of cell activity compared to the other three groups. 
 
@@ -28,15 +25,38 @@ starts to affect cell excitablity within \SI{1}{\hour}, and have a long-term eff
 
 
 
-\section{Encoding}
+\subsection{Contextual fear memory}
+
+In the current project, we subjected \gls{wt} and TgCRND8 mice to contextual fear conditioning, and found that while the TgCRND8 mice shows inferior memory during memory testing, this memory deficit can be rescued by \tglu treatment either during training, or during exposure of a brief reminder. This result suggest that the TgCRND8 mice is still able to encode the memory during training, however have deficit in recalling the memory during memory testing. Similar results have been reported previously. In another mouse model of early \gls{ad}, APP/PS1, \citet{roy16} tagged cells activated during contextual fear conditioning, and optically activate the cells during memory recall. They have found that while the APP/PS1 mice shows a memory deficit during memory recall, light stimulation of the contextual fear memory trace is able to induce memory expression. 
+
+
+In order to distinguish whether the memery recall deficit is due to initiation or maintenance of memeory expression, we have also analyzed the number of freezing bouts and duration of freezing bouts in the TgCRND8 and \gls{wt} mice. We have found while the TgCRND8 mice do not show significant difference in number of freezing bouts during memory test, however the duration of freezing bouts are significant shorter than that of the \gls{wt} mice. This result suggests that the TgCRND8 mice is still able initiate the memory recall, however unable to maintain it. 
+
+\subsection{Encoding}
+
+In the current study, we have found that cell activity in TgCRND8 mice are not predictive of the expression of fear memory. However on the other hand, this deficit is not reflected in the prediction accuracy of the machine learning classifiers: both \gls{nbc} and \gls{gsvm} are able to predict freezing from cell activity in TgCRND8 mice as well as in \gls{wt} mice. This discrepency of the prediction power suggest that the hippocampal neural circuit is highly redundant, such that even the prediction power of individual neurons is negatively affected by \gls{ad}, there is no significant information loss if multiple neurons are combined to make a prediction. Similar result is found in place encoding, where while individual neurons in a \gls{ad} mouse model have degraded spatial encoding, the ensemble is still able to accurately represent the mouse's position \citep{cheng13}.  
+
+In this study, we on average only recorded close to one hundred cells in \gls{ca1} for each mouse, and the information in the activity of these neurons is enough for an acurate prediction of the mice's fear memory recall. There are more than \Num{1e4} neurons in \gls{ca1}: therefore even if under \gls{ad} pathology where individual cells' firing pattern is degraded, any downstream brain structure should still able to decode the information. This then suggest that the degradation of individual cell activity in \gls{ad} is secondary to the cognitive deficit, since to an efficient downstream brain structure, redundancy in the brain can protect information loss due to the degradation of cell activity. 
+
+This conclusion alse explains why in the preclinical population, significant \gls{ad} pathology often does not significantly impact cognitive performance \todo{cite}. Another important implication of this conclusion is that treatment for the \gls{ad} pathology alone, without any restoration of the neural network structure, will not result in a significant improvement in the cognitive symptoms. This may explain the failure of recent attempts at treating \gls{ad} with \abeta{} clearance: it is possible that even with the successful \abeta{} removal, additional intervention is still required to restore the neural network at a circuitry level.
+
+The importance of neural network structure is also reflected in the difference of \gls{gsvm} and \gls{nbc} performance. The significant better performance of the \gls{gsvm} suggest that the network encode more information than individual cells. This may be a universal phenomenon across the brain, as it is also recently found in other brain regions, such as \gls{bla}, during auditory fear conditioning \citep{grewe17}. Moreover, we find the accuracy of \gls{gsvm}, which predicts freezing based on the cell assemble as whole, is again similar to \gls{wt} mice. This suggest that when the mice is freezing, the information contained in the activity of neural network in \gls{ad} mice is unaffected. 
+
+\subsection{pattern completion}
+
+Given that the neural network contains enough information about freezing in \gls{ad} mice, it is then intriguing what can be the source of the memory deficit. During memory expression, the information content for the cell ensemble in \gls{ad} is not different from that of the \gls{wt} mice, it is possible the memory deficit can be detected outside of the duration where the memory is expressed. Given that the memory deficit in \gls{ad} is a deficit in memory recall, and that the process of pattern completion in hippocampus is theorized to be important in memory recall, we investigated whether this process is affected in the TgCRND8 mice.
+
+
+
+we hypothesizes that the memory deficit should be present at 
 
 The finding that the prediction of the classifier preceeds the behaviour of the mice suggest that the neural activity pattern is not a result of the mice's behaviour.  
 
-Resilience of the network: as can be seen from the descrepency of mutual information result vs classifier result. This is also seen in early \gls{ad}, wwhere significant pathology does not impact cognitive performance. Similar result is found in place encoding, where while individual neurons in a \gls{ad} mouse model have degraded spatial encoding, the ensemble is still able to accurately represent the mouse's position \citep{cheng13}. 
+\subsection{tglu}
 
-The difference of \gls{gsvm} and \gls{nbc} performance suggest that the network encode more information than individual cells. This maybe a universal phenomenon across the brain, as it is also found in encoding auditory fear memory in \gls{bla} \todo{grewe17}. 
+The TgCRND8 mice are tested free of \tglu. This suggest that the effect of \tglu is long lasting. Given that the \tglu treatment is also able to rescue the memory deficit, only if a reminder is present, it suggests that the \tglu treatment transforms the underlying neural representation of the memory.  
 
-
+Interestingly, \citet{roy16} have also found while the optogenetic reactivation of contextual fear memory does not have long-term effect, a train of fast, \gls{ltp}-inducing stimulation of the memory trace is able to rescue the memory deficit in APP/PS1 mice. 
 
 \subsection{Other memories}
 what about memories which require excitability to recall?
