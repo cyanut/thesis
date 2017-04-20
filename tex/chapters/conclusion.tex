@@ -29,7 +29,6 @@ starts to affect cell excitablity within \SI{1}{\hour}, and have a long-term eff
 
 In the current project, we subjected \gls{wt} and TgCRND8 mice to contextual fear conditioning, and found that while the TgCRND8 mice shows inferior memory during memory testing, this memory deficit can be rescued by \tglu treatment either during training, or during exposure of a brief reminder. This result suggest that the TgCRND8 mice is still able to encode the memory during training, however have deficit in recalling the memory during memory testing. Similar results have been reported previously. In another mouse model of early \gls{ad}, APP/PS1, \citet{roy16} tagged cells activated during contextual fear conditioning, and optically activate the cells during memory recall. They have found that while the APP/PS1 mice shows a memory deficit during memory recall, light stimulation of the contextual fear memory trace is able to induce memory expression. 
 
-
 In order to distinguish whether the memery recall deficit is due to initiation or maintenance of memeory expression, we have also analyzed the number of freezing bouts and duration of freezing bouts in the TgCRND8 and \gls{wt} mice. We have found while the TgCRND8 mice do not show significant difference in number of freezing bouts during memory test, however the duration of freezing bouts are significant shorter than that of the \gls{wt} mice. This result suggests that the TgCRND8 mice is still able initiate the memory recall, however unable to maintain it. 
 
 \subsection{Encoding}
@@ -46,11 +45,33 @@ The importance of neural network structure is also reflected in the difference o
 
 Given that the neural network contains enough information about freezing in \gls{ad} mice, it is then intriguing what can be the source of the memory deficit. During memory expression, the information content for the cell ensemble in \gls{ad} is not different from that of the \gls{wt} mice, it is possible the memory deficit can be detected outside of the duration where the memory is expressed. Given that the memory deficit in \gls{ad} is a deficit in memory recall, and that the process of pattern completion in hippocampus is theorized to be important in memory recall, we investigated whether this process is affected in the TgCRND8 mice.
 
+To detect the pattern completion process, we aligned the classifier prediction accuracy to the behavioural change point of the mice \todo{ref fig}. We found a significant drop of prediction accuracy just before the mice is freezing, both in the \gls{nbc} and \gls{gsvm}. Since the drop of accuracy happens at a time where the mice are predominantly not freezing, the accuracy drop suggest that the classifiers are (inaccurately) predicting freezing, before the mice start to freeze. 
 
+Since the classifiers are trained on each timepoint shuffled, the classifiers are agnostic to the temporal dynamic of the cell activity. Therefore, the siginificant change of prediction accuracy before freezing must reflect changes in the pattern of neural activity itself. Moreover, the fact that the change of neural activity in \gls{ca1} leads behaviour is very important in interpreting findings of the this study. Given that nature of the study is correlational, the causal relationship between the neural activity and behaviour is unclear. However, the tempororal precedance of the \gls{ca1} activity suggest that the neural activity pattern is not a result of the mice's behaviour, and is likely involved in initiating the behaviour. This confirms that the neural activity difference we have found is a result of circuitry deficit between groups, instead of a consequence of different freezing level between groups. 
 
-we hypothesizes that the memory deficit should be present at 
+We have found in \gls{nbc} prediction, \gls{wt} precedes the other three groups in the temporal precedance of freezing behaviour. Given that the \gls{nbc} consider each cell individually, this result suggest that the activity of individual cells start to form a ``cellular signal'' for freezing, which is a measurement of the contextual fear memory recall. The findings that all groups in \gls{nbc} predict freezing before behaviour, and that they have similar temporal precedence over behaviour suggest that in \gls{tg}, the ``cellular signal'' for contextual fear memory recall is unaffected in \gls{tg}. 
 
-The finding that the prediction of the classifier preceeds the behaviour of the mice suggest that the neural activity pattern is not a result of the mice's behaviour.  
+On the other hand, we found that the \gls{gsvm} prediction precedes freezing in the \gls{wt} mice, however this is not present in the vehicle-treated \gls{ad} mice. Again, given that the \gls{gsvm} detects a network pattern of cell activity, this result suggest that in \gls{wt} mice, a ``network signal'' of freezing appears in the \gls{ca1} network, however this signal is missing from the \gls{ad} mice before freezing. 
+
+As the \gls{gsvm} can accurate classify the behaviour state of the mice based on the neural activity, we can use the \gls{gsvm} to approximate the neural activity pattern of recalling a contextual fear memory (considering each freezing bouts as an episode of memory recall). The gradual rise of freezing prediction before the freezing behaviour therefore represents the process of pattern completion: where an incomplete freezing pattern first appears in the network and confuses the classifier to predict freezing. Over time, the pattern gets more complete, which leads to increased classifier prediction of freezing. 
+
+It is worth noting that while computational studies often model pattern completion using a stationary pattern \citep{rolls13}, the difference of prediction accuracy between \gls{nbs} and \gls{gsvm}, as well as the different temporal dynamics of the prediction precedence suggested that the neural correlate of a contextual fear memory recall is not a stationary state, since otherwise the performance of \gls{nbs} and \gls{gsvm} should be very similar, and have similar temporal dynamics in pattern completion. Therefore, our result suggest that, even in an apparently ``simple'' memory such as the contextual fear memory, the neural correlates is dynamic: the state of the neural activity during memory recall can move between multiple states.
+
+We found that the ``cellular signal'', as detected by the \gls{nbc}, is siginficantly earlier than the ``network signal'' from the \gls{gsvm}. This result reveals some detail about the pattern completion process. The pattern completion process start with individual cells change their firing rate to that representing its activity distribution during memory pattern, potentially guided by feed-forward information. However, as the memory pattern is a collection of patterns, at any single point each cell may have the activity from different memory patterns. Therefore at this time point, \gls{nbc}, which only classify by looking at whether the activity of individual neuron represent \textit{any} single contextual fear memory pattern. However as the cell activities are not synchronized, no visible global pattern can be detected by \gls{gsvm}. 
+
+However, as the ``cellular signal'' grow stronger, potentially due to an increase of feed-forward input, some cell activities become synchronized, and form a partial global pattern. This global pattern then, potentially through recurrent connections, recruits more cells to join the pattern. At this time, the partial global pattern can be detected by the \gls{gsvm}, and this positive feedback loop continues until the pattern is complete. This pattern then forms an attractor, maintain itself despite small fluctuation in the feed-forward input, and only disappear when there is a large shift of the feed-forward input which significantly deviates the neural activity from the contextual memory pattern \citep{rolls13}. \todo{confirm citation}
+
+It is easy to put the specific deficit of \gls{ad} mice under this interpretation. \gls{ad} mice show normal dynamic of ``cellular signal'', however missing the ``network signal''. It is therefore possible that the \gls{ad} mice have a deficit of pattern completion: that the positive feedback force of converting an asynchronized ``cellular signal'' to a ``network signal'' is degraded. The lack of a gradual network signal suggest that the ``network signal'' in the \gls{ad} mice is likely formed by chance, that at some point, a global pattern is formed by the random asynchonous activity of individual cells. 
+
+This interpretation has several predictions. First, it predicts that the synchronization of cell activity in the \gls{ad} mice is degraded. To test this hypothesis, we calculated correlation of the neural activity of each pair of neurons, and compared the distribution between \gls{wt} and \gls{tg} mice. And indeed, we have found that cells in the \gls{tg} mice have less correlation with each other \todo{ref correlation figure}. This result is also supported by studies investigating global oscillations in the network. For example, \todo{\gls{ad} oscillation deficit, theta, gamma}  
+
+Secondly, this interpretation suggests that the \gls{ad} mice may still able to initiate freezing, however due to a degraded attractor force, unable to maintain the state of memory recall. This is supported by our findings that the \gls{tg} mice have similar number of freezing bouts, however a significantly shortened bout duration, showing a deficit in maintaining the expression of the memory but not initiating the memory. \todo{difficulty maintaining memory/attention in humans?} 
+
+Moreover, the instability of the memory state in the \gls{ad} can be implied from the distance to the memory states. \todo{talk about the distance figure}
+
+What causes the instability? Noise / other attractor (cite new cell paper) / fragmented memory state 
+
+Similarly to the classifier prediction data, it is possible that this resultis a consequence of the information redundancy in the neural activity in the brain. 
 
 \subsection{tglu}
 
@@ -58,27 +79,24 @@ The TgCRND8 mice are tested free of \tglu. This suggest that the effect of \tglu
 
 Interestingly, \citet{roy16} have also found while the optogenetic reactivation of contextual fear memory does not have long-term effect, a train of fast, \gls{ltp}-inducing stimulation of the memory trace is able to rescue the memory deficit in APP/PS1 mice. 
 
+The long term effect of \tglu is in accordance with the idea that \gls{ad} pathology is a vicious loop, that the effect of the \gls{ad} pathology including synaptic degeneration and aberrent neural activity in turn accelerates the signature pathologies. In the current study, we an acute \tglu treatment is able to have lasting effect at least \SI{24}{\hour} when the \tglu is not longer present, suggesting that in the TgCRND8 mice, which is a model of early \gls{ad}, correcting the synaptic pathology is not only able to rescue the cognitive ability, but may also prevent the vicious loop of \gls{ad} patholgy in the short term. However, experiments examining the \gls{ad} pathology or the outcome of the TgCRND8 mice is still needed to confirm this hypothesis. 
 \subsection{Other memories}
 what about memories which require excitability to recall?
 Reward / addiction
 
-\subsection{implication on treatment - network}
-\subsection{global noise reduction}
+
 \subsection{Targets for drug development}
 Eplepsy drug etc.
 \subsection{Long-term monitoring}
-
 20 pages
 
 \subsection{Pattern completion}
 \todo{Pattern is not specific to freezing because of \citep{redondo14}}
 \subsection{Attractor}
-\todo{Freezing encoding: not behavioural}
 \todo{Direction of causation}
 \todo{\tglu rescue - how?}
 
 \subsection{Conclusion}
-The long term effect of \tglu is in accordance with the idea that \gls{ad} pathology is a vicious loop, that the effect of the \gls{ad} pathology including synaptic degeneration and aberrent neural activity in turn accelerates the signature pathologies. In the current study, we an acute \tglu treatment is able to have lasting effect at least \SI{24}{\hour} when the \tglu is not longer present, suggesting that in the TgCRND8 mice, which is a model of early \gls{ad}, correcting the synaptic pathology is not only able to rescue the cognitive ability, but may also prevent the vicious loop of \gls{ad} patholgy in the short term. However, experiments examining the \gls{ad} pathology or the outcome of the TgCRND8 mice is still needed to confirm this hypothesis. 
 
 \chapter{Future Directions}
 4-5 pages
