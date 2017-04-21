@@ -71,14 +71,17 @@ Similar oscillation deficits are also found in the human patients. \Gls{eeg} rec
 
 These results suggest that the pattern completion deficit in \gls{ad} may be closely related to the brain oscillation deficit reported in the literature. However in the current study the cell activity is recorded in \SI{20}{\hz}. The sampling frequency is unfortunately too slow to allow detection of any brain oscillation above \SI{10}{\hz}. How a deficit in brain oscillation affects the pattern completion process in \gls{ad} can be an important topic for future research. 
 
+Secondly, this interpretation suggests that the \gls{ad} mice may still able to initiate freezing, however due to degraded attractor functions, unable to maintain the state of memory recall. This is supported by our findings that the \gls{tg} mice have similar number of freezing bouts, however a significantly shortened bout duration, showing a deficit in maintaining the expression of the memory but not initiating the memory. 
 
-Secondly, this interpretation suggests that the \gls{ad} mice may still able to initiate freezing, however due to degraded attractor functions, unable to maintain the state of memory recall. This is supported by our findings that the \gls{tg} mice have similar number of freezing bouts, however a significantly shortened bout duration, showing a deficit in maintaining the expression of the memory but not initiating the memory. \todo{difficulty maintaining memory/attention in humans?} 
+Moreover, the instability of the memory state in the \gls{ad} can be implied from the distance to the memory states. We measured the signed distance to the \gls{gsvm} classification boundary when the mice's behaviour transits into freezing \todo{ref figure}. We have found that while the \gls{wt} mice shows an acceleration over and away from the boundary, the \gls{tg} mice only barely cross the boundary, and stay close to it during freezing. Therefore, a small perturbation in the brain state is more likely to shift the \gls{tg} mice out of freezing, and the freezing states in the \gls{wt} mice is more robust.  
 
-Moreover, the instability of the memory state in the \gls{ad} can be implied from the distance to the memory states. \todo{talk about the distance figure}
+While the current study is the first to suggest that neural attractor states are unstable, evidence from human behaviour studies suggest that similar dynamics may exist in \gls{ad} patients. Attention has long been considered computationally as a result of neural attractor state, and the strength of the attractor is important for maintaining attention \citep{desimone95, rolls08a, rolls13a}. Interestingly, early \gls{ad} patients have no deficits in focusing the attention, however, their attention is more likely to be disrupted by distractors, and less likely to maintain over time \citep{perry99}. This result is similar to the memory recall deficit we have found in the current study, suggesting that it is possible that the deficit in attractor state in early \gls{ad} is global, affecting many brain areas congitive functions. 
 
-What causes the instability? Noise / other attractor (cite new cell paper) / fragmented memory state 
+The fragility of the memory attractor in \gls{ad} may also implicate another curious prodrome of \gls{ad} called subjective memory impairment \citep{jahn13}. The subjective memory impairment is defined as a sense of memory deterioration with no objective impairment in cognitive test. The subjective memory impairment is correlated with hyperactivation of \gls{mtl} during memory tasks, and predictive of hippocampal atrophy as well as later development of cognitive impairment and \gls{ad} \citep{jahn13}. It is possible the subjective memory impairment arises from our finding that during memory recall, the network state in \gls{ad} tend to stay close to the boundary of the attractor state. This close distance can be detected by other brain regions, and reduce the confidence of those brain regions in predicting the patient's behaviour, creating a sense of forgetting, even though without a degradation of performance.  
 
-Similarly to the classifier prediction data, it is possible that this resultis a consequence of the information redundancy in the neural activity in the brain. 
+The deterioration of the attractor state in \gls{ad} can be caused by several factors. First, we have shown that the \gls{ad} mice can be rescued by \tglu{} treatment with a reminder, however we are only able to conclude that the \gls{ad} mice has encoded the contextual fear memory during training, but does not provide support that the memory was encoded \textit{in the same way} as \gls{wt} mice does. Therefore, the attractor state deficit can be a result of the formation of a weak attractor for the memory. Given that the neurons in \gls{ad} have impaired \gls{ltp}, and the a normal memory encoding process may be interfered by hyperactive neurons, it is unlikely that the memory encoding process is completely spared. 
+
+Secondly, it is also possible that interferance exists during the memory recall. The hyperactivity may generate noise in the network state, so even with a functional memory attractor, the network state however is more likely to be spontaneously bumped out of the attractor field by noise. In addition, it is also possible that in \gls{ad}, other attractor states exists, and these sporadic attractors may actively pull the network state toward their own basin, and away from that of the memory recall. This is hinted by both animal and human studies. In a mouse model of taupathy, \citet{cheng13} have found that the \gls{ca1} place cells displays rigid firing, such that the firing pattern of a familiar environment lingers even when the mice is place in a novel environment; in humans, \gls{mci} and early \gls{ad} patients have deficits in shifting attention, often maintain focus in the original item even when it is no longer relavent \citep{perry99}. These studies suggest that if the memory recall deficit is a result of competing attractor fields, it is possible that the competing attractor represents a strong, familiar memory formed previously. This hypothesis can be tested by artificially creating a strong attractor state, for example, using repeated optical activation of a selected neural ensemble \citep{carrillo-reid16}, before contextual fear conditioning. The hypothesis will be supported if the similar pattern reappeared during centextual fear memory recall in \gls{ad} and correlates with the memory deficit. Experiments like this is yet to be performed and reported.  
 
 \subsection{tglu}
 
@@ -94,14 +97,7 @@ Reward / addiction
 
 \subsection{Targets for drug development}
 Eplepsy drug etc.
-\subsection{Long-term monitoring}
-20 pages
 
-\subsection{Pattern completion}
-\todo{Pattern is not specific to freezing because of \citep{redondo14}}
-\subsection{Attractor}
-\todo{Direction of causation}
-\todo{\tglu rescue - how?}
 
 \subsection{Conclusion}
 
