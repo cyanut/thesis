@@ -7,8 +7,10 @@
 \subsubsection{Network freezing encoding}
 \end{comment}
 \section{mini-microscope}
-\subsection{prisms}
-\subsection{realignment with clarity}
+\subsection{advantage of current mini-microscope}
+\subsection{combination with machine learning methods to decode circuitry function}
+
+
 \section{\gls{ad}}
 
 \subsection{\gls{ca1} hyperexcitability}
@@ -87,26 +89,46 @@ Secondly, it is also possible that interferance exists during the memory recall.
 
 In the current project, we gave the TgCRND8 mice an acute treatment of \tglu during memory formation. This treatment is able to rescue information content in \gls{ca1} neural activity as well as the presence of a network pattern just before memory recall, and rescues the pattern completion deficit in the TgCRND8 mice. Interestingly, while behaviourally \tglu have no effect on \gls{wt} mice, \tglu-treated \gls{wt} mice show an even earlier presence of network pattern before memory recall. 
 
-These results suggest that \tglu treatment during memory formation has a long-lasting effect. Moreover, given that the effect of \tglu treatment is only present only when the memory is activated: either during formation or a reminder, these results suggest that the \tglu treatment potentially strengthens the underlying neural representation of the memory. The strengthening of the memory trace is reflected by the timing of network pattern: at the same level of cellular signal of memory, \tglu treatment mice, both in \gls{wt} and \gls{tg} group, forms a network pattern at a smaller cellular signal.  
+These results suggest that \tglu treatment during memory formation has a long-lasting effect. Moreover, given that the effect of \tglu treatment is only present only when the memory is activated: either during formation or a reminder, these results suggest that the \tglu treatment potentially strengthens the underlying neural representation of the memory. Stronger association within a memory trace allows the memory trace to be reactivated with a more degraded pattern, so that a small number of neurons showing the activity of a memory recall is able to synchronize the network. In fact this is what we have found: at the same level of cellular signal of memory, \tglu treatment mice, both in \gls{wt} and \gls{tg} group, forms a network pattern with a smaller cellular signal. This suggest that on a circuitry level, the cognitive benefit of \tglu treatment includes an enhanced pattern completion process.
 
-The memory-enhancing effect of \tglu has been reported earlier. 
+Our finding that \tglu treatment strengthens the memory network is congruent with literature, where \tglu treatment has been shown to make the memory more resilient. For example, chronic \tglu treatment prevents forgetting of contextual fear memory, conditional place preference, and novel object recognition \citep{dong14, migues16}. Treatment of \tglu also protects memory recall from protein synthesis inhibitors in auditory fear memory \citep{lopez15}.
+While our result, together with many other previous studies found that in \gls{wt} mice, \tglu treatment does not affect the magnitude of the memory \citep{dias12, dong14, migues16}, suggesting that the magnitude of memory, especially several days after memory formation, is not encoded in the strength of memory engram connections. 
 
+Given that the \tglu blocks synaptic \gls{ampar} trafficking, and blocks \gls{ltd} \todo{cite}, it is likely that the rescuing effect of \tglu is mediated by synaptic plasticity. \citet{dong14} shows that \tglu treatment prevents \gls{ltp} from delay, and is able to rescue memory deficit in the APP23/PS45 mouse model of \gls{ad}. Moreover, it has been shown that \gls{ltp} may be sufficient to rescue memory recall. \citet{roy16} have also found while the optogenetic reactivation of contextual fear memory does not have long-term effect, a train of fast, \gls{ltp}-inducing stimulation of the memory trace is able to rescue the memory deficit in APP/PS1 mice. Our findings that the effect of \tglu requires a reminder of the original memory is consistent with these results: in the short-term, the activity of the original memory trace needs to be reactivated by the reminder in order for the associations to be strengthened, and without activation of the original memory, our no-reminder controls did not benefit from the \tglu-mediated rescuing of memory recall.
 
-
-
-Interestingly, \citet{roy16} have also found while the optogenetic reactivation of contextual fear memory does not have long-term effect, a train of fast, \gls{ltp}-inducing stimulation of the memory trace is able to rescue the memory deficit in APP/PS1 mice. 
-
-The long term effect of \tglu is in accordance with the idea that \gls{ad} pathology is a vicious loop, that the effect of the \gls{ad} pathology including synaptic degeneration and aberrent neural activity in turn accelerates the signature pathologies. In the current study, we an acute \tglu treatment is able to have lasting effect at least \SI{24}{\hour} when the \tglu is not longer present, suggesting that in the TgCRND8 mice, which is a model of early \gls{ad}, correcting the synaptic pathology is not only able to rescue the cognitive ability, but may also prevent the vicious loop of \gls{ad} patholgy in the short term. However, experiments examining the \gls{ad} pathology or the outcome of the TgCRND8 mice is still needed to confirm this hypothesis. 
-\subsection{Other memories}
-what about memories which require excitability to recall?
-Reward / addiction
+The long term effect of \tglu is in accordance with the idea that \gls{ad} pathology is a vicious loop, that the effect of the \gls{ad} pathology including synaptic degeneration and aberrent neural activity in turn accelerates the signature pathologies. In the current study, we an acute \tglu treatment is able to have lasting effect at least \SI{24}{\hour} when the \tglu is not longer present, suggesting that in the TgCRND8 mice, which is a model of early \gls{ad}, correcting the synaptic pathology is not only able to rescue the cognitive ability, but may also prevent the vicious loop of \gls{ad} patholgy in the short term. Previous report of chronic \tglu treatment in a mouse model of \gls{ad} results in a reduction of neuritic plaques, supporting the hypothesis that rescuing circuit function in \gls{ad} can protect neurons from the \gls{ad} pathology. While more research is required to investigate long-term effect and outcome of \tglu in \gls{ad}, our result and previous studies \citep{roy16, migues16, dong14} suggest that interventions that restores network circuit functions in \gls{ad} can enhance cognitive function and potentially protect the neurons from \gls{ad} pathology. 
 
 
-\subsection{Targets for drug development}
-Eplepsy drug etc.
+
+\chapter{Conclusions and Future Directions}
+
+\section{Conclusion}
+
+\section{mini-microscope}
+- identification of imaging neurons (with 2p/clarity)
+- combination with optogenetics
+- imaging through z-axis: liquid lenses
+- long-term, chronic imaging
+
+\section{Effect of \tglu in strengthening memory trace}
+- Opto test - combination of minimicroscope with two-photon
+- Without reminder, but during sleep etc when the memory is replayed
+
+In the current project, we recorded from \gls{ca1}, which is considered an output of the hippocampus, after both pattern separation process in \gls{dg} and pattern completion process in \gls{ca3} \todo{cite}. We have only tested the contextual fear memory using the same context, which would primarily involve the pattern completion process. However, it would also be interesting to see, whether the \tglu treatment also improves the pattern-separation process. \citet{migues16} 
+
+\section{Effect of \tglu in correcting \gls{ad} pathology, potential treatment target}
+- understanding the link between neural activity and ad pathology:
+    long-term, co-image with plaques
+
+\section{Imaging \gls{ca3} and \gls{dg} during memory formation / recall}
+- understanding hippocampus:
+    - ensemble activity
+    - cell identity (through clarity)
+    - connection and functional connection
 
 
-\subsection{Conclusion}
 
-\chapter{Future Directions}
-4-5 pages
+
+
+
+
