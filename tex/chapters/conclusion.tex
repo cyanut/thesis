@@ -8,7 +8,24 @@
 \end{comment}
 \section{mini-microscope}
 \subsection{advantage of current mini-microscope}
-\subsection{combination with machine learning methods to decode circuitry function}
+In the current project, we constructed a miniature microscope which weights less than \SI{3}{\gram}. This light weight of the mini-microscope allow implantation on mice without significantly alter the mice's natural behaviour.  This miniature microscope is able to image green fluorescence at a resolution of at less \SI{2}{\micrometer}. Using a tail vein injection of the the flourescent dye, dextran-flourescein, we are able to resolve individual red blood cells in capillary blood vessels, and measure the flow rate of the blood the capillaries. 
+
+Moreover, we have shown that the mini-microscope is able to recording calcium transients from GCaMP-expressiong neurons. Using the mini-microscope, we are able to image more than \num{200} \gls{ca1} neurons simutaneously, and identify potential place cells from the recording. Moreover, with an additional thin relay \gls{grin} lens, we are able toextend the imaging capability of the mini-microscope to deep brain region with minimal damage. Here we have demonstrated simutanoeus recording of more than \SI{30} neurons in \gls{la} when the animal is under an auditory fear conditioning paradigm. 
+
+While in this project, all recordings of calcium transients are at a rate of \num{20} frames per second, with our construction of the mini-microscope the recoding rate can reach up to \num{200} frames per second, at a cost of spatial resolution. A higher frame rate will allow the resolution of fast brain oscillations such as the \SIrange{7}{11}{\hertz} theta oscillation and potentially the fast \SIrange{40}{100}{\hertz} gamma oscillation, both of which has been shown to be inportant in learning and memory. Calcium imaging is especially suited for detection of brain oscillation, as these oscillation may not generate action potential, but create sub-threshold changes of membrane potential which is reflected by a fluctuation of internal calcium concentrations. The ability of simutaneous imaging a dense ensemble of neurons allows the brain oscillation to be measured in each cell and average, therefore increase the \gls{snr} in detecting these oscillations. The brain oscillation signal can then be related to neural activities to study how local neural circuit response to the brain oscillation. 
+
+In the current project, we have also demonstrated the ability of the mini-microscope to image in both red and green channels. The extra colour channel can be used for the identification of neural subpopulation or extra inforamation for the brain. In our prototype we used blue light to stimulate red retrobeads and the fluorescent protein tdTomato, both of which have a broad excitation spectrum. However, this requirement is usually not necessary. If the red channel is static, for example, to identify neural subpopulation and stable brain structure, the red channel can be captured by a mini-microscope with an efficient excitation \gls{led} and corresponding filters separately. The resulting image can be later aligned with recording of calcium transients for cell identification. 
+
+Our design of mini-microscope only cost \$\,300--\$\,1000 for each unit, which will not represent a significant expense in most neuroscience laboratories. Moreover, all components of the mini-microscope is commercially available and can be assembled with minimal tools, our design of mini-microscope provides access to neuroscientists with no requirement of engineering experience. The microscope casing is 3D printable. We provide both the 3D models and relavent freely available, in order to allow the neuroscience community to benefit from this work. 
+
+\subsection{advantage of using the mini-microscope in the \gls{ad} project}
+
+As a test of the capabilities of the miniature microscope, we used it to image \gls{ca1} neurons in \gls{wt} and a transgenic mouse model of \gls{ad}, TgCRND8, when the mice are encoding and recalling a contextual fear memory. Our mini-microscope allows us to image more than \num{100} neurons simultaneously, allowing us to investigate hippocampal circuitry mechanisms such as pattern completion. 
+
+We have found that the \gls{nbc}, which predicts the mice's behaviour by considering individual neurons, is unable to reveal the pattern completion deficit in the TgCRND8 mice. This results suggest that a significant amount of information the neurons encoding is contained in the synergy between activity of neurons. This information cannot be revealed using traditional methods such as \textit{in vivo} electrophysiological recording, where only several neurons can be recorded at the same time. 
+
+To compensate for the lack of number of neurons simutaneously recorded, electrophysiological recodings often needs to repeat the same behaviour trial for many times, which may lead to change of the animal's behaviour and confound the interpretation. However in the current study, the mini-microscope gives us the freedom to choose an experimental paradigm which is well-established in the field of behavioural neuroscience. This freedom allows us to connect the findings from the neural activity recording to the rich findings of the behavioural neuroscience. This is in contrast to the \textit{in vivo} 2-photon imaging, where due to the requirement of the animal's head to be fixed, only specifically design behavioural paradigms are compatible, where the neural mechanisms for those are less well understood. 
+
 
 
 \section{\gls{ad}}
@@ -105,6 +122,7 @@ The long term effect of \tglu is in accordance with the idea that \gls{ad} patho
 \section{Conclusion}
 
 \section{mini-microscope}
+- multiple brain region
 - identification of imaging neurons (with 2p/clarity)
 - combination with optogenetics
 - imaging through z-axis: liquid lenses
