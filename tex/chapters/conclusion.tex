@@ -140,31 +140,54 @@ We then investigated whether the memory deficit in TgCRND8 mice is due to impair
 In conclusion, in the project we have developed a miniature flourescent microscope for calcium imaging in freely behaving mice, and use it to image \gls{ca1} neural activity in \gls{wt} and the mouse model for \gls{ad}, TgCRND8 mice. We have found TgCRND8 mice have contextual fear memory deficit, hyperactive \gls{ca1} neurons, and show less information content about behaviour. We found the memory recalled by TgCRND8 mice is unstable, both from neural activity and behaviour. \tglu treatment which potentially enhance \gls{ltp} can rescue both the circuitry disfunction and behaviour in the TgCRND8 mice, suggesting the importance of restoring circuitry funciton in potential treatment in restoring cognitive functions in \gls{ad}.
 
 \section{Future directions for mini-microscope contruction}
-- multiple brain region
-- identification of imaging neurons (with 2p/clarity)
-- combination with optogenetics
-- imaging through z-axis: liquid lenses
-- long-term, chronic imaging
+\subsection{Technical improvement for the mini-microscope}
+
+In the current project, the focus of our mini-microscope manually adjusted, and fixed during the whole imaging session. This only allows us to image a \SI{400 \times 400 \times 50}{\um} rectangular box \SIrange{50}{150}{\um} below the lens. If the focus can be adjust fast enough during recording, it may be possible to provide a z-axis scan. This will allow recording of more neurons, or in case of cortex where neurons are heterogeneous across the z-axis, gives the experimenter some control to anatomy. 
+
+The most basic change to this is instead of manually turning the camera up and down, this part can be controlled by a miniature motor. While this can provide a easy auto-focus mechanisms, it will not be fast enough to give z-scan during recording. Moreover, the addition of an extra motor on the mini-microscope can add significant weight, making it too heavy for small rodents such as mice. 
+
+Alternatively, a liquid lens can be used to replace the barrow lens we currently used to focus light to the camera. A liquid lens contains two immiscible liquids, and the curved interface between the two liquid provide the function of a lens. The focus of the liquid lens can be changed by applying voltage across the two liquids, which will bend the meniscus of the two liquids accordingly \citep{kuiper04}. The liquid lens allows focus change in several milliseconds, and is fast enough to provide a real time z-scan with mini-microscope. However, currently commercially available miniaturized liquid lenses are still not easy to find, and they often have long focus length and can often add significant weight to the mini-microscope. 
+
+In the current project, the mini-microscope is connected to the computer through a cable. Although the mini-microscope is compatible with the majority of the behavioural paradigms, the connection cable can make some paradigm hard to perform, especially in environments with overhead structures, or during long-term recording sessions. Efforts can be put to create a wireless version of the mini-microscope. And again, the size and weight of the transmiting circuit and battery can be prohibitive on small rodents. However, recent development have showed that in a resonent cavity, electrical power can be delivered wirelessly using radio frequency and a minimal implant weighing \SI{20}{\mg} \citep{montgomery15}. This can potential provide a way for a wireless power source, and if combined with a minimal transmission circuitry, it is possible to allow wireless long-term calcium imaging in freely behaving animals. This will be very useful for investigating neural circuitry for slower neural circuitry process such as consolidation. 
+
+\subsection{Combining mini-microscope with other techniques for investigating circuitry function}
+
+One important improvement for the construction of the mini-microscope is to combine it with other methods for investigating neural circuitry mechanisms. This will allow relating the neural activity to other physiological, anatomical and molecular information to provide a whole picture of the function of neural circuit. 
+
+First, efforts can be put for \textit{post mortem} identification of the field of view from the mini-microscope. This would allow the mini-microscope data to be enriched with those from \gls{ihc} or \gls{fish}, which can potentially provide detailed molecular and cellular information about the neurons, and offer an explanation how subpopulations of neurons with different molecular markers coordinate for circuitry behaviour. 
+
+However in order to reach this goal, the optical property of the mini-microscope has to be accurately characterized. Efforts will need to be put on quantification of the curvature, range, and depth of the field of view. Measurement of these parameters allows mapping the cells identified in the mini-microscope to their original x--y plane, and provide constrains to the z-axis. The next step is to construct a 3D image of the \textit{post mortem} tissue, potentially using tissue clearing techniques such as \gls{clarity}. The reconstructed calcium imaging cells can then be mapped to the 3D image of the \textit{post mortem} tissue, allowing further molecular characterization of the recorded neurons. 
+
+Secondly, it is also possible to combine mini-microscope recording with \gls{lfp} measurement for concurrent identification of brain oscillations. This addition does not pose any theoretical challenge, as the \gls{ltp} measurement only involves several extracellular metal eletrodes, and \gls{ltp} recording techniques are well established. However to shield potential interference from the camera chip, the \gls{lfp} signals may need to be amplified and digitized on the headset before the signal is transmitted. This may require extra electronic circuitry, and provide a miniaturization challenge for small rodents such as mice, where both the weight and size of the implant are restricted. 
+
+However, our investigation of pattern completion in \gls{ad} can greatly benefit from a potential combination of \gls{lfp} and mini-microscope. Since we have found that the network signal, not individual cellular signal, is important in mediating the memory recall deficit, it suggest that the neurons in \gls{ad} are not synchronized to form a pattern. In the hippocampus, oscillations in theta and gamma frequency has been implicated in learning and memory, and hypothesized to provide a reference frame to which neurons can align their activity. Given previous reports that in other mouse model of \gls{ad}, both theta and gamma oscillation are degraded \todo{cite}, it is possible the pattern completion deficit is a consequence of degraded oscillation. And if so, artificially restoring the oscillation by stimulation of the neurons, either electrically or optogentically, should be able to restore the pattern completion process in the \gls{ad} mice. 
+
 
 \section{Effect of \tglu in strengthening memory trace}
 - Opto test - combination of minimicroscope with two-photon
 - Without reminder, but during sleep etc when the memory is replayed
 
+\section{pattern completion and pattern separation}
 In the current project, we recorded from \gls{ca1}, which is considered an output of the hippocampus, after both pattern separation process in \gls{dg} and pattern completion process in \gls{ca3} \todo{cite}. We have only tested the contextual fear memory using the same context, which would primarily involve the pattern completion process. However, it would also be interesting to see, whether the \tglu treatment also improves the pattern-separation process. \citet{migues16} 
 
-\section{Effect of \tglu in correcting \gls{ad} pathology, potential treatment target}
-- understanding the link between neural activity and ad pathology:
-    long-term, co-image with plaques
-
-\section{Imaging \gls{ca3} and \gls{dg} during memory formation / recall}
+- Imaging \gls{ca3} and \gls{dg} during memory formation / recall
 - understanding hippocampus:
     - ensemble activity
     - cell identity (through clarity)
     - connection and functional connection
 
+\section{Effect of \tglu in correcting \gls{ad} pathology, potential treatment target}
+- understanding the link between neural activity and ad pathology:
+    long-term, co-image with plaques
 
 
 
+
+
+- identification of imaging neurons (with 2p/clarity)
+
+- multiple brain region
+- combination with optogenetics
 
 
 
