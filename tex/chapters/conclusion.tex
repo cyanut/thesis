@@ -139,7 +139,7 @@ We then investigated whether the memory deficit in TgCRND8 mice is due to impair
 
 In conclusion, in the project we have developed a miniature flourescent microscope for calcium imaging in freely behaving mice, and use it to image \gls{ca1} neural activity in \gls{wt} and the mouse model for \gls{ad}, TgCRND8 mice. We have found TgCRND8 mice have contextual fear memory deficit, hyperactive \gls{ca1} neurons, and show less information content about behaviour. We found the memory recalled by TgCRND8 mice is unstable, both from neural activity and behaviour. \tglu treatment which potentially enhance \gls{ltp} can rescue both the circuitry disfunction and behaviour in the TgCRND8 mice, suggesting the importance of restoring circuitry funciton in potential treatment in restoring cognitive functions in \gls{ad}.
 
-\section{Future directions for mini-microscope contruction}
+\section{Future directions for mini-microscope development}
 \subsection{Technical improvement for the mini-microscope}
 
 In the current project, the focus of our mini-microscope manually adjusted, and fixed during the whole imaging session. This only allows us to image a \SI{400 \times 400 \times 50}{\um} rectangular box \SIrange{50}{150}{\um} below the lens. If the focus can be adjust fast enough during recording, it may be possible to provide a z-axis scan. This will allow recording of more neurons, or in case of cortex where neurons are heterogeneous across the z-axis, gives the experimenter some control to anatomy. 
@@ -164,30 +164,34 @@ However, our investigation of pattern completion in \gls{ad} can greatly benefit
 
 
 \section{Effect of \tglu in strengthening memory trace}
-- Opto test - combination of minimicroscope with two-photon
-- Without reminder, but during sleep etc when the memory is replayed
+
+We hypothesized that the rescuing effect from \tglu is because of strengthening of the memory trace, however direct evidence is still required to show that the connection of neurons involved in the contextual fear memory are strengthend after \tglu treatment. This hypothesis can be directly tested by combining the mini-microscope recording with two-photon imaging. 
+
+\citet{carrillo-reid16} have shown that a strong, optogenetically imprinted neural ensembles can be recalled by reactivated by stimulating a single neuron in the ensemble. A similar experiment can be conducted for evaluation of the fear memory ensemble. First, an excitatory opsin can be introduced to the cells of interest. After mini-microscope recording of contextual fear conditioning, the mice can be head-fixed on the stage of two-photon microscope, where the same cells can be imaged through the \gls{grin} lens, and neurons involved in the memory trace can be identified. Part of the memory trace can then be optically stimulated, and if the connections between the fear memory ensemble is strong, a partial activation of the ensemble should be able to activate the rest of the ensemble. Therefore we predict in \tglu-treated mice, activation of a smaller part of the ensemble is able to reactivate the whole memory trace. 
 
 \section{pattern completion and pattern separation}
-In the current project, we recorded from \gls{ca1}, which is considered an output of the hippocampus, after both pattern separation process in \gls{dg} and pattern completion process in \gls{ca3} \todo{cite}. We have only tested the contextual fear memory using the same context, which would primarily involve the pattern completion process. However, it would also be interesting to see, whether the \tglu treatment also improves the pattern-separation process. \citet{migues16} 
 
-- Imaging \gls{ca3} and \gls{dg} during memory formation / recall
-- understanding hippocampus:
-    - ensemble activity
-    - cell identity (through clarity)
-    - connection and functional connection
+In the current project, we recorded from \gls{ca1}, which is considered an output of the hippocampus circuit, after both pattern separation process in \gls{dg} and pattern completion process in \gls{ca3} \todo{cite}. We have only tested the contextual fear memory using the same context, which would primarily involve the pattern completion process. However, it would also be interesting to see, whether the \tglu treatment also improves the pattern-separation process. 
+
+If the pattern completion process is enhanced by the \tglu treatment without affecting the pattern separation process, it follows that the patterns are likely to complete with a smaller partial activation. This suggest that memory strengthened by \tglu treatment is more generalized: since a similar environment may activate part of the trace, and this leads to completion of the fear memory pattern and generates corresponding behaviour. However, this hypothesis is not supported. \citet{migues16} gave chronic \tglu-treatment in dorsal hippocampus after mice were trained with object recognition, conditioned place preference, or contextual fear conditioning. Interestingly, the authors found \tglu treatment not only prevents generalization, but in fact allow the mice to distinguish different memory testing environment more than the vehicle treated group \citep{migues16}. 
+
+\citet{migues16}'s result may not be surprising, given that \tglu treatment improves \gls{ltp}, which has also been cardinal for the pattern separation process in \gls{dg} \citep{rolls13}. However, neither \citet{migues16} nor us distinguished \gls{ca3} and \gls{dg} in \tglu treatment, and therefore are unable to tease out the effect of \tglu on pattern separation and pattern completion separately. A future experiment will be limiting effect of \tglu in either \gls{ca3} or \gls{dg}, and observe both the \gls{ca1} activity and the mice's behaviour. We hypothesized that if \tglu treatment in \gls{ca3} will result in an enhancement of pattern completion as well as behavioural generalization, and treatment in \gls{dg} will result in an enhance pattern separation and behavioural discrimination. 
+
+A more direct way, but potentially harder approach to investigate the involvement of pattern separation process in to use the mini-microscope to image \gls{ca3} and \gls{dg} simutaneously, and obsereve the pattern completion and pattern separation process directly. This potentially can be done using a doublet \gls{grin} lenses, where a small, thin relay \gls{grin} lens is glued to a large \gls{grin} lens. With proper placement, it allows imaging \gls{ca3} using the rest of the surface of the large \gls{grin} lens, and the thin \gls{grin} lens will be inserted above \gls{dg} to relay image to the large \gls{grin} lens. If combined with connectivity studies, data from this approach allows direct validation of the computational model of hippocampus. Further more in a disease model, having information of both \gls{dg} and \gls{ca3} cell activity as well as their connectivity enables researchers to pin-point the functional impairment in the hippocampus circuitry.
+
 
 \section{Effect of \tglu in correcting \gls{ad} pathology, potential treatment target}
+
+In the current project, we have shown that the \tglu treatment is not only able to rescue the behavioural deficit of the TgCRND8 mice, but also able to rescue circuitry function in these mice. Given that the aberrent circuitry activity in \gls{ad} promotes \gls{ad} pathology, it is worth investigate whether \tglu, and its target of \gls{ampar} endocytosis process, can be targeted to alleviate the \gls{ad} pathology. Results from \citet{dong14} show that chronically \tglu-treated \gls{ad} mice have fewer number of amyloid plaques compared to vehicle treated mice after memory training. However, it is still unknown whether \tglu treatment can lead to reverse of the \gls{ad} pathology. Instead of comparing to vehicle-treated controls, chronically treated \gls{ad} mice can be longitudinally compared to mice before treatment to characterize the effect of \tglu on \gls{ad} progression.
+
+Moreover, \tglu, being an interfere peptide, is not a good candidate for drug treatment because of the inferior \todo{drug property}. Future studies can also focus on small molecules having the same effect of \tglu with better 
+
 - understanding the link between neural activity and ad pathology:
     long-term, co-image with plaques
 
 
 
 
-
-- identification of imaging neurons (with 2p/clarity)
-
-- multiple brain region
-- combination with optogenetics
 
 
 
