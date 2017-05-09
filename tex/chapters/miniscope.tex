@@ -68,8 +68,8 @@ Cells were extracted from the recordings for both session respectively. The posi
 
 \section{Results}
 
-\subsection{mini-microscope}
-The mini-microscope provides a cheap and easy way for neuroscience laboratories to measure calcium activity in freely behaving small animals. The completely assembled mini-microscope weighs less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box (Figure~\ref{f.scope}). Adult mice with the mini-microscope attached are able to rear, groom, and freely explore environment with no noticable change from their natural behaviour (\todo{mouse image?}).
+\subsection{Capability and \textit{in vitro} testing of the mini-microscope}
+The mini-microscope provides as a easy and inexpensive tool for neuroscience laboratories to measure calcium activity in freely behaving animals. Our completely assembled mini-microscope weighs less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box (Figure~\ref{f.scope}). Adult mice with the mini-microscope attached are able to rear, groom, and freely explore environment with no noticable change from their natural behaviour (\todo{mouse image?}).
 
 \todo{insert microscope photo and mouse figure here}
 \begin{figure}[h]
@@ -84,9 +84,9 @@ The mini-microscope provides a cheap and easy way for neuroscience laboratories 
     \end{subfigure}
 \end{figure}
 
-The theoretical optical resolution of the mini-microscope is \SI{1}{\um}. To measure the resolution empirically, we tested the mini-microscope against \gls{usaf} resolution target (\todo{USAF target detail}, Edmund Optics). As shown in Figure~\ref{f.usaf}, the thinest lines (group 7 element 6, \SI{2.07}{\um} width) are clearly visible. This suggest that the empirical resolution of the microscope is smaller than \SI{2}{\um}. With this resolution, the mini-microscope is able to resolve cell bodies and capillary blood vessels.
+The theoretical optical resolution of the mini-microscope is \SI{1}{\um}. To measure the resolution empirically, we tested the mini-microscope against \gls{usaf} resolution target (38-257, Edmund Optics). As shown in Figure~\ref{f.usaf}, the thinest lines (group 7 element 6, \SI{2.07}{\um} width) are clearly distinguishable. This suggest that the empirical resolution of the microscope is smaller than \SI{2}{\um}. With this resolution, the mini-microscope is able to resolve cell bodies and capillary blood vessels.
 
-In order to test the illumination, we expressed \gls{gfp} in \gls{la} of an animal, perfused and harvested the brain 3 days later when the \gls{hsv} expression peaks. The brain was sliced coronally on a vibratome until the area of infection. The trunk of the brain was imaged under the mini-microscope. As seen is Figure~\ref{f.scope-gfp}, the \gls{gfp} cells are clearly visible. Moreover, many of the apical dendrites can also be resolved. The imaging quality is comparable to that taken under a standard epi-flourescence microscope (Nikon \todo{Nikon details}\todo{insert Nikon image}. The imaging quality is lower than normal due to the thickness of the brain trunk). This result confirms that the flourescence under the \gls{led} illumination can be reliably detected by the \gls{cmos} camera.
+We first tested the mini-microscope agaist a perfused fluorescent tissue. We virally expressed \gls{gfp} in the \gls{la} of a mice using \gls{hsv}, and perfused and harvested the brain 3 days later when the \gls{gfp} expression peaks. The brain was sliced coronally on a vibratome until fluorescence is detectable on the cutting surface. The trunk of the brain was imaged under the mini-microscope. As seen is Figure~\ref{f.scope-gfp}, the \gls{gfp} cell bodies and the apical dendrites can be resolved from the mini-microscope image. This result confirms that the flourescence under the \gls{led} illumination can be reliably detected by the \gls{cmos} camera.
 
 \todo{reorganize figures}
 \begin{figure}[h]
@@ -116,32 +116,9 @@ In order to test the illumination, we expressed \gls{gfp} in \gls{la} of an anim
              \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.
 \end{figure}
 
-\subsection{Video preprocessing}
-\subsubsection{illumination correction}
-\todo{move to methods?}
-Due to the size limitation of the mini-microscope, the illumination has to be compromized and is uneven. The uneven illumination not only affects the calcium signal and cell detection, but also adds difficulty to the motion correction step, since the uneven illumination pattern appears stable even when there is relative movement between the mini-microscope and the target. To correct this, a 2D gaussian filter with large window (15 $\times$ 15) is convolved with each frame to extract the illumination pattern. The illumination pattern is then subtracted from the frame\todo{... and nomalized by multiplying the inverse of the difference of illumination pattern to roof}. Figure~\ref{f.illumination}\todo{image} shows the maximum projection of the recording before and after illumination correction. Cells under intense illumination in the center can be clearly visualized after illumination correction.
-
-\begin{figure}[h]
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \missingfigure{before correction}
-    \end{subfigure}
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \missingfigure{after correction}
-    \end{subfigure}
-    \caption{\label{f.illumination}, before, after}
-\end{figure}
-
-\subsubsection{motion correction}
-After illumination correction, the movie was then removed from dust, and corrected for motion. Occasional dust speckles on the camera appears as stational small dark objects in the movie, and would interfere with motion detection. To remove the dust speckles, for each frame, pixels two standard deviation darker than mean intensity are labeled. The labeled pixels are morphologically eroded and dilated to remove noise, and then inpainted using Navier-Stokes based methods (\todo{reference opencv?}).
-
-As the motion is almost entirely translational, after dust removal we used phase correlation algorithm to achieved sub-pixel level motion correction. The reference frame is initialized to be the first frame. A moving average of 25 registered frames were generated, and the reference frame is updated by maximum projection of the moving average frame to the reference frame. To test the efficacy of the motion correction algorithm, we have generated a perticularly shaky recording by loosing the connection of the mini-microscope to the baseplate. As can be seen from the maximum projection of the original recording and stabilized recording (Figure~\todo{ref max projection image}), the motion correction works well even for extremely erratic motion. 
-
-\missingfigure{max projection, x/y motion plot}
 
 \subsection{Measuring blood flow with mini-microscope}
-To test \textit{in vivo} imaging capability of the microscope, we first implanted the microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{120}{\kilo\dalton}). The fluorescein-dextran will fill the blood vessels and have similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
+To test the \textit{in vivo} imaging capability of the microscope, we first implanted the mini-microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{150}{\kilo\dalton}; FD150, Sigma) in the tail vein of the mice. The fluorescein-dextran will fill the blood vessels, and fluoresce with similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
 \todo{calculating blood flow}
 \todo{image, blood vessel detection, velocity heatmap}
 \begin{figure}[h]
@@ -162,7 +139,7 @@ The positions of the animal was traced out in the behaviour video. The timecours
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{analysis1.png}
-    \caption{Example of an independent component of the movie after analysis, showing both the extracted spatial location of the cell (left) and the un-normalized actvity (top right). \label{f.analysis}}
+    \caption{Example of an independent component of the video after analysis, showing both the extracted spatial location of the cell (left) and the un-normalized actvity (top right). \label{f.analysis}}
 \end{figure}
 
 
@@ -188,6 +165,46 @@ The positions of the animal was traced out in the behaviour video. The timecours
     \caption{Activity of 4 sample cells plotted against location of the animal. The colour represents the \ce{Ca^2+} activity. The cellular activity is specific to the animal's location in the environment. \label{f.traceplot}}
 \end{figure}
 
+\subsection{Video preprocessing}
+\subsubsection{illumination correction}
+The size of the mini-microscope limits the illumination pathway from being optimal, and as a result the illumination in the \gls{fov} is uneven. An uneven illumination not only affects the calcium signal and cell detection, but also adds difficulty to the motion correction step, since the uneven illumination pattern appears stable even when there is relative movement between the mini-microscope and the target. To correct this, a 2D gaussian filter with large window (\SI{20x20}{\um}) is convolved with each frame. The lower frequency image is regarded as the illumination pattern. The illumination pattern is then subtracted from the frame and normalized. Figure~\ref{f.illumination}\todo{image} shows the maximum projection of an \textit{in vivo} video recording of \gls{ca1} cells expressing gCaMP6f before and after illumination correction. Cells under intense illumination in the center can be clearly visualized after illumination correction.
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{illum.orig}
+        \caption{\label{illum.orig}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{illum.corrected}
+        \caption{\label{illum.corrected}}
+    \end{subfigure}
+    \caption{Illumination correction allows better detection of the cells. This is a maximum projection of a video taken by the mini-microscope, before (\subref{illum.orig}) and after (\subref{illum.corrected}) illumination correction. Cells in the center of the \gls{fov} are clearly visible after illumination correction. \label{f.illumination}}
+\end{figure}
+
+\subsubsection{motion correction}
+After illumination correction, the video was then removed from dust, and corrected for motion. Occasional dust speckles on the camera appears as stational small dark objects in the video, and would interfere with motion detection. To remove the dust speckles, for each frame, pixels two standard deviation darker than mean intensity were labeled. The labeled pixels are morphologically eroded and dilated to remove labeling noise, and then inpainted using Navier-Stokes based methods \citep{bertalmio01}.
+
+As the motion is almost entirely translational, after dust removal we used phase correlation algorithm to achieved sub-pixel level motion correction \citep{guizar08}. The reference frame is initialized to be the first frame. A moving average of 25 registered frames were generated, and the reference frame is updated by maximum projection of the moving average frame to the reference frame. To test the efficacy of the motion correction algorithm, we have generated a recording with significant motion artifact by loosing the connection of the mini-microscope to the baseplate during recording. As can be seen from the maximum projection of the original recording and stabilized recording (Figure~\todo{ref max projection image}), after motion correction, we are able to obtain stable image of cells even with significant motion artifact in the original video.
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        %\includegraphics[width=\textwidth]{illum.orig}
+
+        \missingfigure{motion.orig}
+        \caption{\label{motion.orig}}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        %\includegraphics[width=\textwidth]{illum.corrected}
+        \missingfigure{motion.corrected}
+        \caption{\label{motion.corrected}}
+    \end{subfigure}
+    \caption{\label{f.motion}}
+\end{figure}
+
+
 \subsection{between session stability}
 Two measure the stability of the imaging field between sessions, animals with gCaMP6 infused in \gls{ca1} underwent contextual fear conditioning, and \SI{24}{\hour} later, were put back to the same context for testing. Mini-microscope was attached during both imaging sessions, and the recordings are aligned as shown in \todo{alignment figure}. \todo{alignment result, how many percentage overlap??}
 \todo{figure matching cells across sessions}
@@ -200,11 +217,10 @@ Two measure the stability of the imaging field between sessions, animals with gC
 
 \end{figure}
 \todo{same as CA1 analysis}
-This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to visualize activity form more than 40 cells in lateral amygdala and track them over time (Figure~\ref{f.amygdala}).
-
+This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the mini-microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to record neural activity form more than 40 cells in \gls{la} and track them over time (Figure~\ref{f.amygdala}).
 
 \subsection{Two colour}
-To test the two-colour version of the mini-microscope, we infused red retrobeads (\todo{retrobeads info}) in \gls{nac} bilaterally and gCaMP6 \gls{aav} in \gls{la}. The retrobeads will be trafficked retrogradely along axons, and will label \gls{la} neurons that preject to \gls{nac}. The images acquired from both the green and red channel are shown in Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}. There is no interference between the two channels\todo{wording}.
+To test the two-colour version of the mini-microscope, we infused red retrobeads (Lumafluor) in \gls{nac} bilaterally and gCaMP6 \gls{aav} in \gls{la}. The retrobeads will be trafficked retrogradely along axons, and will label \gls{la} neurons that preject to \gls{nac}. The images acquired from both the green and red channel are shown in Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}. There is no interference between the two channels\todo{wording}.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\linewidth}
@@ -227,35 +243,9 @@ To test the two-colour version of the mini-microscope, we infused red retrobeads
     \caption{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{comment}
-\begin{figure}[h]
-    \includegraphics[width=\textwidth]{behaviour-schematic.png}
-    \caption{Proposed experiment. A mixture of GCaMP6s-expressing AAV and tdTomato-expressing long-term HSV are infused into LA of the animals. A two-colour microscope is implanted to visualize infected LA neurons. The animal then subject to auditory fear conditioning paradigm, and GCaMP6s signals in either tdTomato\textsuperscript{+} or tdTomato\textsuperscript{-} cells are recorded. We hypothesize that the tdTomato\textsuperscript{+} cells will be more excitable than tdTomato\textsuperscript{-} cells during training and testing. \label{f.behaviour-schema}}
-\end{figure}
-\end{comment}
-
-
-
-
 \section{Discussion}
 
-In the current project, we have developed a miniature microscope that allows deep brain calcium imaging in freely behaving mice. The mini-microscope weighs less than \SI{3}{\gram}, and can be implanted on a mouse's head without altering the mouse's natural behaviour. We have successfully used it to record calcium transients both from \gls{ca1} in dorsal hippocampus and lateral amygdala. Moreover, we have added an additional red colour channel for subpopulation identification. With the additional colour channel, we have shown that it is possible to identify the projection target of the cell using flourescent retrobeads. 
+In the current project, we have developed a miniature integrated microscope for calcium imaging in freely behaving mice. The mini-microscope weighs less than \SI{3}{\gram}, and can be implanted on a mouse's head without altering the mouse's natural behaviour. We have successfully used it to record calcium transients both from \gls{ca1} in dorsal hippocampus and lateral amygdala. Moreover, we have added an additional red colour channel for subpopulation identification. With the additional colour channel, we have shown that it is possible to identify the projection target of the cell using flourescent retrobeads. 
 
 Compared to previous designs of mini-microscope, our design is simpler to build and more cost efficient, and suitable for use for common neuroscience laboratories. All optical and electronic parts are commercially available, and the casing can be 3D-printed. The mini-microscope is designed to be easily assembled with minimal tools. The design allows biology researchers with minimal engineering experience to build the mini-microscope and use it for biological research. Moreover, the complete cost a single mini-microscope is between \$\,300 and \$\,1000, and will not representa significant expense in most biology laboratories.
 
