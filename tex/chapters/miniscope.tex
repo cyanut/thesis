@@ -186,38 +186,41 @@ The size of the mini-microscope limits the illumination pathway from being optim
 \subsubsection{motion correction}
 After illumination correction, the video was then removed from dust, and corrected for motion. Occasional dust speckles on the camera appears as stational small dark objects in the video, and would interfere with motion detection. To remove the dust speckles, for each frame, pixels two standard deviation darker than mean intensity were labeled. The labeled pixels are morphologically eroded and dilated to remove labeling noise, and then inpainted using Navier-Stokes based methods \citep{bertalmio01}.
 
-As the motion is almost entirely translational, after dust removal we used phase correlation algorithm to achieved sub-pixel level motion correction \citep{guizar08}. The reference frame is initialized to be the first frame. A moving average of 25 registered frames were generated, and the reference frame is updated by maximum projection of the moving average frame to the reference frame. To test the efficacy of the motion correction algorithm, we have generated a recording with significant motion artifact by loosing the connection of the mini-microscope to the baseplate during recording. As can be seen from the maximum projection of the original recording and stabilized recording (Figure~\todo{ref max projection image}), after motion correction, we are able to obtain stable image of cells even with significant motion artifact in the original video.
+As the motion is almost entirely translational, after dust removal we used phase correlation algorithm to achieved sub-pixel level motion correction \citep{guizar08}. The reference frame is initialized to be the first frame. A moving average of 25 registered frames were generated, and the reference frame is updated by maximum projection of the moving average frame to the reference frame. To test the efficacy of the motion correction algorithm, we have generated a recording with significant motion artifact by loosing the connection of the mini-microscope to the baseplate during recording. As can be seen from the maximum projection of the original recording and stabilized recording (Figure~\ref{f.motion}), after motion correction, we are able to obtain stable image of cells even with significant motion artifact in the original video.
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        %\includegraphics[width=\textwidth]{illum.orig}
-
-        \missingfigure{motion.orig}
+        \includegraphics[width=\textwidth]{shake.raw.mean}
         \caption{\label{motion.orig}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        %\includegraphics[width=\textwidth]{illum.corrected}
+        \includegraphics[width=\textwidth]{shake.mean}
         \missingfigure{motion.corrected}
         \caption{\label{motion.corrected}}
     \end{subfigure}
-    \caption{\label{f.motion}}
+    \caption{Average video frame before and after motion correction. \label{f.motion}}
 \end{figure}
 
 
 \subsection{between session stability}
-Two measure the stability of the imaging field between sessions, animals with gCaMP6 infused in \gls{ca1} underwent contextual fear conditioning, and \SI{24}{\hour} later, were put back to the same context for testing. Mini-microscope was attached during both imaging sessions, and the recordings are aligned as shown in \todo{alignment figure}. \todo{alignment result, how many percentage overlap??}
-\todo{figure matching cells across sessions}
+Two measure the stability of the imaging field between sessions, animals with gCaMP6 infused in \gls{ca1} underwent contextual fear conditioning, and \SI{24}{\hour} later, were put back to the same context for testing. Mini-microscope was attached during both imaging sessions, and the recordings are aligned as shown in \ref{f.cellalign}. In this mouse, we are able to detect 88 active cells from day 1 and 70 active cells from day 2. We are able to align videos from both sessions and found 57 cells active for both sessions. This result is similar to previously reported results \citep{ziv13}, and validates our method to map cells between sessions.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{cell-align}
+    \caption{Recorded active cells in \gls{ca1} when the mouse is exposed to the same context between two days. Red and blue dots represent centroid of each recorded cell in day 1 and day 2, respectively. Yellow dotted lines shows mapping from a day 2 cell to its image in day 1 (represented with green dots). \label{f.cellalign}}
+\end{figure}
+
 
 \subsection{Deep brain imaging}
+This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the mini-microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to record neural activity form more than 40 cells in \gls{la} and track them over time (Figure~\ref{f.amygdala}).
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{amygdala.png}
     \caption{Raw calcium signals during fear conditioning. Left: extracted map of neurons, randomly coloured. Right: Sample calcium signals over time.\label{f.amygdala}}
 
 \end{figure}
-\todo{same as CA1 analysis}
-This design of the miniature microscope incorporates an objective lens of \SI{1.8}{\mm} in diameter. This lens is both too thick and too short to reach deep brain structures such as amygdala. We have modified the design and attached a \SI{4.8}{\mm} long \SI{0.5}{\mm} diameter relay \gls{grin} lens (ILW-050-P050, GoFoton) to the objective lens. Attaching the relay lens does not significantly alter the imaging ability of the mini-microscope, however allows the lens to reach deep brain regions without extensive damage. With this configuration, we are able to record neural activity form more than 40 cells in \gls{la} and track them over time (Figure~\ref{f.amygdala}).
 
 \subsection{Two colour}
 To test the two-colour version of the mini-microscope, we infused red retrobeads (Lumafluor) in \gls{nac} bilaterally and gCaMP6 \gls{aav} in \gls{la}. The retrobeads will be trafficked retrogradely along axons, and will label \gls{la} neurons that preject to \gls{nac}. The images acquired from both the green and red channel are shown in Figure~\ref{f.twocolour.g.invivo},\ref{f.twocolour.r.invivo}. There is no interference between the two channels\todo{wording}.
@@ -245,14 +248,12 @@ To test the two-colour version of the mini-microscope, we infused red retrobeads
 
 \section{Discussion}
 
-In the current project, we have developed a miniature integrated microscope for calcium imaging in freely behaving mice. The mini-microscope weighs less than \SI{3}{\gram}, and can be implanted on a mouse's head without altering the mouse's natural behaviour. We have successfully used it to record calcium transients both from \gls{ca1} in dorsal hippocampus and lateral amygdala. Moreover, we have added an additional red colour channel for subpopulation identification. With the additional colour channel, we have shown that it is possible to identify the projection target of the cell using flourescent retrobeads. 
+In the current project, we have developed a miniature integrated microscope for calcium imaging in freely behaving mice. The mini-microscope weighs less than \SI{3}{\gram}, and can be implanted on a mouse's head without altering the mouse's natural behaviour. We have successfully used it to record calcium transients both from \gls{ca1} in dorsal hippocampus and \gls{la}. Moreover, we have added an additional red colour channel for subpopulation identification. With the additional colour channel, we have shown that it is possible to identify cells with specific projection target by retrograde tracing using flourescent retrobeads. 
 
-Compared to previous designs of mini-microscope, our design is simpler to build and more cost efficient, and suitable for use for common neuroscience laboratories. All optical and electronic parts are commercially available, and the casing can be 3D-printed. The mini-microscope is designed to be easily assembled with minimal tools. The design allows biology researchers with minimal engineering experience to build the mini-microscope and use it for biological research. Moreover, the complete cost a single mini-microscope is between \$\,300 and \$\,1000, and will not representa significant expense in most biology laboratories.
+Compared to previous designs of mini-microscope, our design is simpler to build and more cost efficient, which makes it suitable for common neuroscience laboratories. All optical and electronic parts are commercially available, and the casing can be 3D-printed. The mini-microscope is designed to be easily assembled with minimal tools. The design allows biology researchers with minimal engineering experience to build the mini-microscope and use it for biological research. Moreover, the complete cost a single mini-microscope is between \$\,300 and \$\,1000, and will not representa significant expense in most biology laboratories.
 
-Here we used PCA--ICA for sorting the cells from videos. It is worth noting that although this method often can extract cells and traces reliably, it is not optimal: the PCA--ICA can only catch statistical regularities in the cell activity, but any spatial information is discarded. As a result of this, if the duration of the video is relative short, or some cells fires in synchrony, the PCA--ICA is unable to extract individual cells well. In addition, the result of PCA--ICA may include negative values in the cell activity, which should be limited to only posititive values. Recently, \citet{pnevmatikakis16} used a \gls{cnmf} approach for cell sorting from calcium imaging videos. This method is superior from PCA--ICA in videos acquired from two-photon microscopes, and is promising to be applied to the mini-microscope dataset. 
+Here we used PCA--ICA for sorting the cells from videos. It is worth noting that although this method often can extract cells and traces reliably, it is not optimal: the PCA--ICA method can only catch statistical regularities in the cell activity, but any spatial information is ignored. As a result, if the statistic distribution of cell activity is similar between some cells, for example if the duration of the video is relative short or there are cells fire in synchrony, the PCA--ICA is unable to extract individual cells correctly. In addition, the result of PCA--ICA may include negative values in the cell activity, which should be limited to only posititive values. Recently, \citet{pnevmatikakis16} used a \gls{cnmf} approach for cell sorting from calcium imaging videos. This method took consideration of the spatial information of each cell, as well as the activity signature of the calcium indicators, and has been shown to be more accurate from PCA--ICA in videos acquired from two-photon microscopes. It is promising that a similar \gls{cnmf} approach to be applied to the mini-microscope dataset for cell sorting. 
 
-In the two-colour version of the mini-microscope, colour aberration still exists, such that the alignment of the red and green channels is not perfect. However, the colour abberation is not significant, and will only result in a theoretical shift of \SI{2}{\um} in the field of view. Given that the diametor of a neuron is usually more than \SI{10}{\um}, this misalignment will not significant affect the identification of neural subpopulations in the red channel. The colour abberation is primarily introduced by the \gls{grin} lens, and can be corrected by a careful selection of the barrel lens. Additionally, the colour abberation can also be corrected by a \gls{grin} lens with optimal radial refractory index profile. However although technically possible, such \gls{grin} lens is not currently commercially available. 
-
-
+In the two-colour version of the mini-microscope, colour aberration still exists, such that the alignment of the red and green channels is not perfect. However, the colour abberation is not significant, and will only result in a theoretical shift of \SI{2}{\um} in the field of view. Given that the diametor of a neuron is usually more than \SI{10}{\um}, this misalignment will not significant affect the identification of neural subpopulations in the red channel. The colour abberation is primarily introduced by the \gls{grin} lens, and can be corrected by using a \gls{grin} lens with optimal radial refractory index profile. However although technically possible, such \gls{grin} lens is not currently commercially available. 
 
 
