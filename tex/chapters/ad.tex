@@ -70,7 +70,7 @@ The mouse's position over time is modelled as a \gls{hmm}, as show in Figure \re
 
 \begin{figure}[h]
     \input{../figs/ad/hmm.tex}
-    \caption{\gls{hmm} model for tracking mice. The mouse's true position at time $i$ is represented by the latent variables $z_i$, measurements of the mouse's position is represented by $x_i$. \label{f.ad.hmm}}
+    \caption[\gls{hmm} model for tracking mice.]{\gls{hmm} model for tracking mice. The mouse's true position at time $i$ is represented by the latent variables $z_i$, measurements of the mouse's position is represented by $x_i$. \label{f.ad.hmm}}
 \end{figure}
 
 Using particle filter, we approximate the posterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated with a mixture of Dirac delta function: 
@@ -230,12 +230,12 @@ To record \gls{ca1} activity, we first expressed the \gls{geci} GCaMP6f in the \
 First, we examined the behavioural performance between the \gls{wt} and the \gls{tg} mice. We hypothesized that the \gls{tg} mice will have deficits in contextual fear memory, and this deficit can be rescued by \tglu{} treatment.  The experimental paradigm is summarized in Figure~\ref{f.ad.paradigm}. Mini-microscope base-plates were surgically implanted unilaterally in the \gls{ca1} of dorsal hippocampus in gCaMP6f expressing \gls{wt} and TgCRND8 (\gls{tg}) mice. The mice received either vehicle (Veh) or \tglu{} (Glu) peptide one hour before training. Twenty-four hours later, the mice were put back to the training chamber for the memory test of contextual fear. Calcium transients were recorded during both training and testing session of contextual fear conditioning. Figure~\ref{f.ad.trace} shows cells recorded from a single mouse and calcium transients from a sample of cells.
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{paradigm.png}
-    \caption{Experimental paradigm. Adult \gls{wt} and \gls{tg} mice (with gCaMP6f expression) were implanted with a mini-microscope base-plate targeting CA1 hippocampus on day 0. The cells were visible three weeks later. Mice received \tglu{} peptide (i.p.) \SI{1}{\hour} before contextual fear conditioning. Mice were tested \SI{24}{\hour} later for freezing behaviour. Calcium transients were recorded for both training and testing session. \label{f.ad.paradigm}}
+    \caption[Experimental paradigm for contextual fear conditioning.]{Experimental paradigm. Adult \gls{wt} and \gls{tg} mice (with gCaMP6f expression) were implanted with a mini-microscope base-plate targeting CA1 hippocampus on day 0. The cells were visible three weeks later. Mice received \tglu{} peptide (i.p.) \SI{1}{\hour} before contextual fear conditioning. Mice were tested \SI{24}{\hour} later for freezing behaviour. Calcium transients were recorded for both training and testing session. \label{f.ad.paradigm}}
 \end{figure}
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{trace.png}
-    \caption{Sample cell image and calcium transients. Transients are random coloured and correspond to cells of the same colour. \label{f.ad.trace}}
+    \caption[Sample cell image and calcium transients.]{Sample cell image and calcium transients. Transients are random coloured and correspond to cells of the same colour. \label{f.ad.trace}}
 \end{figure}
 
 
@@ -245,7 +245,7 @@ This result is consistent with previous report \citep{palmer11, zhou16} that the
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freezing.png}
-    \caption{Percent of freezing during testing. \Gls{tg} mice have significant lower freezing, and \tglu{} treatment returns the freezing to wild-type level. \label{f.ad.freezing}}
+    \caption[Percent of freezing during memory test.]{Percent of freezing during memory test. \Gls{tg} mice have significant lower freezing, and \tglu{} treatment returns the freezing to wild-type level. \label{f.ad.freezing}}
 \end{figure}
 
 \subsection{\Gls{tg} mice can initiate freezing}
@@ -258,11 +258,15 @@ Figure~\ref{f.ad.freezing_profile} summarizes the number and length of freezing 
         \includegraphics[width=\textwidth]{freezing_frequency.png}
         \caption{\label{f.ad.freezing_freq}}
     \end{subfigure}
-    \begin{subfigure}[h]{\textwidth}
-        \includegraphics[width=\textwidth]{freezing_length.png}
-        \caption{\label{f.ad.freezing_length}}
+    \begin{subfigure}[h]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{freezing_length_dist.png}
+        \caption{\label{f.ad.freezing_length_dist}}
     \end{subfigure}
-    \caption{Average number of freezing bouts \subref{f.ad.freezing_freq} and length of freezing bouts \subref{f.ad.freezing_length}. \Gls{tg} mice freeze as often as \gls{wt} mice, but with less duration. This is rescued by \tglu{} treatment. \label{f.ad.freezing_profile}}
+    \begin{subfigure}[h]{0.6\textwidth}
+        \includegraphics[width=\textwidth]{freezing_length_bar.png}
+        \caption{\label{f.ad.freezing_length_bar}}
+    \end{subfigure}
+    \caption[Freezing lengths and number of freezing bouts.]{Average number of freezing bouts \subref{f.ad.freezing_freq} and length of freezing bouts \subref{f.ad.freezing_length_dist, f.ad.freezing_length_bar}. \Gls{tg} mice freeze as often as \gls{wt} mice, but with less duration. This is rescued by \tglu{} treatment. \label{f.ad.freezing_profile}}
 \end{figure}
 
 
@@ -285,12 +289,12 @@ Comparing the cell activity between testing and training, we found that the \gls
         \includegraphics[width=\textwidth]{activity_test.png}
         \caption{\label{f.ad.acttest}}
     \end{subfigure}
-    \caption{Distribution and mean of average cell activity during \subref{f.ad.acttrain} training before foot shock and \subref{f.ad.acttest} memory test. Cells in the Tg mice are significantly more active, and this is rescued by \tglu{} treatment. Cell numbers are listed in the legend with parenthesis. The cell activity are measured in \gls{au}. \label{f.ad.activity}}
+    \caption[Cell activity during training and memory test.]{Distribution and mean of average cell activity during \subref{f.ad.acttrain} training before foot shock and \subref{f.ad.acttest} memory test. Cells in the Tg mice are significantly more active, and this is rescued by \tglu{} treatment. Cell numbers are listed in the legend with parenthesis. The cell activity are measured in \gls{au}. \label{f.ad.activity}}
 \end{figure}
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{diff_activity.png}
-    \caption{Cell activity difference between training and testing sessions. \gls{tg} mice significantly increased their cell activity during testing session, and this is blocked by \tglu{} treatment. \label{f.ad.actdiff}}
+    \caption[Cell activity difference between training and memory test.]{Cell activity difference between training and testing sessions. \gls{tg} mice significantly increased their cell activity during testing session, and this is blocked by \tglu{} treatment. \label{f.ad.actdiff}}
 \end{figure}
 
 
@@ -312,7 +316,7 @@ For the cell activity when the mice did not show freezing behaviour, we performe
         \includegraphics[width=\textwidth]{activity_moving.png}
         \caption{\label{f.ad.actnf}}
     \end{subfigure}
-    \caption{Average cell activity when the mice was \subref{f.ad.actf} freezing and \subref{f.ad.actnf} not freezing during the 5-min contextual memory test. Cells in \gls{tg} mice have significantly higher activity during freezing, and \tglu{} treatment decreases cell activity in both \gls{wt} and \gls{tg} groups. When the mice were not freezing, \tglu{} treatment decreases cell activity only in \gls{tg} mice, but have no effect in \gls{wt} mice. This result suggests that the effect of \tglu{} in \gls{tg} mice is a global decrease of cell activity. \label{f.ad.activity_freezing}}
+    \caption[Cell activity during freezing.]{Average cell activity when the mice was \subref{f.ad.actf} freezing and \subref{f.ad.actnf} not freezing during the 5-min contextual memory test. Cells in \gls{tg} mice have significantly higher activity during freezing, and \tglu{} treatment decreases cell activity in both \gls{wt} and \gls{tg} groups. When the mice were not freezing, \tglu{} treatment decreases cell activity only in \gls{tg} mice, but have no effect in \gls{wt} mice. This result suggests that the effect of \tglu{} in \gls{tg} mice is a global decrease of cell activity. \label{f.ad.activity_freezing}}
 \end{figure}
 \begin{comment}
 \begin{figure}[h]
@@ -334,7 +338,7 @@ First we looked at cells individually, and calculated the mutual information bet
 The group differences in freezing information was compared using two-way \gls{anova}. There is a significant \textit{Genotype} $\times$ \textit{Treatment} interaction (F\tsb{1,4380}=126.7, p<0.001), as well as main effects in both \textit{Genotype} (F\tsb{1,4380}=254.0, p<0.001) and \textit{Treatment} (F\tsb{1,4380}=54.7, p<0.001). \textit{Post hoc} tests show Tg-Veh group has significantly less freezing information (WT-Veh vs Tg-Veh, T=19.3, p<0.001), and this deficit is partially rescued by \tglu{} treatment (Tg-\glu{} vs Tg-Veh, T=13.2, p<0.001), as Tg-\glu{} group has significantly less freezing information than WT-Veh group (WT-Veh vs Tg-\glu, T=6.0, p<0.001; Figure~\ref{f.ad.freeze_info}). WT-\glu{} has significantly less freezing information than WT-Veh, although the significance is close to threshold (WT-Veh vs WT-\glu, T=2.5, p=0.011, threshold=0.013). This result suggests in the \gls{tg} group, the individual cell activity in hippocampus \gls{ca1} is not a good predictor of the mouse's freezing behaviour. This is partially recovered by \tglu{} treatment. 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_info.png}
-    \caption{Freezing information during the context memory test. This measurement represent how much information a particular cell have in a period of time about whether the mouse is freezing. Cells in \gls{tg} mice encode significantly less freezing information than the \gls{wt} groups, and \tglu{} treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
+    \caption[Freezing information during memory test.]{Freezing information during the context memory test. This measurement represent how much information a particular cell have in a period of time about whether the mouse is freezing. Cells in \gls{tg} mice encode significantly less freezing information than the \gls{wt} groups, and \tglu{} treatment can only partially rescue the effect. \label{f.ad.freeze_info}}
 \end{figure}
     
 
@@ -345,7 +349,7 @@ Given that CA1 cells are known to encode place, and \gls{tg} mice have deficits 
 The result is similar to the freezing information observed in Figure~\ref{f.ad.freeze_info} (Figure~\ref{f.ad.freeze_ctrl}). There is a significant interaction between \textit{Genotype} and \textit{Treatment} (F\tsb{1,4380}=97.9, p<0.001), as well as significant main effects in \textit{Genotype} (F\tsb{1,4380}=139.4, p<0.001) and \textit{Treatment} (F\tsb{1,4380}=100.3, p<0.001). Furthermore, this test revealed that mice's freezing level is not a significant confounding factor (T=-0.65, p=0.50) for freezing information. And again, \textit{post hoc} tests show that Tg-Veh has significant lower freezing information with position controlled (WT-Veh vs Tg-Veh, T=15.1, p<0.001), and fully rescued by \tglu{} (Tg-\glu{} vs Tg-Veh, t=13.9, p<0.001; WT-Veh vs Tg-\glu, t=1.9, p=0.06, threshold=0.013). This result suggest that the deficit of freezing encoding in \gls{tg} is independent of the mouse's position in space and freezing levels during the memory test session.
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{freeze_position.png}
-    \caption{Freezing information encoded in cells is not reliant on mice's position or freezing level. This measurement removes the effect of position from freezing information measurement. This result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the mouse is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
+    \caption[Position-controlled freezing information.]{Freezing information encoded in cells is not reliant on mice's position or freezing level. This measurement removes the effect of position from freezing information measurement. This result is similar to Figure~\ref{f.ad.freeze_info}. This suggest that the position of the mouse is not a confounding factor for freezing information measurement. \label{f.ad.freeze_ctrl}}
 \end{figure}
 
 \begin{comment}
@@ -381,9 +385,9 @@ In addition, we also checked whether the freezing information coding is a result
 While all the measurements we have performed considers each cell individually, are the cells independent of each other, or is part of the information encoded in the coordination between them? To answer this question, we took advantage of machine learning algorithms. A \gls{nbc} models the cells independent of each other, and therefore can use neural signatures in individual cells for prediction. A general classifier such as a \gls{gsvm} on the other hand, is able to take advantage of information encoded by individual cells as well as the ensemble of them. To investigate whether the neural signature of recalling a contextual fear memory (as measured by the freezing behaviour) is encoded by the cells individually or in the network, we trained both an \gls{nbc} and a \gls{gsvm} to predict freezing behaviour from the calcium transients at each time point. The performance of \gls{nbc} would represent prediction power encoded independently in cells, and the performance of \gls{gsvm} represents total prediction power of the network.
 
 \todo{accuracy figure}
-The result is shown in Figure~\ref{f.ad.classifier}. We calculated F1 score as a measurement of classifier performance, which considers both the precision and sensitivity of the classifier. A three-way \gls{anova} of \textit{Genotype} $\times$ \textit{Treatment} $\times$ \textit{Classifier} was carried out. We found a significant interaction between \textit{Genotype} and \textit{Treatment} (F\tsb{1,50}=14.2, p<0.001), as well as significant main effects of each factors (\textit{Genotype}, F\tsb{1,50}=15.6, p<0.001; \textit{Treatment} F\tsb{1,50}=5.5, p=0.02; and \textit{Classifier} F\tsb{1,50}=9.0, p=0.004). Since the \textit{Classifier} factor only have a significant major effect, for the \textit{post hoc} tests we used F-test to only compare different levels of \textit{Genotype} and \textit{treatment}. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu{} treatment (Tg-\glu{} vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu{} (F\tsb{2,50}=0.63, p=0.54), and \tglu{} treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
+The result is shown in Figure~\ref{f.ad.classifier}. A three-way \gls{anova} of \textit{Genotype} $\times$ \textit{Treatment} $\times$ \textit{Classifier} was carried out. We found a significant interaction between \textit{Genotype} and \textit{Treatment} (F\tsb{1,50}=14.2, p<0.001), as well as significant main effects of each factors (\textit{Genotype}, F\tsb{1,50}=15.6, p<0.001; \textit{Treatment} F\tsb{1,50}=5.5, p=0.02; and \textit{Classifier} F\tsb{1,50}=9.0, p=0.004). Since the \textit{Classifier} factor only have a significant major effect, for the \textit{post hoc} tests we used F-test to only compare different levels of \textit{Genotype} and \textit{treatment}. F1 score of Tg-Veh is significantly less than WT-Veh (F\tsb{2,50}=16.4, p<0.001), and this effect is rescued by \tglu{} treatment (Tg-\glu{} vs Tg-Veh, F\tsb{2,50}=9.7, p<0.001). There is no significant difference between WT-Veh and Tg-\glu{} (F\tsb{2,50}=0.63, p=0.54), and \tglu{} treatment has no significant effect on \gls{wt} group (WT-Veh vs WT-\glu, F\tsb{2,50}=0.20, p=0.81).  
 
-These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information about freezing than the cells individually. Moreover, both classifiers perform significantly worse in the \gls{tg} group, further supports our hypothesis that \gls{tg} mice have deficits encoding fear memory during memory test. Moreover, this deficit is fully rescued by \tglu{} treatment. 
+These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier across all groups, suggesting that the network encodes more information about freezing than the cells individually. Moreover, unlike the information content for individual cells, both \gls{nbc} and \gls{gsvm} have same performance across all groups. This suggests that with the activity of multiple cells, the deficit in information content in \gls{tg} mice are compensated. 
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
@@ -394,23 +398,21 @@ These results show \gls{gsvm} significantly outperforms the \gls{nbc} classifier
         \includegraphics[width=\textwidth]{svm.png}
         \caption{\label{f.ad.svm}}
     \end{subfigure}
-    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Results are measured  using the F1 score. Both classifiers showed significant lower performance in \gls{tg} group, further supports the hypothesis that \gls{tg} mice have deficits in encoding freezing during the context memory test. Interestingly, since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the network level. \label{f.ad.classifier}}
+    \caption[Accuracy of machine learning classifier in predicting freezing.]{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity. Since \gls{nbc} assumes the cells are independent and \gls{gsvm} is more general, the performance difference between the two suggest a portion of freezing information is encoded in the network level. Both \gls{nbc} and \gls{gsvm} perform similarly across all groups, suggesting that the deficit of information content in \gls{tg} mice can be compensated by the network activity. \label{f.ad.classifier}}
 \end{figure}
 
-To show that the machine learning classifiers are indeed detecting freezing instead of a lack of movement of the mice, we investigated timepoints where the mice was not moving, but also not freezing. If the classifiers were detecting a lack of movement, this subset of data will be misclassified as freezing, and result in a significant worse performance. The accuracy of the classifiers are shown in Figure~{f.ad.accu-freezing-no-moving}. We have found that while \gls{nbc} shows significantly worse performance in this subset of data, the performance is siginficantly better than if it were detecting a lack of movement. \Gls{gsvm} on the other hand is able to completely distinguish a lack of movement and freezing, and have similar performance as the rest of the time points. 
+To show that the machine learning classifiers are indeed detecting freezing instead of a lack of movement of the mice, we investigated timepoints where the mice was not moving, but also not freezing. If the classifiers were detecting a lack of movement, this subset of data will be misclassified as freezing, and result in a significant worse performance. The accuracy of the classifiers are shown in Figure~{f.ad.accu-freezing-no-moving}. We have found that while \gls{nbc} shows significantly worse performance in this subset of data, the performance is significantly better than if it were detecting a lack of movement. \Gls{gsvm} on the other hand is able to completely distinguish a lack of movement and freezing, and have similar performance as the rest of the time points. 
 
 \begin{figure}[h]
     \begin{subfigure}[h]{\textwidth}
-        %\includegraphics[width=\textwidth]{nb-freezing-no-moving.png}
-        \missingfigure{nb}
+        \includegraphics[width=\textwidth]{nb-freezing-no-moving.png}
         \caption{\label{f.ad.nb-freezing-no-moving}}
     \end{subfigure}
     \begin{subfigure}[h]{\textwidth}
-        \missingfigure{svm}
-        %\includegraphics[width=\textwidth]{svm-freezing-no-moving.png}
+        \includegraphics[width=\textwidth]{svm-freezing-no-moving.png}
         \caption{\label{f.ad.svm-freezing-no-moving}}
     \end{subfigure}
-    \caption{Performance of \subref{f.ad.nb} \gls{nbc} and \subref{f.ad.svm} \gls{gsvm} in predicting freezing from cell activity, at timepoints where the mice was not moving, but also not freezing. We found both \gls{nbc} and \gls{gsvm} perform siginficantly better than if they were detecting a lack of movement instead of freezing. However, while the \gls{gsvm} can completely distinguish lack of movement with freezing, the \gls{nbc} shows some confusion between lack of movement and freezing. (\subref{f.ad.nb-freezing-no-moving}): \gls{nbc} performance; (\subref{f.ad.svm-freezing-no-moving}): \gls{gsvm} performance. \label{f.ad.accu-freezing-no-moving}}
+    \caption[Machine learning classifiers predictions are not based on a lack of movement.]{Performance of \subref{f.ad.nb-freezing-no-moving} \gls{nbc} and \subref{f.ad.svm-freezing-no-moving} \gls{gsvm} in predicting freezing from cell activity, at timepoints where the mice was not moving, but also not freezing. We found both \gls{nbc} and \gls{gsvm} perform significantly better than if they were detecting a lack of movement instead of freezing. However, while the \gls{gsvm} can completely distinguish lack of movement with freezing, the \gls{nbc} shows some confusion between lack of movement and freezing. (\subref{f.ad.nb-freezing-no-moving}): \gls{nbc} performance; (\subref{f.ad.svm-freezing-no-moving}): \gls{gsvm} performance. \label{f.ad.accu-freezing-no-moving}}
 
 \end{figure}
 
@@ -438,7 +440,7 @@ To show that the machine learning classifiers are indeed detecting freezing inst
                 \end{cases}
         \end{align*}
     \end{minipage}
-    \caption{Bayes model for change point detection. The accuracy is modelled as a Gaussian distribution with mean as a function of time and constant variance. In the null hypothesis, the mean is constant and estimated from the data. In the alternative hypothesis, the mean is modelled as constant up to the change point, then as a linear function of time with a negative slope. A Bernoulli variable $selector$ is estimated to choose from each of the hypothesis. All variables have non-informative priors \label{f.ad.bayesmodel}}
+    \caption[Bayes model for change point detection.]{Bayes model for change point detection. The accuracy is modelled as a Gaussian distribution with mean as a function of time and constant variance. In the null hypothesis, the mean is constant and estimated from the data. In the alternative hypothesis, the mean is modelled as constant up to the change point, then as a linear function of time with a negative slope. A Bernoulli variable $selector$ is estimated to choose from each of the hypothesis. All variables have non-informative priors \label{f.ad.bayesmodel}}
 \end{figure}
 
 We next examined whether freezing encoding in the network precedes behaviour onset. We plotted average prediction accuracy for the classifiers at the time mice behaviour transitions into freezing. We hypothesized that if the neural signature for freezing behaviour in the network precedes, the classifiers will predict freezing earlier than the behavioural onset, which will result in a reduction prediction accuracy before behavioural onset.
@@ -457,19 +459,18 @@ On the other hand,  we have found very strong evidence for a change point in \gl
         \includegraphics[width=\textwidth]{svm_into_freezing.png}
         \caption{\label{f.ad.svm_into_f}}
     \end{subfigure}
-    \caption{Average accuracy of classifiers at the beginning of freezing behaviour in mice during the context memory test. For \gls{wt} and \gls{tg}-\glu{} groups, both \gls{nbc} and \gls{gsvm} shows significantly decreased performance just before the mice show freezing behaviour. This suggests that \gls{ca1} neural activity drives freezing behaviour. The error bars on the top shows \SI{95}{\percent} credible interval of the change point, if the alternative hypothesis is favoured. \label{f.ad.into_f}}
+    \caption[Average accuracy of classifiers at initiation of freezing behaviour.]{Average accuracy of classifiers at the beginning of freezing behaviour in mice during the context memory test. For \gls{wt} and \gls{tg}-\glu{} groups, both \gls{nbc} and \gls{gsvm} shows significantly decreased performance just before the mice show freezing behaviour. This suggests that \gls{ca1} neural activity drives freezing behaviour. The error bars on the top shows \SI{95}{\percent} credible interval of the change point, if the alternative hypothesis is favoured. \label{f.ad.into_f}}
 \end{figure}
 
 \subsection{Memory recall in \gls{tg} mice is unstable}
 Our result shows that \gls{tg} mice have a shorter freezing bouts, and suggests that \gls{tg} mice may have an unstable representation of contextual fear memory, and maybe unable to maintain the expression of the fear memory. Here we directly test the robustness of the representation of fear memory expression in \gls{ca1}. Using the \gls{gsvm} classifier, we calculated the distance of the brain state to the \gls{gsvm} classification boundary. We hypothesized that if the \gls{tg} mice have a unstable representation of fear memory, their brain state during freezing will be closer to the classification boundary than the \gls{wt} mice. 
 
 \begin{figure}[h]
-    %\includegraphics[width=\textwidth]{cls-distance.png}
-    \missingfigure{distance}
-    \caption{The normalized distance to the \gls{gsvm} classification boundary. A positive distance represent the network state of not freezing, and a negative distance represent the network state of freezing. We found during freezing, the network state of the \gls{wt} groups are deep in the freezing states, the \gls{tg} mice show a network state close to the classification boundary. This suggests that the freezing state in the \gls{tg} \gls{ca1} network is more likely to be disrupted by small pertubations in the network. \tglu{} treatment during training is able to rescue this deficit in \gls{tg} mice. \label{f.ad.cls-distance}}
+    \includegraphics[width=\textwidth]{cls-distance.png}
+    \caption[Normalized distance to the \gls{gsvm} classification boundary.]{The normalized distance to the \gls{gsvm} classification boundary. A positive distance represent the network state of not freezing, and a negative distance represent the network state of freezing. We found during freezing, the network state of the \gls{wt} groups are deep in the freezing states, the \gls{tg} mice show a network state close to the classification boundary. This suggests that the freezing state in the \gls{tg} \gls{ca1} network is more likely to be disrupted by small perturbations in the network. \tglu{} treatment during training is able to rescue this deficit in \gls{tg} mice. \label{f.ad.cls-distance}}
 \end{figure}
 
-The result is show in Figure~\ref{f.ad.cls-distance}. We have found at the initiation of freezing behaviour, the neural state of \gls{wt} mice falls into the freezing classification boundary, as is shown with a significant negative distance. However in the \gls{tg} mice the network state stay close to the classification boundary. This result suggest that a small pertubation is more likely to shift the \gls{tg} mice network state out of freezing, and this may result in a corresponding change of behavioural state from freezing to not freezing. This result suggests that the \gls{ca1} network state in \gls{tg} mice is unstable. \tglu{} treatment is able to rescue this deficit. 
+The result is show in Figure~\ref{f.ad.cls-distance}. We have found at the initiation of freezing behaviour, the neural state of \gls{wt} mice falls into the freezing classification boundary, as is shown with a significant negative distance. However in the \gls{tg} mice the network state stay close to the classification boundary. This result suggest that a small perturbation is more likely to shift the \gls{tg} mice network state out of freezing, and this may result in a corresponding change of behavioural state from freezing to not freezing. This result suggests that the \gls{ca1} network state in \gls{tg} mice is unstable. \tglu{} treatment is able to rescue this deficit. 
 
 \subsection{\Gls{tg} mice have deficits recall freezing memory}
 
@@ -479,7 +480,7 @@ To test this hypothesis, we trained \gls{wt} and \gls{tg} mice treatment-free, a
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{reminder1.png}
-    \caption{\gls{tg} mice have deficits in memory recall but not memory encoding. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given a reminder \SI{3}{\day} later with treatment and tested on the following day. \gls{tg} mice showed significantly less freezing, however this effect is rescued by \tglu{} treatment. \label{f.ad.reminder1}}
+    \caption[\tglu{} treatment during a brief reminder rescues memory recall deficit.]{\gls{tg} mice have deficits in memory recall but not memory encoding. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given a reminder \SI{3}{\day} later with treatment and tested on the following day. \gls{tg} mice showed significantly less freezing, however this effect is rescued by \tglu{} treatment. \label{f.ad.reminder1}}
 \end{figure}
 
 We then investigated whether the effect of the \tglu{} is memory specific. In a separate cohort of mice, we use a similar protocol as Figure~\ref{f.ad.reminder1}, except the mice received \tglu{} in their home-cage instead of the reminder (Figure~\ref{f.ad.reminder2}). In this case, the \tglu{} treatment does not have any effect on memory recall. There is a significant main effect of genotype (\todo{stats}), and the genotype $times$ treatment interaction is not significant (\todo{stats}; Figure~\ref{f.ad.reminder2}). Together, these two pieces of results suggest that \gls{tg} mice have normal memory encoding but unable to recall, and \tglu{} can rescues the recall deficit during reinstatement. 
@@ -487,7 +488,7 @@ We then investigated whether the effect of the \tglu{} is memory specific. In a 
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{reminder2.png}
-    \caption{\tglu{} does not rescue memory recall without reminder. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given treatment in home cage and tested on the following day. \tglu{} treatment without reminder is unable to rescue recall deficit in \gls{tg} mice. \label{f.ad.reminder2}}
+    \caption[\tglu{} treatment does not rescue memory recall without reminder.]{\tglu{} does not rescue memory recall without reminder. \gls{wt} and \gls{tg} mice were contextual fear conditioned, given treatment in home cage and tested on the following day. \tglu{} treatment without reminder is unable to rescue recall deficit in \gls{tg} mice. \label{f.ad.reminder2}}
 \end{figure}
 
 \section{Discussion}

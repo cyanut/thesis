@@ -97,7 +97,7 @@ We first tested the mini-microscope agaist a perfused fluorescent tissue. We vir
         \includegraphics[width=\textwidth]{scope-gfp.png}
         \caption{\label{f.scope-gfp}}
     \end{subfigure}
-    \caption{\subref{f.scope-schema} Schematic of the miniature microscope. Excitation light is emitted from a high-intensity blue LED, filtered and reflected to the sample by a dichroic mirror. GCaMP6 emission is collected by the gradient-index (GRIN) lens, filtered and focused onto a CMOS camera chip, where the images are sent to a computer and recorded. 
+    \caption[Schematic of the miniature microscope.]{\subref{f.scope-schema} Schematic of the miniature microscope. Excitation light is emitted from a high-intensity blue LED, filtered and reflected to the sample by a dichroic mirror. GCaMP6 emission is collected by the gradient-index (GRIN) lens, filtered and focused onto a CMOS camera chip, where the images are sent to a computer and recorded. 
              \subref{f.scope} Prototype of the mini-microscope.
              \subref{f.usaf} USAF resolution test target under the mini-microscope.}
              \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.
@@ -110,29 +110,29 @@ To test the \textit{in vivo} imaging capability of the microscope, we first impl
 \todo{image, blood vessel detection, velocity heatmap}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{blood-vessel.png}
-    \caption{\textit{In vivo} image of blood vessel. The animal received 10mg/kg fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. \label{f.bloodvessel}}
+    \caption[\textit{In vivo} image of blood vessels.]{\textit{In vivo} image of blood vessel. The animal received 10mg/kg fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. \label{f.bloodvessel}}
 \end{figure}
 
 
 \subsection{Recording calcium transients in CA1}
-To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into \gls{ca1} hippocampus and implanted the mini-microscope above the injection site. During behavioural session, the animal was placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. We were able to extract 200 cells from the recording and their corresponding \ce{Ca^2+} transients (Figure~\ref{f.ca1rainbow}\ref{f.analysis}).
+To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into \gls{ca1} hippocampus and implanted the mini-microscope above the injection site. During behavioural session, the animal was placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. We were able to extract 200 cells from the recording and their corresponding \ce{Ca^2+} transients (Figure~\ref{f.analysis}, \ref{f.ca1rainbow}).
 
 The positions of the animal was traced out in the behaviour video. The timecourse of the identified cells were mapped back to the behaviour of the animal. Figure~\ref{f.traceplot} shows \ce{Ca^2+} activity of potential place cells as they respond to specific location in the environment the animal is in.
 \todo{max projection, sample cell, animal tracing, place cell heat map}
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{cells-bw.png}
-    \caption{Cells in CA1 captured by the mini-microscope in behaving animal. Two weeks after AAV infusion and microscope implantation, the animal is allowed to freely explore a novel environment. The picture is a maximum projection of all frames captured in a 5-minute session. \label{f.ca1bw}}
+    \caption[Image of \Gls{ca1} neurons in a freely behaving mouse.]{Cells in \gls{ca1} captured by the mini-microscope in a freely behaving mouse. Two weeks after AAV infusion and microscope implantation, the animal is allowed to freely explore a novel environment. The picture is a maximum projection of all frames captured in a 5-minute session. \label{f.ca1bw}}
 \end{figure}
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{analysis1.png}
-    \caption{Example of an independent component of the video after analysis, showing both the extracted spatial location of the cell (left) and the un-normalized actvity (top right). \label{f.analysis}}
+    \caption[Sample analysis data from a calcium imaging video.]{Example of an independent component of the video after analysis, showing both the extracted spatial location of the cell (left) and the un-normalized actvity (top right). \label{f.analysis}}
 \end{figure}
 
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{cells-bw-rainbow-all-final.png}
-    \caption{More than 100 cells are identified in a single imaging session. The identified cells are randomly coloured. \label{f.ca1rainbow}}
+    \caption[Cells identified in a single imaging session.]{More than 100 cells are identified in a single imaging session. The identified cells are randomly coloured. \label{f.ca1rainbow}}
 \end{figure}
 
 
@@ -149,7 +149,7 @@ The positions of the animal was traced out in the behaviour video. The timecours
     \begin{subfigure}[t]{.5\linewidth}
         \includegraphics[width=\textwidth]{trace4.png}
     \end{subfigure}
-    \caption{Activity of 4 sample cells plotted against location of the animal. The colour represents the \ce{Ca^2+} activity. The cellular activity is specific to the animal's location in the environment. \label{f.traceplot}}
+    \caption[Detection of potential place cells in \gls{ca1} calcium imaging.]{Activity of 4 sample cells plotted against location of the mouse. The colour represents the \ce{Ca^2+} activity. The cellular activity is specific to the mouse's location in the environment. \label{f.traceplot}}
 \end{figure}
 
 \subsection{Video preprocessing}
@@ -167,7 +167,7 @@ The size of the mini-microscope limits the illumination pathway from being optim
         \includegraphics[width=\textwidth]{illum-corrected}
         \caption{\label{illum.corrected}}
     \end{subfigure}
-    \caption{Illumination correction allows better detection of the cells. This is a maximum projection of a video taken by the mini-microscope, before (\subref{illum.orig}) and after (\subref{illum.corrected}) illumination correction. Cells in the center of the \gls{fov} are clearly visible after illumination correction. \label{f.illumination}}
+    \caption[Illumination correction.]{Illumination correction allows better detection of the cells. This is a maximum projection of a video taken by the mini-microscope, before \subref{illum.orig} and after \subref{illum.corrected} illumination correction. Cells in the center of the \gls{fov} are clearly visible after illumination correction. \label{f.illumination}}
 \end{figure}
 
 \subsubsection{motion correction}
@@ -183,10 +183,9 @@ As the motion is almost entirely translational, after dust removal we used phase
     \begin{subfigure}[t]{.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{shake-mean}
-        \missingfigure{motion.corrected}
         \caption{\label{motion.corrected}}
     \end{subfigure}
-    \caption{Average video frame before and after motion correction. \label{f.motion}}
+    \caption[Motion correction.]{Average video frame before and after motion correction. \label{f.motion}}
 \end{figure}
 
 
@@ -196,7 +195,7 @@ Two measure the stability of the imaging field between sessions, animals with gC
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{cell-align}
-    \caption{Recorded active cells in \gls{ca1} when the mouse is exposed to the same context between two days. Red and blue dots represent centroid of each recorded cell in day 1 and day 2, respectively. Yellow dotted lines shows mapping from a day 2 cell to its image in day 1 (represented with green dots). \label{f.cellalign}}
+    \caption[Cell alignment between sessions.]{Recorded active cells in \gls{ca1} when the mouse is exposed to the same context between two days. Red and blue dots represent centroid of each recorded cell in day 1 and day 2, respectively. Yellow dotted lines shows mapping from a day 2 cell to its image in day 1 (represented with green dots). \label{f.cellalign}}
 \end{figure}
 
 
@@ -205,7 +204,7 @@ This design of the miniature microscope incorporates an objective lens of \SI{1.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{amygdala.png}
-    \caption{Raw calcium signals during fear conditioning. Left: extracted map of neurons, randomly coloured. Right: Sample calcium signals over time.\label{f.amygdala}}
+    \caption[Calcium imaging in \gls{la} during fear conditioning.]{Raw calcium signals during fear conditioning. Left: extracted map of neurons, randomly coloured. Right: Sample calcium signals over time.\label{f.amygdala}}
 
 \end{figure}
 
@@ -230,7 +229,7 @@ To test the two-colour version of the mini-microscope, we infused red retrobeads
         \caption{\label{f.twocolour.r.invivo}}
     \end{subfigure}
 
-    \caption{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
+    \caption[Images under both green and red channel. ]{Images of cells with different fluorescent protein under the two-colour mini-microscope prototype. \subref{f.twocolour.g} HSV-GFP in perfused brain. \subref{f.twocolour.r} HSV-tdTomato in perfused brain. \subref{f.twocolour.g.invivo} Red retrobeads \textit{in vivo} in green channel. \subref{f.twocolour.r.invivo} Red retrobeads \textit{in vivo} in red channel. \label{f.twocolour}}
 \end{figure}
 
 \section{Discussion}
