@@ -1,6 +1,6 @@
 \chapter{Construction of a miniature epi-fluorescence microscope \label{chap-scope}}
 
-\section{Introduction}\todo{edit microscope intro}
+\section{Introduction}
 
 One of the major technological limitation in neuroscience research is recording neural activity in model animals. Traditional techniques such multi-unit recordings give excellent temporal resolution, however the spatial resolution --- as measured by the number of cells simultaneously recorded --- is limited. Moreover, it is very hard to distinguish cell subpopulations within the same region from the recording. Neural activity can also be inferred by \textit{post mortem} staining of neural activity markers, such as cfos or arc. This method give excellent spatial resolution, however the temporal resolution is very poor, where the time window of neural activity lasts from minutes to hours.
 
@@ -49,7 +49,7 @@ Each mouse received \gls{ip} injection of atropine (\SI{0.1}{\mg\per\kg}) and ch
 
 Mice with gCaMP expression (either through a transgene or viral infusion) were anesthetized and head-fixed on a stereotaxic frame as described in Section \ref{viral-infusion}. Three screws were placed around the viral injection site for anchoring the microscope. For implantation targeting \gls{ca1}, a circular craniology of \SI{2}{\mm} was performed above the viral injection site. The dura was pierced and lifted with a fine tweezer to expose the brain. The brain was then constantly irrigated with artificial cerebral-spinal fluid to remove the blood. A 27-gauge aspiration needle was used to remove cortex and expose \gls{ca1}. For implantation targeting amygdala after anchoring the screws, a 27-gauge needle was lowered to the target coordinate, left for \SI{5}{\min}, and slowly retracted.
 
-The mini-microscope is then fixed on the stereotaxic frame and gradually lowered to \SI{0.2}{\mm} above the target coordinates (\gls{ca1}: \gls{a/p} \SI{-1.8}{\mm}, \gls{m/l} $\SI{1.5}{\mm}, \gls{d/v} \SI{-1.3}{\mm} from Bregma; \gls{la}: \gls{a/p} \SI{-1.4}{\mm}, \gls{m/l} \SI{3.4}{\mm}, \gls{d/v} \SI{-4.8}{\mm} from Bregma). Opaque black dental acrylic was applied to secure the microscope baseplate to the skull. Once the dental acrylic was cured, the microscope body was detached from the baseplate and replaced with a cap. Mice were given \SI{5}{\mg\per\kg} ketoprofen for analgesia before returned to a clean cage for recovery.
+The mini-microscope is then fixed on the stereotaxic frame and gradually lowered to \SI{0.2}{\mm} above the target coordinates (\gls{ca1}: \gls{a/p} \SI{-1.8}{\mm}, \gls{m/l} \SI{1.5}{\mm}, \gls{d/v} \SI{-1.3}{\mm} from Bregma; \gls{la}: \gls{a/p} \SI{-1.4}{\mm}, \gls{m/l} \SI{3.4}{\mm}, \gls{d/v} \SI{-4.8}{\mm} from Bregma). Opaque black dental acrylic was applied to secure the microscope baseplate to the skull. Once the dental acrylic was cured, the microscope body was detached from the baseplate and replaced with a cap. Mice were given \SI{5}{\mg\per\kg} ketoprofen for analgesia before returned to a clean cage for recovery.
 
 \subsection{In vivo mini-microscope testing}
 After lens implantation, the mice were kept in the home cage for at least two weeks before the first image session. This time allows the optical window to clear up. The animals were scruffed, the cap was removed and replaced with the microscope body. A typical imaging session lasts for \SI{5}{\minute}. After the imaging session the microscope body was removed, and the animal was recapped.
@@ -69,20 +69,7 @@ Cells were extracted from the recordings for both session respectively. The posi
 \section{Results}
 
 \subsection{Capability and \textit{in vitro} testing of the mini-microscope}
-The mini-microscope provides as a easy and inexpensive tool for neuroscience laboratories to measure calcium activity in freely behaving animals. Our completely assembled mini-microscope weighs less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box (Figure~\ref{f.scope}). Adult mice with the mini-microscope attached are able to rear, groom, and freely explore environment with no noticable change from their natural behaviour (\todo{mouse image?}).
-
-\todo{insert microscope photo and mouse figure here}
-\begin{figure}[h]
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{scope-cropped}
-        \caption{\label{f.scope}}
-    \end{subfigure}
-    \begin{subfigure}[t]{.5\textwidth}
-        \centering
-        \missingfigure{animal with scope}
-    \end{subfigure}
-\end{figure}
+The mini-microscope provides as a easy and inexpensive tool for neuroscience laboratories to measure calcium activity in freely behaving animals. Our completely assembled mini-microscope weighs less than \SI{3}{\g}, and can be bounded in a \SI{25 x 16 x 11}{\mm} box (Figure~\ref{f.scope}). Adult mice with the mini-microscope attached are able to rear, groom, and freely explore environment with no noticable change from their natural behaviour.
 
 The theoretical optical resolution of the mini-microscope is \SI{1}{\um}. To measure the resolution empirically, we tested the mini-microscope against \gls{usaf} resolution target (38-257, Edmund Optics). As shown in Figure~\ref{f.usaf}, the thinest lines (group 7 element 6, \SI{2.07}{\um} width) are clearly distinguishable. This suggest that the empirical resolution of the microscope is smaller than \SI{2}{\um}. With this resolution, the mini-microscope is able to resolve cell bodies and capillary blood vessels.
 
@@ -167,17 +154,17 @@ The positions of the animal was traced out in the behaviour video. The timecours
 
 \subsection{Video preprocessing}
 \subsubsection{illumination correction}
-The size of the mini-microscope limits the illumination pathway from being optimal, and as a result the illumination in the \gls{fov} is uneven. An uneven illumination not only affects the calcium signal and cell detection, but also adds difficulty to the motion correction step, since the uneven illumination pattern appears stable even when there is relative movement between the mini-microscope and the target. To correct this, a 2D gaussian filter with large window (\SI{20x20}{\um}) is convolved with each frame. The lower frequency image is regarded as the illumination pattern. The illumination pattern is then subtracted from the frame and normalized. Figure~\ref{f.illumination}\todo{image} shows the maximum projection of an \textit{in vivo} video recording of \gls{ca1} cells expressing gCaMP6f before and after illumination correction. Cells under intense illumination in the center can be clearly visualized after illumination correction.
+The size of the mini-microscope limits the illumination pathway from being optimal, and as a result the illumination in the \gls{fov} is uneven. An uneven illumination not only affects the calcium signal and cell detection, but also adds difficulty to the motion correction step, since the uneven illumination pattern appears stable even when there is relative movement between the mini-microscope and the target. To correct this, a 2D gaussian filter with large window (\SI{20x20}{\um}) is convolved with each frame. The lower frequency image is regarded as the illumination pattern. The illumination pattern is then subtracted from the frame and normalized. Figure~\ref{f.illumination} shows the maximum projection of an \textit{in vivo} video recording of \gls{ca1} cells expressing gCaMP6f before and after illumination correction. Cells under intense illumination in the center can be clearly visualized after illumination correction.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{illum.orig}
+        \includegraphics[width=\textwidth]{illum-orig}
         \caption{\label{illum.orig}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{illum.corrected}
+        \includegraphics[width=\textwidth]{illum-corrected}
         \caption{\label{illum.corrected}}
     \end{subfigure}
     \caption{Illumination correction allows better detection of the cells. This is a maximum projection of a video taken by the mini-microscope, before (\subref{illum.orig}) and after (\subref{illum.corrected}) illumination correction. Cells in the center of the \gls{fov} are clearly visible after illumination correction. \label{f.illumination}}
@@ -190,12 +177,12 @@ As the motion is almost entirely translational, after dust removal we used phase
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{shake.raw.mean}
+        \includegraphics[width=\textwidth]{shake-raw-mean}
         \caption{\label{motion.orig}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{shake.mean}
+        \includegraphics[width=\textwidth]{shake-mean}
         \missingfigure{motion.corrected}
         \caption{\label{motion.corrected}}
     \end{subfigure}

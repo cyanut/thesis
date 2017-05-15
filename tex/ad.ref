@@ -69,3 +69,33 @@ pages={111--21},
 pmid={2345598},
 keywords={}
 }
+@book{silverman86,
+  title={Density estimation for statistics and data analysis},
+  author={Silverman, Bernard W},
+  volume={26},
+  year={1986},
+  publisher={CRC press}
+}
+
+@article{park91,
+  title={Universal approximation using radial-basis-function networks},
+  author={Park, Jooyoung and Sandberg, Irwin W},
+  journal={Neural computation},
+  volume={3},
+  number={2},
+  pages={246--257},
+  year={1991},
+  publisher={MIT Press}
+}
+
+
+@article{kass95,
+  title={Bayes factors},
+  author={Kass, Robert E and Raftery, Adrian E},
+  journal={Journal of the american statistical association},
+  volume={90},
+  number={430},
+  pages={773--795},
+  year={1995},
+  publisher={Taylor \& Francis Group}
+}
