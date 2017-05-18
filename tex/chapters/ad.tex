@@ -20,13 +20,13 @@ GP5.17 mice transgenically express the fluorescence calcium indicator GCaMP6f un
 
 
 \subsubsection{Viral vectors}
-In the TgCRND8 mice, GCaMP6f expression is delivered through \gls{aav}. GCaMP6f expression is controlled by \gls{hsyn} promoter. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core and used undiluted. 
+In some TgCRND8 mice, GCaMP6f was delivered through \gls{aav}. GCaMP6f expression is controlled by \gls{hsyn} promoter. AAV--DJ--syn--GCaMP6f virus was purchased from Stanford University Gene and Viral Vector Core and used undiluted. 
 
 \subsubsection{\tglu{} peptide}
-To deliver \glu{} construct (\texttt{YKEGYNVYG}) to target, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb}. The \tglu{} was synthesized from the sequence \texttt{YGRKKRRQRRRYKEGYNVYG}. It was injected in saline solution.
+To deliver the \glu{} construct (\texttt{YKEGYNVYG}) to our target region, we attached it to the protein transduction domain of the \gls{hiv} \textit{tat} gene (TAT peptide). The TAT peptide is able to transport across cell membrane and \gls{bbb}. The \tglu{} was synthesized from the sequence \texttt{YGRKKRRQRRRYKEGYNVYG}. It was injected in saline solution.
 
 
-\subsection{Viral Infusion}
+\subsection{Viral infusion}
 
 Each mouse received \gls{ip} injection of atropine (\SI{0.1}{\mg\per\kg}) and chlorohydrate (\SI{400}{\mg\per\kg}) before being secured on a stereotaxic frame. An incision was made on the scalp and the skin was pulled to the side to reveal the skull. Holes were drilled above \gls{la} on the skull for micropipette injection. Virus was loaded into a glass micropipette and gradually lowered to target coordinate. \SI{1.5}{\ul} of virus were injected on each side at a rate of \SI{0.12}{\ul\per\min}, aiming at \gls{ca1} (\gls{a/p} \SI{-1.8}{\mm}, \gls{m/l} \SI{1.5}{\mm}, \gls{d/v} \SI{3.5}{\mm} from Bregma). The micropipette was left in the brain for an extra \SI{10}{\min} before slowly retracted. The incision was sutured and treated with antibiotics. Each mouse then received subcutaneous injection of analgesic (ketoprofen, \SI{5}{\mg\per\kg}) before returned to a partially heated clean cage for recovery.
 
@@ -73,7 +73,7 @@ The mouse's position over time is modelled as a \gls{hmm}, as show in Figure \re
     \caption[\gls{hmm} model for tracking mice.]{\gls{hmm} model for tracking mice. The mouse's true position at time $i$ is represented by the latent variables $z_i$, measurements of the mouse's position is represented by $x_i$. \label{f.ad.hmm}}
 \end{figure}
 
-Using particle filter, we approximate the posterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated with a mixture of Dirac delta function: 
+Using particle filter, we approximated the posterior distribution $f_{z_n}(z_n|X_n)$ with $L$ particles at $\{a^i\}_{i=1}^L$ with weights $\{w^i\}_{i=1}^L$, such that the posterior distribution can be approximated with a mixture of Dirac delta function: 
 \begin{equation} \label{zn_approx}
     f_{z_n}(z_n|X_n) \approx \sum_{i=1}^Lw_n^i\delta(z_n - a_n^i)
 \end{equation}
@@ -91,7 +91,7 @@ where the probability distribution $f_{x_n}(x_n|z_n)$ is the measurement model, 
 \subsection{Analysis}
 
 \subsubsection{Freezing behaviour}
-Freezing behaviour of the mice during first 5 minutes of contextual fear memory testing were assessed by an experimenter who is blind to the genotype and treatment of the mice. Frame-to-frame timestamps for the beginning and end of freezing bouts were recorded.
+Freezing behaviour of the mice during first \SI{10}{\min} of contextual fear memory testing were assessed by an experimenter blind to the genotype and treatment of the mice. Frame-to-frame timestamps for the beginning and end of freezing bouts were recorded.
 
 \subsubsection{Preprocessing for calcium transients}
 
@@ -133,7 +133,7 @@ Plug (\ref{est_h}) and (\ref{est_cond_h}) to (\ref{cond_h}), we have:
 
 Time-course data for the calcium transients and mouse behavioural states were paired and shuffled across time. The calcium transient for each cell was regarded as a single feature. The classifiers were then trained and validated using 5-fold cross validation. Specifically, the shuffled data were divided into 5 equal blocks. Each block was held out one at a time, and the classifier was trained using the rest 4 blocks. The hold out block was then used to test the performance of the classifier. The classifier prediction from each block was then concatenated and sorted into the original order. In the analysis, we used two classifiers, a \gls{nbc} and a \gls{gsvm}. 
 
-\paragraph{Poisson Naive Bayes Classifier.}
+\paragraph{Naive Bayes classifier (\gls{nbc}).}
 In a \gls{nbc}, the classifier tries to infer the likelihood of the $i$th target class $T_i$ given the features $\mathbf{x} = (x_1, x_2, \dots, x_n)$. Therefore, we have:
 \begin{equation*}
     P(T_i|\mathbf{x}) = \frac{P(T_i, \mathbf{x})}{P(\mathbf{x})}
@@ -156,7 +156,7 @@ Therefore:
 \end{equation*}
 where $C$ is a constant independent of $T_i$. The conditional probability for each feature $P(x_k|T_i)$ is estimated from the training data assuming a Gaussian distribution. During testing, the target class with maximum likelihood $\hat{T}=\underset{i}{\operatorname{arg\,max}} P(T_i|\mathbf{x})$ is predicted.
 
-\paragraph{Gaussian Support Vector Machine.}
+\paragraph{Gaussian support vector machine (\gls{gsvm}).}
 A \gls{svm} aims to find a hyperplane $\mathbf{w}^T\mathbf{x}+b=0$ which separates the target classes with maximum margin. Concretely, for features $\mathbf{x}$ and targets $y$, the \gls{svm} aim to maximize the minimum distance for each data points, transformed by a function $\phi$, to the classifying hyperplane:
 \begin{equation} \label{dist}
     \us{\mathbf{w},b}{arg\,max}\Big(\min_{i=1}^{n}\frac{y_i(\mathbf{w}^T\phi(\mathbf{x}_i)+b)}{|\mathbf{w}|}\Big)
@@ -197,11 +197,11 @@ subject to:
     0 \leq \lambda_i \leq C, i &= 1,\ldots,n \\
     \sum_{i=1}^n \lambda_i y_i &= 0
 \end{align*}
-The parameters $\lambda_i$ can then be solved numerically through quadratic programming. Since equation \ref{lagr2} does not depend on $\phi$, but only the inner product of $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$, we can replace the term with a function $K(\chi, \chi) \to \mathbb{R}$, which represents a measure of similarity between $\mathbf{x}_i$ and $ \mathbf{x}_j$. In this way, the data $\mathbf{x}$ can be projected into a high dimensional space (or even infinite-dimension space) to allow a linear separation between the classes. Particularly, here we used the Gaussian kernel:
+The parameters $\lambda_i$ can then be solved numerically through quadratic programming. Since Equation \ref{lagr2} does not depend on $\phi$, but only the inner product of $\phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)$, we can replace the term with a function $K(\chi, \chi) \to \mathbb{R}$, which represents a measure of similarity between $\mathbf{x}_i$ and $ \mathbf{x}_j$. In this way, the data $\mathbf{x}$ can be projected into a high dimensional space (or even infinite-dimension space) to allow a linear separation between the classes. Particularly, here we used the Gaussian kernel:
 \begin{equation*}
     K(\mathbf{x}_i, \mathbf{x}_j) = e^{-\frac{|\mathbf{x}_i - \mathbf{x}_j|^2}{2\sigma^2}}
 \end{equation*}
-The Gaussian kernel is a universal kernel \citep{park91}, meaning that with proper regulation, with it an \gls{svm} can create a classification boundary approaching any function at arbitrary precision. Therefore using a Gaussian kernel, we would be able to capture any structure present in the training data which helps in prediction.
+The Gaussian kernel is a universal kernel \citep{park91}, meaning that with proper regulation, an \gls{svm} with it can create a classification boundary approaching any function at arbitrary precision. Therefore using a Gaussian kernel, we would be able to capture any structure present in the training data which helps in prediction.
 
 The parameters of the model, $\lambda_i$ and $\mu_i$ are fitted with training data. To predict a new data point $\mathbf{x}'$, we calculate the sign of the distance from it to the classification boundary (\ref{dist}), using (\ref{dw}) to eliminate $\mathbf{w}$, and $b$:
 \begin{equation*}
@@ -215,7 +215,7 @@ We used the \texttt{SVC} module from \texttt{scikit-learn} Python package for \g
 
 \subsubsection{Statistics}
 
-Influence of genotype (\gls{tg}, \gls{wt}) and drug condition (vehicle, \tglu) was evaluated with two-way \gls{anova}. Covariates are controlled with \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. For analysis where the number of samples are large, if comparison of means is not significant, a two-sample \gls{kstest} is performed to detect any difference in the distribution of the two samples. All statistical tests were performed using \texttt{statsmodels} package in the Python programming language.
+Influence of \textit{Genotype} (\gls{tg}, \gls{wt}) and \textit{Treatment} (Vehicle, \tglu{}) was evaluated with two-way \gls{anova}. Covariates are controlled with \gls{glm}. Comparisons between single levels are contrasted with T-test, and multiple levels with F-test. Bonferroni correction is performed for multiple comparisons. For analysis where the number of samples are large, if comparison of means is not significant, a two-sample \gls{kstest} is performed to detect any difference in the distribution of the two samples. All statistical tests were performed using \texttt{statsmodels} package in the Python programming language.
 
 \subsubsection{Bayesian modelling}
 \Gls{mcmc} sampling was performed on \texttt{pymc} package in Python. Samples were drawn using Metropolis-Hasting steps. \num{540000} samples were drawn with \num{40000} in the burn-in period. The rest are thinned \num{10} times, resulting \num{50000} total samples for each model. Bayes factors of alternative hypothesis versus null hypothesis (BF\tsb{10}) were calculated. Interpretation of Bayes factors is reported according to \citet{kass95}, where there is positive evidence if Bayes factor is between 3 and 20, strong evidence if between 20 and 150, and very strong evidence if greater than 150.
