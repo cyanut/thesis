@@ -2,7 +2,7 @@
 \documentclass[letterpaper,oneside, openright, 12pt]{scrbook}
 \usepackage[left=32mm,right=32mm,top=32mm,bottom=32mm, headsep=10mm]{geometry}
 \usepackage{color}
-\usepackage{transparent}
+%\usepackage{transparent}
 \usepackage[round,authoryear]{natbib}
 
 \usepackage[xindy,nonumberlist,nopostdot]{glossaries}
@@ -12,6 +12,13 @@
 \usepackage{tikz,titlesec}
 \usetikzlibrary{calc}
 \usetikzlibrary{bayesnet}
+\usepackage{pgf} %figures
+\usepackage{pdftricks}
+\begin{psinputs}
+    \usepackage{pstricks}
+    \usepackage{multido}
+\end{psinputs}
+
 \usepackage{setspace}
 \usepackage{fancyhdr}                    
 \usepackage{colortbl}
