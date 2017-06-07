@@ -102,18 +102,24 @@ We first tested the mini-microscope in a perfused fluorescent brain. We virally 
              \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.}
 \end{figure}
 
-
+\todo{what the hell is this schematic? change to correct one}
 \subsection{Measuring blood flow with mini-microscope}
-To test the \textit{in vivo} imaging capability of the microscope, we first implanted the mini-microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{150}{\kilo\dalton}; FD150, Sigma) in the tail vein of the mice. The fluorescein-dextran will fill the blood vessels, and fluoresce with similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}).
-\todo{calculating blood flow}
-\todo{image, blood vessel detection, velocity heatmap}
+To test the \textit{in vivo} imaging capability of the microscope, we first implanted the mini-microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{150}{\kilo\dalton}; FD150, Sigma) in the tail vein of the mice. The fluorescein-dextran will fill the blood vessels, and fluoresce with similar excitation and emission wavelength to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels are clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}). The resolution of the mini-microscope allows identification of individual eurythrocytes in the capillaries, and therefore the eurythrocyte flow rate can be calculated and shown in Figure~\ref{fig.sub.vel}. This measurement allows using the mini-microscope to study haemodynamic responses in the capillaries in freely behaving mice. 
 \begin{figure}[h]
-    \includegraphics[width=\textwidth]{blood-vessel.png}
-    \caption[\textit{In vivo} image of blood vessels.]{\textit{In vivo} image of blood vessel. The animal received 10mg/kg fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. \label{f.bloodvessel}}
+    \begin{subfigure}[h]{.5\linewidth}
+        \centering
+        \includegraphics[width=.72\linewidth]{blood-vessel.png}
+        \caption{\label{fig.sub.bv}}
+    \end{subfigure}
+    \begin{subfigure}[h]{.5\linewidth}
+        \input{../figs/miniscope/bloodvessel.pdf_tex}
+        \caption{\label{fig.sub.vel}}
+    \end{subfigure}
+    \caption[\textit{In vivo} image of blood vessels.]{\textit{In vivo} image of blood vessel. The animal received \SI{10}{\mg\per\kg} fluorescein-dextran in tail vein. The mini-microscope is placed at cortex when the animal is under anaesthesia. Blood flow speed was calculated using the cross-correlation method described in Section~\ref{meth.bloodvessel}. \subref{fig.sub.bv} Mean fluorescent image of blood vessels under mini-microscope. \subref{fig.sub.vel} Heatmap of eurythrocyte flow speed overlaid on the mean fluorescent image. Eurythrocyte flow speed is measured in \si{\mm\per\second}. \label{f.bloodvessel}}
 \end{figure}
 
 
-\subsection{Recording calcium transients in CA1}
+\subsection{Recording calcium transients in \gls{ca1}}
 To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE into \gls{ca1} hippocampus and implanted the mini-microscope above the injection site. During behavioural session, the animal was placed in a novel environment to explore for \SI{5}{\minute}, during which GCaMP6 fluorescence were recorded. The maximum projection of the GCaMP6 fluorescence in a 5-minute session is shown in Figure~\ref{f.ca1bw}. We were able to extract 200 cells from the recording and their corresponding \ce{Ca^2+} transients (Figure~\ref{f.analysis}, \ref{f.ca1rainbow}).
 
 The positions of the animal was traced out in the behaviour video. The timecourse of the identified cells were mapped back to the behaviour of the animal. Figure~\ref{f.traceplot} shows \ce{Ca^2+} activity of potential place cells as they respond to specific location in the environment the animal is in.
