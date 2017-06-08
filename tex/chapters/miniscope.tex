@@ -96,33 +96,36 @@ The theoretical optical resolution of the mini-microscope is \SI{1}{\um}. To mea
 We first tested the mini-microscope in a perfused fluorescent brain. We virally expressed \gls{gfp} in the \gls{la} of a mice using \gls{hsv}, and perfused and harvested the brain 3 days later when the \gls{gfp} expression had peaked. The brain was sliced coronally on a vibratome until fluorescence was detectable on the cutting surface. The trunk of the brain was then imaged under the mini-microscope. As seen in Figure~\ref{f.scope-gfp}, the \gls{gfp} cell bodies and the apical dendrites could be resolved from the mini-microscope image. This result confirms that the fluorescence under  \gls{led} illumination can be reliably detected by the \gls{cmos} camera.
 
 \begin{figure}[h]
-    \begin{subfigure}[t]{.55\textwidth}
+    \begin{subfigure}[t]{.3333\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{microscope-schematic.png}
+        \input{../figs/miniscope/render.pdf_tex}
         \caption{\label{f.scope-schema}}
     \end{subfigure}
-    \begin{subfigure}[t]{.45\textwidth}
+    \begin{subfigure}[t]{.6666\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{scope-cropped}
+        \input{../figs/miniscope/scope.pdf_tex}
         \caption{\label{f.scope}}
     \end{subfigure}
-    \begin{subfigure}[t]{.5\textwidth}
+    \caption[Schematic of the miniature microscope.]{\subref{f.scope-schema} Schematic of the miniature microscope. Excitation light is emitted from a high-intensity blue LED, filtered and reflected to the sample by a dichroic mirror. GCaMP6 emission are collected by the gradient-index (GRIN) lens, filtered and focused onto a CMOS camera chip, where the images are sent to a computer and recorded. 
+    \subref{f.scope} Assembled mini-microscope with optic path overlay. The complete mini-microscope weights less than \SI{3}{\gram} and can be bounded in a \SI{25 x 16 x 11}{\mm} box.}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.57\textwidth}
         \centering
         \includegraphics[width=\textwidth]{usaf-target.png}
         \caption{\label{f.usaf}}
     \end{subfigure}
-    \begin{subfigure}[t]{.5\textwidth}
+    \begin{subfigure}[t]{.43\textwidth}
         \centering
         \includegraphics[width=\textwidth]{scope-gfp.png}
         \caption{\label{f.scope-gfp}}
     \end{subfigure}
-    \caption[Schematic of the miniature microscope.]{\subref{f.scope-schema} Schematic of the miniature microscope. Excitation light is emitted from a high-intensity blue LED, filtered and reflected to the sample by a dichroic mirror. GCaMP6 emission are collected by the gradient-index (GRIN) lens, filtered and focused onto a CMOS camera chip, where the images are sent to a computer and recorded. 
-             \subref{f.scope} Prototype of the mini-microscope.
-             \subref{f.usaf} USAF resolution test target under the mini-microscope.
-             \subref{f.scope-gfp} GFP-expressing cells in perfused brain under the miniature microscope.}
+    \caption[Resolution of the mini-microscope.]{Resolution test for the mini-microscope. The mini-microscope has a resolution of less than \SI{2}{\um}, and can resolve cell bodies and apical dendrites in the perfused brain sample. 
+        \subref{f.usaf} USAF resolution test target.
+        \subref{f.scope-gfp} GFP-expressing cells in perfused brain.}
 \end{figure}
 
-\todo{what the hell is this schematic? change to correct one}
 \subsection{Measuring blood flow with mini-microscope}
 To test the \textit{in vivo} imaging capabilities of the microscope, we first implanted the mini-microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{150}{\kilo\dalton}; FD150, Sigma) in the mouse tail vein. Fluorescein-dextran fills the blood vessels, and leads to fluorescence with similar excitation and emission wavelengths to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels were clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}). The resolution of the mini-microscope allows identification of individual eurythrocytes in the capillaries, and therefore the eurythrocyte flow rate can be calculated and shown in Figure~\ref{fig.sub.vel}. This measurement allows using the mini-microscope to study haemodynamic responses in the capillaries in freely behaving mice. 
 \begin{figure}[h]
@@ -135,7 +138,7 @@ To test the \textit{in vivo} imaging capabilities of the microscope, we first im
         \input{../figs/miniscope/bloodvessel.pdf_tex}
         \caption{\label{fig.sub.vel}}
     \end{subfigure}
-    \caption[\textit{In vivo} image of blood vessels.]{\textit{In vivo} image of blood vessel. The mouse received \SI{10}{\mg\per\kg} fluorescein-dextran in tail vein. The mini-microscope was placed at cortex when the mouse was under anaesthesia. Blood flow speed was calculated using the cross-correlation method described in Section~\ref{meth.bloodvessel}. \subref{fig.sub.bv} Mean fluorescent image of blood vessels under mini-microscope. \subref{fig.sub.vel} Heatmap of eurythrocyte flow speed overlaid on the mean fluorescent image. Eurythrocyte flow speed is measured in \si{\mm\per\second}. \label{f.bloodvessel}}
+    \caption[\textit{In vivo} image of blood vessels.]{\textit{In vivo} image of blood vessel. The mouse received \SI{10}{\mg\per\kg} fluorescein-dextran in tail vein. The mini-microscope was placed at cortex when the mouse was under anaesthesia. \subref{fig.sub.bv} Mean fluorescent image of blood vessels under mini-microscope. \subref{fig.sub.vel} Heatmap of eurythrocyte flow speed overlaid on the mean fluorescent image. Eurythrocyte flow speed is measured in \si{\mm\per\second}. \label{f.bloodvessel}}
 \end{figure}
 
 
