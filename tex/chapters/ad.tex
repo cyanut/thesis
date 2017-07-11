@@ -100,9 +100,9 @@ All calcium transients were normalized to have zero median and unit noise standa
 \subsubsection{Mutual information}
 
 The mutual information measurement of two random variables represents the degree of relatedness between them. The mutual information between the calcium transient for each cell $C$, a continuous random variable and the freezing state of the mouse $F$, a discrete random variable, is defined as:
-\begin{equation*}
+\begin{equation} \label{mutual_info_formula}
     I(C, F) = \int\limits_{c \in C} \sum_{f \in F} P(c,f)\log\frac{P(c,f)}{P(c)P(f)}dc
-\end{equation*}
+\end{equation}
 To estimate the mutual information between freezing and calcium transients, we used the \gls{kl} twice to estimate the entropy of calcium transient $H(C)$ and its conditional entropy on freezing $H(C|F)$ \citep{ross14, victor02}. The mutual information was then calculated using the identity:
 \begin{equation} \label{cond_h}
     I(C, F) = H(C) - H(C|F)
