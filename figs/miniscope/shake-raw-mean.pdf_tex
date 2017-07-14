@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.92.1, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'bloodvessel-raw.pdf' (pdf, eps, ps)
+%% Accompanies image file 'shake-raw-mean.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{203.75bp}%
+    \setlength{\unitlength}{212.09668738bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,8 +48,9 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.74552144)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{bloodvessel-raw.pdf}}%
-    \put(0.85308379,0.08876227){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.87919965\unitlength}\raggedright \scriptsize{\color{white}\SI{50}{\um}}\end{minipage}}}%
+  \begin{picture}(1,0.71428573)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{shake-raw-mean.pdf}}%
+    \put(0.85393485,0.05928844){\makebox(0,0)[lb]{\smash{\footnotesize{\color{white}\SI{50}{\um}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{shake-raw-mean.pdf}}%
   \end{picture}%
 \endgroup%

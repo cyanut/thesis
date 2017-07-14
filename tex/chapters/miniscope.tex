@@ -118,7 +118,7 @@ We first tested the mini-microscope in a perfused fluorescent brain. We virally 
     \end{subfigure}
     \begin{subfigure}[t]{.43\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{scope-gfp.png}
+        \input{../figs/miniscope/scope-gfp.pdf_tex}
         \caption{\label{f.scope-gfp}}
     \end{subfigure}
     \caption[Resolution of the mini-microscope.]{Resolution test for the mini-microscope. The mini-microscope has a resolution of less than \SI{2}{\um}, and can resolve cell bodies and apical dendrites in the perfused brain sample. 
@@ -129,12 +129,12 @@ We first tested the mini-microscope in a perfused fluorescent brain. We virally 
 \subsection{Measuring blood flow with mini-microscope}
 To test the \textit{in vivo} imaging capabilities of the microscope, we first implanted the mini-microscope above the cortex, and injected \SI{150}{\ul} of fluorescein-dextran (molecular weight \SI{150}{\kilo\dalton}; FD150, Sigma) in the mouse tail vein. Fluorescein-dextran fills the blood vessels, and leads to fluorescence with similar excitation and emission wavelengths to GCaMP. As expected, after fluorescein-dextran injection, the blood vessels were clearly visible when the microscope is implanted (Figure~\ref{f.bloodvessel}). The resolution of the mini-microscope allows identification of individual eurythrocytes in the capillaries, and therefore the eurythrocyte flow rate can be calculated and shown in Figure~\ref{fig.sub.vel}. This measurement allows using the mini-microscope to study haemodynamic responses in the capillaries in freely behaving mice. 
 \begin{figure}[h]
-    \begin{subfigure}[h]{.5\linewidth}
+    \begin{subfigure}[h]{.471\linewidth}
         \centering
         \input{../figs/miniscope/bloodvessel-raw.pdf_tex}
         \caption{\label{fig.sub.bv}}
     \end{subfigure}
-    \begin{subfigure}[h]{.5\linewidth}
+    \begin{subfigure}[h]{.529\linewidth}
         \input{../figs/miniscope/bloodvessel.pdf_tex}
         \caption{\label{fig.sub.vel}}
     \end{subfigure}
@@ -147,7 +147,7 @@ To test GCaMP6s expression \textit{in vivo}, we infused AAV--syn--GCaMP6s--WPRE 
 
 The positions of the mouse was traced out in the behaviour video. The timecourse of the identified cells was mapped back onto the behaviour of the mouse. Figure~\ref{f.traceplot} shows \ce{Ca^2+} activity of potential place cells as they responded to specific locations in the environment the animal was in.
 \begin{figure}[h]
-    \includegraphics[width=\textwidth]{cells-bw.png}
+    \input{../figs/miniscope/cells-bw.pdf_tex}
     \caption[Image of \Gls{ca1} neurons in a freely behaving mouse.]{Cells in \gls{ca1} captured by the mini-microscope in a freely behaving mouse. Two weeks after AAV infusion and microscope implantation, the animal was allowed to freely explore a novel environment. The picture is a maximum projection of all frames captured in a 5-minute session. \label{f.ca1bw}}
 \end{figure}
 
@@ -158,7 +158,7 @@ The positions of the mouse was traced out in the behaviour video. The timecourse
 
 
 \begin{figure}[h]
-    \includegraphics[width=\textwidth]{cells-bw-rainbow-all-final.png}
+    \input{../figs/miniscope/cells-bw-rainbow-all-final.pdf_tex}
     \caption[Cells identified in a single imaging session.]{More than 100 cells are identified in a single imaging session. The identified cells are randomly coloured. \label{f.ca1rainbow}}
 \end{figure}
 
@@ -186,12 +186,12 @@ The size of the mini-microscope limits its illumination pathway, and as a result
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{illum-orig}
+        \input{../figs/miniscope/illum-orig.pdf_tex}
         \caption{\label{illum.orig}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{illum-corrected}
+        \input{../figs/miniscope/illum-corrected.pdf_tex}
         \caption{\label{illum.corrected}}
     \end{subfigure}
     \caption[Illumination correction.]{Illumination correction allows better detection of cells. This is a maximum projection of a video taken by the mini-microscope, before \subref{illum.orig} and after \subref{illum.corrected} illumination correction. Cells in the center of the \gls{fov} are clearly visible after illumination correction. \label{f.illumination}}
@@ -204,12 +204,12 @@ As camera motion is almost entirely translational, after dust removal we used ph
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{shake-raw-mean}
+        \input{../figs/miniscope/shake-raw-mean.pdf_tex}
         \caption{\label{motion.orig}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{shake-mean}
+        \input{../figs/miniscope/shake-mean.pdf_tex}
         \caption{\label{motion.corrected}}
     \end{subfigure}
     \caption[Motion correction.]{Average video frame before and after motion correction. \label{f.motion}}
@@ -240,19 +240,19 @@ To test the two-colour version of the mini-microscope, we infused red retrobeads
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.5\linewidth}
-        \includegraphics[width=\textwidth]{two-colour-g.png}
+        \input{../figs/miniscope/two-colour-g.pdf_tex}
         \caption{\label{f.twocolour.g}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\linewidth}
-        \includegraphics[width=\textwidth]{two-colour-r.png}
+        \input{../figs/miniscope/two-colour-r.pdf_tex}
         \caption{\label{f.twocolour.r}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\linewidth}
-        \includegraphics[width=\textwidth]{two-colour-green-in-vivo.png}
+        \input{../figs/miniscope/two-colour-green-in-vivo.pdf_tex}
         \caption{\label{f.twocolour.g.invivo}}
     \end{subfigure}
     \begin{subfigure}[t]{.5\linewidth}
-        \includegraphics[width=\textwidth]{two-colour-red-in-vivo.png}
+        \input{../figs/miniscope/two-colour-red-in-vivo.pdf_tex}
         \caption{\label{f.twocolour.r.invivo}}
     \end{subfigure}
 
