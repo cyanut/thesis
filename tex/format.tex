@@ -1,5 +1,5 @@
 %\nonstopmode
-\documentclass[letterpaper, twoside, openright, 11pt]{scrbook}
+\documentclass[letterpaper, twoside, openright, 11pt, cleardoublepage=plain]{scrbook}
 \usepackage[left=32mm,right=32mm,top=32mm,bottom=32mm, headsep=10mm]{geometry}
 \usepackage{color}
 %\usepackage{transparent}
@@ -10,6 +10,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{tikz,titlesec}
+
 \usetikzlibrary{calc}
 \usetikzlibrary{bayesnet}
 \usepackage{pgf} %figures
@@ -117,7 +118,7 @@
 
 \fancypagestyle{plain}{
     \fancyhead{}
-  \fancyfoot{}%[CE,CO]{\oldstylenums{\thepage}}
+    \fancyfoot[CE,CO]{\oldstylenums{\thepage}}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0.0pt}
 }
@@ -158,3 +159,5 @@
 }
 
 \renewcommand{\theadfont}{\bfseries}
+\assignpagestyle{\chapter}{plain}
+\clearpage{\pagestyle{plain}\cleardoublepage}
